@@ -1,4 +1,10 @@
 VirtualOffice::Application.routes.draw do
+  resource :account, :controller => "users"
+  resources :users
+  resources :user_sessions
+
+  root :to => 'user_sessions#new'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
