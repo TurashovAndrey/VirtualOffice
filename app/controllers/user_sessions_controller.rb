@@ -13,7 +13,7 @@ class UserSessionsController < ApplicationController
       Authorization.current_user = new_user
 
       flash[:notice] = t('user_session.flashes.logged_in')
-      redirect_to
+      redirect_to account_path
     else
       render :action => :new, :layout => "login"
     end

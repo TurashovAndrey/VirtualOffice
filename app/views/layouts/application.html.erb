@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<%= link_to('Logout', logout_path, :method => :delete) if logged_in? %>
 <%= yield %>
 
 </body>

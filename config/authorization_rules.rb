@@ -14,7 +14,7 @@ authorization do
       if_permitted_to :new_account
     end
 
-    has_permission_on :user_sessions, :to => [:new, :new_menu_link]
+    has_permission_on :user_sessions, :to => [:new, :create]
   end
 
   role :authorized do

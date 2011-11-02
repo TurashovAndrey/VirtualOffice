@@ -1,6 +1,8 @@
 VirtualOffice::Application.routes.draw do
   resource :account
-  resources :user_sessions
+  resource :user_session
+
+  match 'logout' => 'user_sessions#destroy'
 
   root :to => 'pages#main'
 
