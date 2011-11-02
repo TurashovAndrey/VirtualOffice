@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20111101125728) do
     t.string   "last_name"
     t.string   "email",                              :null => false
     t.string   "url",                                :null => false
+    t.integer  "role_id"
     t.string   "crypted_password",                   :null => false
     t.string   "password_salt",                      :null => false
     t.string   "persistence_token",                  :null => false
