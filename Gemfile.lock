@@ -15,6 +15,8 @@ GEM
       rack-mount (~> 0.8.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.0.2)
+    active_hash (0.9.7)
+      activesupport (>= 2.2.2)
     activemodel (3.1.1)
       activesupport (= 3.1.1)
       builder (~> 3.0.0)
@@ -42,6 +44,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.1.2)
+    declarative_authorization (0.5.3)
     erubis (2.7.0)
     execjs (1.2.9)
       multi_json (~> 1.0)
@@ -113,8 +116,10 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  active_hash
   authlogic
   coffee-rails (~> 3.1.0)
+  declarative_authorization
   jquery-rails
   mysql
   rails (= 3.1.1)
