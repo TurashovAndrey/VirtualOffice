@@ -1,6 +1,5 @@
 VirtualOffice::Application.routes.draw do
-  resource :account, :controller => "users"
-  resources :users
+  resource :account
   resources :user_sessions
 
   root :to => 'pages#main'
