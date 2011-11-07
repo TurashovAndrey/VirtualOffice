@@ -10,6 +10,7 @@ gem 'mysql'
 gem 'authlogic'
 gem 'declarative_authorization'
 gem 'active_hash'
+gem 'formtastic'
 
 # Gems used only for assets and not required
 # in production environments by default.
