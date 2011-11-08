@@ -15,7 +15,7 @@ class AccountsController < ApplicationController
       flash[:notice] = 'User was successfully created.'
       redirect_to account_path
     else
-      render :action => "new"
+      render 'pages/main', :layout => 'main'
     end
   end
 

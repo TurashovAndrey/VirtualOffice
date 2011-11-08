@@ -40,6 +40,7 @@ Formtastic::FormBuilder.include_blank_for_select_by_default = false
 # Defaults to :sentence, valid options are :sentence, :list, :first and :none
 # Formtastic::FormBuilder.inline_errors = :sentence
 # Formtastic uses the following classes as default for hints, inline_errors and error list
+Formtastic::FormBuilder.inline_errors = :none
 
 # If you override the class here, please ensure to override it in your stylesheets as well
 # Formtastic::FormBuilder.default_hint_class = "inline-hints"

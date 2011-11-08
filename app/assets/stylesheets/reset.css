@@ -1,0 +1,130 @@
+/* &copy Pavel Markovnin */
+
+html {
+    color: #000;
+    font-family: Arial,Helvetica,sans-serif;;
+    font-size: 10pt;
+    line-height: 1.4em;
+    background: #FFF;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: url('/assets/bg.gif');
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	outline: none;
+	font-size: 100%;
+	line-height: 1.2em;
+}
+
+input, textarea {
+    padding: 0.2em;
+}
+
+img {
+	border: 0;
+}
+
+.clear {
+    clear: both;
+}
+
+hr.clear {
+    display: none;
+}
+
+a {
+    color: #002061;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #002061;
+    text-decoration: underline;
+}
+
+h1 {
+    font-size: 1.5em;
+    margin: 1em 0 0.6em 0;
+	color: #6799ff;
+    font-weight: normal;
+}
+
+h2 {
+  	font-size: 1.2em;
+    margin: 1em 0 0.5em 0;
+    color: #333333;
+}
+
+h3 {
+   	font-size: 1.1em;
+    margin: 1.4em 0 0.4em 0;
+}
+
+h4 {
+    font-size: 1.3em;
+    margin: 0 0 0.5em 0;
+}
+
+h5 {
+    font-size: 1.2em;
+    margin: 0 0 0.5em 0;
+}
+
+h6 {
+    font-size: 1.1em;
+    margin: 0 0 0.5em 0;
+}
+
+p {
+    padding: 0 0 1em 0;
+}
+
+strong {
+}
+
+ul li, ol li {
+	list-style: default;
+/*	white-space: nowrap; */
+}
+
+small, sup, sub {
+    font-size: 0.8em;
+}
+
+big {
+    font-size: 1.2em;
+}
+
+a.img {
+  border-bottom: 0 ! important;
+}
+
+form, fieldset {
+	margin: 0;
+	padding: 0;
+}
+
+fieldset { border: none; }
+
+legend {
+	padding: 0;
+	color: #000;
+}
+
+input, textarea, select {
+	margin: 0;
+	padding: 1px;
+	font-size: 100%;
+	font-family: inherit;
+}
+
+select { padding: 0; }
+
+.clear { clear: both; }

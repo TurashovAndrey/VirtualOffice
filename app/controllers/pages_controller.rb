@@ -1,8 +1,9 @@
 class PagesController < ApplicationController
   skip_before_filter :check_current_user
+  layout 'main'
 
   def main
-     @user = User.new
+    @user = User.new
   end
 
 end

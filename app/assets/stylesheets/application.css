@@ -1,9 +1,519 @@
-/*
- * This is a manifest file that'll automatically include all the stylesheets available in this directory
- * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
- * the top of the compiled file, but it's generally better to create a new file per style scope.
- *= require_self
- *= require_tree . 
-*/
+#all {
+    position: relative;
+    height: 100%;
+    min-height: 100%;
+}
 
-div#user_nav { float: right; font-size: 0.9em; }
+html>body #all {
+    height: auto;
+}
+
+#footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #1376c9;
+}
+
+#footer, #empty {
+    height: 70px;
+}
+
+#footer img {
+    margin: 10px;
+    float: right;
+}
+
+#footer img#satbooking_logo {
+    margin-top: 25px;
+}
+
+/* HEADER */
+#header {
+    width: 100%;
+}
+
+/* LOGGED IN */
+
+#user_header {
+    float: right;
+    margin-right: 10px;
+}
+
+#user_header img {
+    margin-left: 20px;
+    float: right;
+}
+
+#logged_in_status {
+    background: url('../images/icons/account.gif') no-repeat left center;
+    padding-left: 20px;
+    float: right;
+    margin-top: 20px;
+}
+
+/* MAIN MENU */
+#main_menu {
+    clear: both;
+    width: 100%;
+    background: url('../images/main_menu_bg.gif') #000000;
+}
+
+#main_menu ul {
+    list-style-type: none;
+    margin-left: 5px;
+    overflow: hidden;
+}
+
+#main_menu ul li {
+    float: left;
+    overflow: hidden;
+    height: 35px;
+    border-right: 1px solid #555555;
+}
+
+#main_menu ul li:hover {
+    background: url('../images/main_menu_bg_hover.gif') repeat-x;
+}
+
+#main_menu ul li.selected {
+    background: url('../images/main_menu_bg_active.gif') repeat-x;
+}
+
+#main_menu ul li.selected a {
+    font-weight: bold;
+}
+
+#main_menu ul li a {
+    width: 100%;
+    float: left;
+    padding: 10px 15px;
+    color: #f0f0f0;
+}
+
+#main_menu ul li a:hover {
+}
+
+/* SUB MENU */
+#sub_menu {
+    width: 100%;
+    background: #1376c9;
+}
+
+#sub_menu ul {
+    list-style-type: none;
+    margin-left: 20px;
+    overflow: hidden;
+}
+
+#sub_menu ul li {
+    float: left;
+    margin-right: 30px;
+    padding: 5px 0;
+    height: 20px;
+}
+
+#sub_menu ul li a {
+    color: #f0f0f0;
+    line-height: 20px;
+}
+
+#main_menu ul li a, #sub_menu ul li a {text-decoration: none;}
+#sub_menu ul li a:hover {text-decoration: underline;}
+
+
+
+
+/* CONTENT */
+
+#content {
+    margin-left: 20px;
+    overflow: hidden;
+}
+
+h1 {
+    color: #005094;
+}
+  
+/* PAGINATION */
+
+/* FLASH MESSAGES */
+div.messages {
+    width: 99%;
+}
+
+div.messages div {
+    height: 36px;
+    color: #000000;
+    margin: 10px 0;
+    border: 1px solid #cccccc;
+    line-height: 36px;
+    padding-left: 35px;
+}
+
+div.messages .notice { background: #bff7b4 url("../images/messages/ok.gif") no-repeat 10px 9px; }
+div.messages .error { background: #f7b4b4 url("../images/messages/error.gif") no-repeat 10px 9px; }
+div.messages .info { background: #bff7b4 url("../images/messages/ok.gif") no-repeat 10px 9px; }
+
+/* SHOW_FOR */
+
+.show_for {
+    clear: left;
+    width: 650px;
+    margin: 20px 0;
+    padding-bottom: 10px;
+    overflow: hidden;
+}
+
+.show_for dl {
+    margin-right: 5%;
+    width: 650px;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px dotted #a8c6d9;
+}
+
+.show_for dt, .show_for dd {
+    line-height: 30px;
+}
+
+.show_for dd a, .show_for dd span {
+    line-height: 30px;
+}
+
+.show_for dt {
+    background: #f3f3f3;
+    border-right: 1px solid #ffffff; 
+    text-align: right;
+    font-weight: bold;
+    color: #333333;
+    padding-right: 10px;
+
+    position: absolute;
+    width: 275px;
+    height: 10000px;
+    top: 0;
+    left: 0;
+}
+
+.show_for dd {
+    background: #e8f8fd;
+    width: 365px;
+    padding-left: 10px;
+    margin: 0 0 0 285px;
+}
+
+.show_for dl:hover dt {
+    background: #d3d3d3;
+}
+.show_for dl:hover dd {
+    background: #6cdafc;
+}
+
+.show_for .collection {
+    list-style-type: disc;
+    margin-left: 10px;
+}
+
+/* SHOW_FOR TABLE */
+#content .show_for_table {
+    width: 100%;
+    clear: left;
+    margin-top: 10px;
+}
+
+h2.booking_details {
+    /*margin-left: 13%;*/
+}
+
+/* SEARCH FORM */
+
+.search {
+    margin-bottom: 10px;
+}
+
+.search div {
+    width: 680px;
+    background: #d9e6f1;
+    border: 1px solid #777777;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.search div div { border: none; }
+
+#content .search form {
+    margin: 0 auto;
+}
+
+/* CONTENT TABLE */
+
+#content table {
+    border-collapse: collapse;
+    width: 99%;
+    margin: 0;
+}
+
+#content table th a {
+    color: #f0f0f0;
+    text-decoration: underline;
+}
+
+#content table th {
+    padding: 6px 5px;
+    border-top: 1px solid #005094;
+}
+
+#content table td {
+    padding: 3px 5px;
+    border-left: 1px solid #b0b0b0;
+}
+
+#content table tbody tr {
+    border-top: 1px solid #b0b0b0;
+}
+
+#content table tbody tr:first-child {
+    border-top: none;
+}
+
+#content table tbody tr:hover {
+    background: #e8f8fd;
+}
+
+#content table thead {
+    border-right: 1px solid #005094;
+}
+
+#content table tbody {
+    border-bottom: 1px solid #005094;
+    border-right: 1px solid #005094;
+}
+
+#content table thead th {
+    text-align: left;
+    background: #1376c9;
+    color: #f0f0f0;
+    border-left: 1px solid #ffffff;
+}
+
+#content table thead th:first-child {
+    border-left: 1px solid #005094;
+}
+
+#content table tbody td:first-child {
+    border-left: 1px solid #005094;
+}
+
+/* content table for bookings */
+.my_booking_id { width: 10%; }
+.my_booking_time { width: 15%; }   /*2*/
+.my_booking_duration { width: 10%; }
+.my_booking_info { width: 8%; } /*3*/
+.my_booking_price { width: 10%; }
+.my_booking_actions { width: 10%; }
+
+.booking_id { width: 10%; }
+.booking_user { width: 10%; }
+.booking_time { width: 11%; }   /*2*/
+.booking_duration { width: 10%; }
+.booking_info { width: 8%; } /*3*/
+.booking_price { width: 8%; }
+.booking_actions { width: 8%; }
+
+/* MENU IN THE TABLE */
+#content table ul {
+    list-style-type: none;
+}
+
+#content table ul li {
+    float: left;
+    display: inline;
+    margin-right: 10px;
+}
+
+/* PAGINATION */
+div.pagination {
+    margin-bottom: 10px;
+}
+
+
+/* MAIN PAGE */
+#main_page {
+    margin-bottom: 20px;
+}
+
+#main_page img {
+    margin-right: 25px;
+}
+
+/* BOOKING NOTIFICATIONS */
+.notification {
+    background: #fcef74 url('../images/icons/notification.png') no-repeat 99.8% 5px;
+    width: 99%;
+    padding: 10px 0 0;
+    border: 1px solid #dee1fc;
+    margin-bottom: 20px;
+}
+
+.notification p {
+    width: 95%;
+    margin-left: 10px;
+}
+
+.booking_expire_moment_warning, .booking_utc_moment_warning {
+    color: #dd0000;
+    font-weight: bold;
+}
+
+.booking_available {
+    color: #008000;
+}
+
+.booking_not_available {
+    color: #ff0000;
+}
+
+/* 404 ERRORS */
+
+#not_found {
+    width: 50%;
+    border: 2px solid #dd0000;
+    margin: 20px auto;
+    padding: 10px 10px 0;
+}
+
+#not_found p {
+    text-align: center;
+    font-size: 16px;
+}
+
+/* PAYMENTS */
+.payment {
+    float: left;
+}
+
+.payment input.button {
+    padding: 5px;
+}
+
+#payment_help {
+    float: left;
+    width: auto;
+    margin-left: 20px;
+    margin-top: -10px;
+}
+
+.accent {
+    font-weight: bold;
+    color: #dd0000;
+}
+
+/* MAIN PAGE */
+#main {
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+}
+
+#main h1 {
+    font-size: 45px;
+}
+
+#main h2 {
+    font-size: 30px;
+    font-weight: normal;
+    color: #0e6dbe;
+}
+
+#main .inputs, #main .buttons {
+    display: inline;
+}
+
+#main .inputs ol {
+    list-style-type: none;
+    margin: 0 auto;
+}
+
+#main .inputs ol li {
+    height: 30px;
+    margin-bottom: 20px;
+    float: left;
+}
+
+#main .inputs ol li label {
+    float: right;
+    line-height: 38px;
+    font-size: 18px;
+    color: #6d6d6d;
+}
+
+#main .inputs ol li input {
+    float: left;
+    width: 200px;
+    height: 30px;
+    margin-left: 15px;
+    font-size: 18px;
+    background: #deeeff;
+    border: 1px solid #dddddd;
+}
+
+#main .buttons {
+    margin-left: 30px;
+}
+
+#main .buttons ol {
+    list-style-type: none;
+}
+
+/* BUTTONS */
+#main button {
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 10px 0;
+    width :auto;
+    overflow :visible;
+    text-align :center;
+    white-space :nowrap;
+    height: 38px;
+    line-height: 38px;
+}
+
+#main button span, button em {
+    display: block;
+    height: 38px;
+    line-height: 38px;
+    margin: 0;
+    color: #000000;
+    font-size: 20px;
+}
+
+#main button span {
+    padding-left: 20px;
+    background: url(/assets/button.png) no-repeat 0 0;
+}
+#main button em {
+    font-style: normal;
+    padding-right: 20px;
+    background: url(/assets/button.png) no-repeat 100% 0;
+}
+
+/* ERRORS */
+
+#main ul.errors {
+    color: #cc0000;
+    font-size: 14px;
+    list-style-type: disc;
+    margin: 0 auto;
+    width: 956px;
+    text-align: left;
+}
+
+#main ul.errors li {
+    height: 20px;
+    line-height: 20px;
+    padding-top: 7px;
+}
