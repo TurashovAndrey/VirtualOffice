@@ -1,0 +1,7 @@
+ru:
+  formtastic:
+    placeholders:
+      user:
+        email: Email
+        password: Пароль
+        company_name: Имя компании

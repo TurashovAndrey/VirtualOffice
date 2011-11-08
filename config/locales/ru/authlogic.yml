@@ -1,0 +1,4 @@
+ru:
+  authlogic:
+    error_messages:
+      email_invalid: некорретный

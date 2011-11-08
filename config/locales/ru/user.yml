@@ -1,0 +1,23 @@
+ru:
+  user:
+    buttons:
+      register: Зарегистрироваться
+
+    #flashes:
+
+    titles:
+      register: Регистрация
+
+
+  activerecord:
+    models:
+      user:
+        one: Пользователь
+        other: Пользователи
+
+    attributes:
+      user:
+        email: Email
+        password: Пароль
+        company_name: Название компании
+
