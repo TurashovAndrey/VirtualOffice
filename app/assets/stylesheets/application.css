@@ -152,9 +152,9 @@ div.messages div {
     padding-left: 35px;
 }
 
-div.messages .notice { background: #bff7b4 url("../images/messages/ok.gif") no-repeat 10px 9px; }
-div.messages .error { background: #f7b4b4 url("../images/messages/error.gif") no-repeat 10px 9px; }
-div.messages .info { background: #bff7b4 url("../images/messages/ok.gif") no-repeat 10px 9px; }
+div.messages .notice { background: #bff7b4 url("/assets/messages/ok.gif") no-repeat 10px 9px; }
+div.messages .error { background: #f7b4b4 url("/assets/messages/error.gif") no-repeat 10px 9px; }
+div.messages .info { background: #bff7b4 url("/assets/messages/ok.gif") no-repeat 10px 9px; }
 
 /* SHOW_FOR */
 
@@ -516,4 +516,10 @@ div.pagination {
     height: 20px;
     line-height: 20px;
     padding-top: 7px;
+}
+
+#main div.messages {
+    width: 956px;
+    margin: 0 auto;
+    text-align: left;
 }

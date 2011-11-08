@@ -3,7 +3,8 @@ ru:
     buttons:
       register: Зарегистрироваться
 
-    #flashes:
+    flashes:
+      create_error: 'Не удалось создать пользователя'
 
     titles:
       register: Регистрация

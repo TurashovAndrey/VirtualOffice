@@ -15,6 +15,7 @@ class AccountsController < ApplicationController
       flash[:notice] = 'User was successfully created.'
       redirect_to account_path
     else
+      flash[:error] = t('user.flashes.create_error')
       render 'pages/main', :layout => 'main'
     end
   end
