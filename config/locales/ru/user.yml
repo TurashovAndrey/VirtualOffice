@@ -6,6 +6,7 @@ ru:
       logout: Выйти
 
     flashes:
+      created: 'Пользователь успешно создан!'
       create_error: 'Не удалось создать пользователя'
 
     titles:

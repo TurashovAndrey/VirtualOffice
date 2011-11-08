@@ -12,7 +12,7 @@ class AccountsController < ApplicationController
   def create
     @user.role = Role::MANAGER
     if @user.save
-      flash[:notice] = 'User was successfully created.'
+      flash[:notice] = t('user.flashes.created')
       redirect_to account_path
     else
       flash[:error] = t('user.flashes.create_error')
