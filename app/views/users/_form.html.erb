@@ -1,29 +1,14 @@
-<%= form_for(@user, :url => account_path, :method => :create) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<%= semantic_form_for(@user, :url => account_path) do |f| %>
+    <%= f.semantic_errors :email, :password, :company_name %>
 
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <%= f.inputs do %>
+        <%= f.input :email, :required => false, :label => false, :hint=>true%>
+        <%= f.input :password, :required => false, :label => false %>
+        <%= f.input :company_name, :required => false, :label => '.timtim.ru' %>
+    <% end %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :url %><br />
-    <%= f.text_field :url %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <%= f.buttons do %>
+        <button><span><em><%= t('user.buttons.register') %></em></span></button>
+    <% end %>
+
 <% end %>

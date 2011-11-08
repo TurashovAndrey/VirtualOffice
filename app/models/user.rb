@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :role
 
+  validates_presence_of :email, :company_name
+
   def role_symbols
     [self.role.name.to_sym]
   end
