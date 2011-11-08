@@ -2,12 +2,15 @@ ru:
   user:
     buttons:
       register: Зарегистрироваться
+      login: Войти
+      logout: Выйти
 
     flashes:
       create_error: 'Не удалось создать пользователя'
 
     titles:
       register: Регистрация
+      login: Вход
 
 
   activerecord:

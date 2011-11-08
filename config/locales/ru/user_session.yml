@@ -1,0 +1,10 @@
+ru:
+  user_session:
+    #buttons:
+
+    flashes:
+      access_denied: 'Доступ запрещен'
+      logged_in: 'Вход в аккаунт выполнен успешно!'
+      logged_out: 'Выход из аккаунта выполнен успешно!'
+
+    #titles:

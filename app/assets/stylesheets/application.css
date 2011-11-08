@@ -436,6 +436,11 @@ div.pagination {
     margin: 0 auto;
 }
 
+#main form.user_session {
+    width: 550px;
+    margin: 0 auto;
+}
+
 #main .inputs, #main .buttons {
     float: left;
     margin-top: 20px;
@@ -558,5 +563,8 @@ div.pagination {
     width: 956px;
     text-align: right;
     margin: 10px auto 0;
+}
 
+#login_button a {
+    margin-left: 15px;
 }

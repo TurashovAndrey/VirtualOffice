@@ -3,6 +3,7 @@ class UserSessionsController < ApplicationController
   skip_before_filter :check_current_user, :only => [:new, :create]
  
   def new
+    render :action => :new, :layout => 'main'
   end
 
   def create
@@ -23,8 +24,8 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.find
     @user_session.destroy
 
-    flash[:notice] = "Logout successful!"
-    redirect_back_or_default new_user_session_url
+    flash[:notice] = t('user_session.flashes.logged_out')
+    redirect_to root_path
   end
 
   protected

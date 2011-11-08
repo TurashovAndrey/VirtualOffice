@@ -5,3 +5,6 @@ ru:
         email: Email
         password: Пароль
         company_name: Имя компании
+      user_session:
+        email: Email
+        password: Пароль

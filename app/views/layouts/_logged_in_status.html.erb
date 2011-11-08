@@ -1,1 +1,5 @@
-<%= content_tag(:div, render(:partial => "accounts/logged_in"), :id => "logged_in_status") if logged_in? %>
+<div id="login_button">
+    <%= link_to(t('user.buttons.login'), new_user_session_path) if !logged_in? && @current_path != new_user_session_path %>
+    <%= link_to(t('user.buttons.logout'), logout_path, :method => :delete) if logged_in? %>
+    <%= link_to(t('user.buttons.register'), root_path) if !logged_in? && @current_path != root_path %>
+</div>
