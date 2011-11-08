@@ -32,6 +32,8 @@ html>body #all {
 /* HEADER */
 #header {
     width: 100%;
+    height: 40px;
+    border-bottom: 1px solid #005094;
 }
 
 /* LOGGED IN */
@@ -420,6 +422,7 @@ div.pagination {
 
 #main h1 {
     font-size: 45px;
+    margin-top: 20px;
 }
 
 #main h2 {
@@ -482,7 +485,7 @@ div.pagination {
     line-height: 38px;
 }
 
-#main button span, button em {
+#main button span, #main button em {
     display: block;
     height: 38px;
     line-height: 38px;
@@ -499,6 +502,13 @@ div.pagination {
     font-style: normal;
     padding-right: 20px;
     background: url(/assets/button.png) no-repeat 100% 0;
+}
+
+#main button.bw span {
+    background: url(/assets/button_bw.png) no-repeat 0 0;
+}
+#main button.bw em {
+    background: url(/assets/button_bw.png) no-repeat 100% 0;
 }
 
 /* ERRORS */
@@ -522,4 +532,14 @@ div.pagination {
     width: 956px;
     margin: 0 auto;
     text-align: left;
+}
+
+
+/* LOGIN BUTTON */
+#login_button {
+    font-size: 18px;
+    width: 956px;
+    text-align: right;
+    margin: 10px auto 0;
+
 }
