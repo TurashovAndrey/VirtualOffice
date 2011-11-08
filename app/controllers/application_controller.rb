@@ -2,6 +2,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   include AuthenticatedSystem
 
+  before_filter :current_path
+
+  def current_path
+    @current_path ||= request.env['PATH_INFO']
+  end
+
   private
 
   def redirect_back_or_default(default)
