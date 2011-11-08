@@ -8,7 +8,7 @@
     <% end %>
 
     <%= f.buttons do %>
-        <button><span><em><%= t('user.buttons.register') %></em></span></button>
+        <%= f.commit_button :label => t('user.buttons.register'), :button_html => { :class => 'button-styled blue'} %>
     <% end %>
 
 <% end %>
