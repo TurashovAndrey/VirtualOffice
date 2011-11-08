@@ -6,5 +6,12 @@ ru:
       access_denied: 'Доступ запрещен'
       logged_in: 'Вход в аккаунт выполнен успешно!'
       logged_out: 'Выход из аккаунта выполнен успешно!'
+      login_failed: 'Не получилось выполнить вход.'
 
     #titles:
+
+  activerecord:
+    attributes:
+      user_session:
+        email: Email
+        password: Пароль

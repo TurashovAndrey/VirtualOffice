@@ -3,7 +3,11 @@ class UserSessionsController < ApplicationController
   skip_before_filter :check_current_user, :only => [:new, :create]
  
   def new
-    render :action => :new, :layout => 'main'
+    if logged_in?
+      redirect_session_back_or_root
+    else
+      render :action => :new, :layout => 'main'
+    end
   end
 
   def create
@@ -16,7 +20,8 @@ class UserSessionsController < ApplicationController
       flash[:notice] = t('user_session.flashes.logged_in')
       redirect_to account_path
     else
-      render :action => :new, :layout => "login"
+      flash[:notice] = t('user_session.flashes.login_failed')
+      render :action => :new, :layout => "main"
     end
   end
 

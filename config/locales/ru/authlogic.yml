@@ -2,3 +2,14 @@ ru:
   authlogic:
     error_messages:
       email_invalid: некорретный
+      login_blank: не может быть пустым
+      login_not_found: не существует
+      login_invalid: 'некорректный: можно использовать только буквы, цифры, пробелы и знаки .-_@'
+      consecutive_failed_logins_limit_exceeded: Consecutive failed logins limit exceeded, account is disabled.
+      password_blank: не может быть пустым
+      password_invalid: некорректный
+      not_active: Your account is not active
+      not_confirmed: Your account is not confirmed
+      not_approved: Your account is not approved
+      no_authentication_details: Вы не заполнили форму для аутентификации
+      general_credentials_error: Login/Password combination is not valid
