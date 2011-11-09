@@ -45,6 +45,7 @@ GEM
       execjs
     coffee-script-source (1.1.2)
     declarative_authorization (0.5.3)
+    default_value_for (1.0.6)
     erubis (2.7.0)
     execjs (1.2.9)
       multi_json (~> 1.0)
@@ -124,6 +125,7 @@ DEPENDENCIES
   authlogic
   coffee-rails (~> 3.1.0)
   declarative_authorization
+  default_value_for
   formtastic
   jquery-rails
   mysql

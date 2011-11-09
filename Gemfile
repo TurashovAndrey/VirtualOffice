@@ -12,6 +12,7 @@ gem 'declarative_authorization'
 gem 'active_hash'
 gem 'formtastic'
 gem 'simple-navigation'
+gem 'default_value_for'
 
 # Gems used only for assets and not required
 # in production environments by default.
