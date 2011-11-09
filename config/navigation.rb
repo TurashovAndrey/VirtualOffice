@@ -72,8 +72,7 @@ SimpleNavigation::Configuration.run do |navigation|
     # You can turn off auto highlighting for a specific level
     # primary.auto_highlight = false
 
-    primary.item :home, 'Home', root_path
-    primary.item :account, 'Account', account_path
+    primary.item :account, t('user.titles.account'), account_path
 
   end
 

@@ -12,6 +12,7 @@ ru:
     titles:
       register: Регистрация
       login: Вход
+      account: Аккаунт
 
     messages:
       logged_in_as: '%{login} (%{role})'
