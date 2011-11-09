@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string    :first_name
       t.string    :last_name
       t.string    :email,               :null => false                # optional, you can use login instead, or both
-      t.string    :company_name,        :null => false
+      t.string    :company_id
       t.integer   :role_id
 
       t.string    :crypted_password,    :null => false                # optional, see below

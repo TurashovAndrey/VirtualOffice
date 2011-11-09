@@ -11,13 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111101125728) do
+ActiveRecord::Schema.define(:version => 20111109061318) do
+
+  create_table "companies", :force => true do |t|
+    t.string "name",     :default => "", :null => false
+    t.string "url_base", :default => "", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email",                              :null => false
-    t.string   "url",                                :null => false
+    t.string   "company_id"
     t.integer  "role_id"
     t.string   "crypted_password",                   :null => false
     t.string   "password_salt",                      :null => false

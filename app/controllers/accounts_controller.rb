@@ -11,6 +11,7 @@ class AccountsController < ApplicationController
 
   def create
     @user.role = Role::MANAGER
+
     if @user.save
       flash[:notice] = t('user.flashes.created')
       redirect_to account_path
