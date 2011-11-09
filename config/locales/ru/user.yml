@@ -13,6 +13,9 @@ ru:
       register: Регистрация
       login: Вход
 
+    messages:
+      logged_in_as: '%{login} (%{role})'
+
 
   activerecord:
     models:

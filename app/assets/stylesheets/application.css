@@ -32,7 +32,7 @@ html>body #all {
 /* HEADER */
 #header {
     width: 100%;
-    height: 40px;
+    height: auto;
     border-bottom: 1px solid #005094;
 }
 
@@ -132,6 +132,7 @@ html>body #all {
 #content {
     margin-left: 20px;
     overflow: hidden;
+    clear: both;
 }
 
 h1 {

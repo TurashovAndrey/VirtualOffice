@@ -1,0 +1,8 @@
+ru:
+  activerecord:
+    attributes:
+      role:
+        names:
+          admin: Администратор
+          manager: Директор
+          worker: Сотрудник
