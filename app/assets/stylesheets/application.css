@@ -76,11 +76,11 @@ html>body #all {
 }
 
 #main_menu ul li:hover {
-    background: url('../images/main_menu_bg_hover.gif') repeat-x;
+    background: url('/assets/main_menu_bg_hover.gif') repeat-x;
 }
 
 #main_menu ul li.selected {
-    background: url('../images/main_menu_bg_active.gif') repeat-x;
+    background: url('/assets/main_menu_bg_active.gif') repeat-x;
 }
 
 #main_menu ul li.selected a {

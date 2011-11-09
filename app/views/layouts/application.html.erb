@@ -2,16 +2,13 @@
 <html>
 <head>
   <%= render :partial => 'layouts/html_head' %>
-  <title>VirtualOffice</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 <div id="all">
   <div id="header">
     <%= render :partial => 'layouts/header' %>
-    <%#= render :partial => "layouts/navigation" %>
+    <%= render :partial => "layouts/navigation" %>
     <%#= render :partial => 'layouts/sub_navigation' %>
   </div>
   <div id="content">
