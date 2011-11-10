@@ -40,6 +40,7 @@ authorization do
   role :manager do
     includes :authorized
     has_permission_on :users, :to => [:new_account, :show_account]
+    has_permission_on :companies, :to => [:show, :edit, :update]
   end
 
 end

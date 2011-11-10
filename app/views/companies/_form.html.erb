@@ -1,0 +1,13 @@
+<%= semantic_form_for(@company, :url => company_path) do |f| %>
+    <%= f.semantic_errors :name, :url_base %>
+
+    <%= f.inputs do %>
+        <%= f.input :name, :required => true %>
+        <%= f.input :url_base, :required => true %>
+    <% end %>
+
+    <%= f.buttons do %>
+        <%= f.commit_button :label => t('company.buttons.update'), :button_html => { :class => 'button-styled blue'} %>
+    <% end %>
+
+<% end %>

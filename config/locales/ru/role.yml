@@ -1,5 +1,7 @@
 ru:
   activerecord:
+    models:
+      role: Роль
     attributes:
       role:
         names:

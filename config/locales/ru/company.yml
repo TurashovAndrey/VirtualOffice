@@ -1,0 +1,26 @@
+ru:
+  company:
+    buttons:
+      update: 'Сохранить'
+
+    flashes:
+      updated: 'Компания успешно сохранена!'
+      update_error: 'Не удалось сохранить компанию.'
+
+    titles:
+      my_company: 'Компания'
+      show: 'Просмотр'
+      edit: 'Редактирование'
+
+    #messages:
+
+  activerecord:
+    models:
+      company:
+        one: Компания
+        other: Компании
+
+    attributes:
+      company:
+        url_base: Адрес в системе
+        name: Название

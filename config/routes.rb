@@ -1,6 +1,7 @@
 VirtualOffice::Application.routes.draw do
   resource :account
   resource :user_session
+  resource :company
 
   match 'logout' => 'user_sessions#destroy'
 

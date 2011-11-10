@@ -73,6 +73,10 @@ SimpleNavigation::Configuration.run do |navigation|
     # primary.auto_highlight = false
 
     primary.item :account, t('user.titles.account'), account_path
+    primary.item :company, t('company.titles.my_company'), company_path do |company|
+      company.item :show_company, t('company.titles.show'), company_path
+      company.item :edit_company, t('company.titles.edit'), edit_company_path
+    end
 
   end
 
