@@ -568,3 +568,38 @@ div.pagination {
 #login_button a {
     margin-left: 15px;
 }
+
+/* FORM INSIDE */
+.inputs ol {
+    list-style-type: none;
+}
+
+.inputs ol li label {
+    line-height: 38px;
+    font-size: 18px;
+    color: #6d6d6d;
+    width: 200px;
+    text-align: right;
+    display: block;
+    float: left;
+    clear: left;
+}
+
+.inputs ol li input {
+    width: 200px;
+    height: 30px;
+    margin-left: 15px;
+    font-size: 18px;
+    background: #deeeff;
+    border: 1px solid #dddddd;
+    float: left;
+}
+
+.buttons {
+    margin-left: 213px;
+    margin-top: 20px;
+}
+
+.buttons ol {
+    list-style-type: none;
+}
