@@ -18,7 +18,8 @@ class UserSessionsController < ApplicationController
       Authorization.current_user = new_user
 
       flash[:notice] = t('user_session.flashes.logged_in')
-      redirect_to account_path
+
+      redirect_to application_root_path(current_user.company.url_base)
     else
       flash[:notice] = t('user_session.flashes.login_failed')
       render :action => :new, :layout => "main"
@@ -30,7 +31,7 @@ class UserSessionsController < ApplicationController
     @user_session.destroy
 
     flash[:notice] = t('user_session.flashes.logged_out')
-    redirect_to root_path
+    redirect_to application_root_path
   end
 
   protected

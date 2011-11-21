@@ -5,6 +5,10 @@ VirtualOffice::Application.routes.draw do
 
   match 'logout' => 'user_sessions#destroy'
 
+  constraints(Subdomain) do
+    match '/' => 'accounts#show'
+  end
+
   root :to => 'pages#main'
 
   # The priority is based upon order of creation:
