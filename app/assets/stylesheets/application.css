@@ -462,6 +462,7 @@ div.pagination {
     line-height: 38px;
     font-size: 18px;
     color: #6d6d6d;
+    width: auto;
 }
 
 #main .inputs ol li input {
