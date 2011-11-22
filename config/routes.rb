@@ -7,6 +7,12 @@ VirtualOffice::Application.routes.draw do
 
   root :to => 'pages#main'
 
+  match "chat" => "chat#chat", :as => :chat
+  match 'socky/auth' => 'sockies#auth'
+  
+  # root :to => "chat#login"
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

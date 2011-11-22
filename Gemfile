@@ -15,15 +15,22 @@ gem 'simple-navigation'
 gem 'default_value_for'
 gem 'show_for'
 
+gem 'thin'
+
+gem 'socky-authenticator'
+
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
+ group :assets do
   gem 'sass-rails', "  ~> 3.1.0"
   gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
-end
+ end
 
-gem 'jquery-rails'
+#gem 'jquery-rails'
+
+# gem 'execjs'
+# gem 'therubyracer'
 
 # Use unicorn as the web server
 # gem 'unicorn'

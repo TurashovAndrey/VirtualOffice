@@ -4,7 +4,7 @@ function addMessage(type, header, content) {
   $("#messages").prop('scrollTop', $("#messages").prop("scrollHeight"));
 };
 
-function runChat(username,channel) {
+function runChat(username) {
   // Connect to Socky Server
   var socky = new Socky.Client('ws://localhost:3001/websocket/my_app');
   
@@ -23,33 +23,34 @@ function runChat(username,channel) {
   // { write:true } option will allow sending messages directly to server
   //   note: this will require enabling this in authenticator
   // { data: { login: username } } all 'data' options are passed to other users
-     //var channel = socky.subscribe("presence-chat-channel", { write: true, data: { login: username } });
-       var channel = socky.subscribe("presence-chat-"+channel, { write: true, data: { login: username } });
+  var channel = socky.subscribe("presence-chat-channel", { write: true, data: { login: username } });
 
   // Bind message after successfull joining channel
   channel.bind("socky:subscribe:success", function(members) {
     for (i=0; i<members.length; i++)
     {
+      alert(members[i].data.login);
     }
     addMessage("system", '', "Joined channel - " + members.length + " users online.");
   });
 
+  
   // Bind message after other user joins channel
   channel.bind("socky:member:added", function(data) {
     addMessage("login", "", data.login + " joined chat");
   });
-
+  
   // Bind message after other user disconnect from channel
   channel.bind("socky:member:removed", function(data) {
     addMessage("logout", "", data.login + " left chat");
   });
-
+  
   // Bind function to 'chat_message' event
   // This event can be sent by all clients with 'write' permission
   channel.bind("chat_message", function(message) {
     addMessage('', message.login + ': ', message.content);
   });
-
+  
   // jQuery bind sending message via form to channel event
   $("#message_form").submit(function(e) {
     e.preventDefault();

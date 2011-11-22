@@ -2,6 +2,18 @@
 <html>
 <head>
   <%= render :partial => 'layouts/html_head' %>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" >
+  <%= stylesheet_link_tag "application" %>
+		<!--[if IE]>
+		<%= stylesheet_link_tag "ie" %>
+		<![endif]-->
+  <%= javascript_include_tag 'application.js' %>
+  <%= javascript_include_tag 'jquery.js' %>
+  <%= javascript_include_tag 'jquery.min.js' %>
+  <%= javascript_include_tag 'jquery_ujs.js' %>
+  <%= javascript_include_tag 'http://js.socky.org/v0.5.0-beta1/socky.min.js' %>
+  <%= yield :head %>
   <%= csrf_meta_tags %>
 </head>
 <body>
