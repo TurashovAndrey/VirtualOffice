@@ -22,8 +22,8 @@ production:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: virtual_office_production
+  database: gb_timtim
   pool: 5
-  username: root
-  password: 
-  host: localhost
+  username: gb_timtim
+  password: 25449748
+  host: mysql40.1gb.ru
