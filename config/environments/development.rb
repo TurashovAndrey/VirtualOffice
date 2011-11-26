@@ -26,7 +26,6 @@ VirtualOffice::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  config.assets.debug = true
-
   config.session_store :cookie_store, key: '_VirtualOffice_session', :domain => 'lvh.me'
+  config.assets.debug = true
 end
