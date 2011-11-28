@@ -27,7 +27,7 @@ gem 'socky-authenticator'
   gem 'uglifier'
  end
 
-#gem 'jquery-rails'
+gem 'jquery-rails'
 
 # gem 'execjs'
 # gem 'therubyracer'
