@@ -1,3 +1,8 @@
+//= require jquery
+//= require jquery_ujs
+//= require_tree .
+
+
 // Add message to chat
 function addMessage(type, header, content) {
   $("<li class='" + type + "'><span>" + header + "</span>" + content + "</li>").appendTo("#messages");

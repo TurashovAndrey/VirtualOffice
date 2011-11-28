@@ -46,6 +46,8 @@ module VirtualOffice
     # Enable the asset pipeline
     config.assets.enabled = true
 
+    config.assets.allow_debugging = true
+
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
   end
