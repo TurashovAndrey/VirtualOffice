@@ -29,8 +29,11 @@ gem 'socky-authenticator'
 
 gem 'jquery-rails'
 
-# gem 'execjs'
-# gem 'therubyracer'
+gem 'execjs'
+group :production do
+  gem 'therubyracer'
+end
+
 
 # Use unicorn as the web server
 # gem 'unicorn'
