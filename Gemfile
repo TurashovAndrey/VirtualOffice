@@ -31,18 +31,9 @@ gem 'jquery-rails'
 
 gem 'execjs'
 
-
 group :production do
   gem 'therubyracer'
 end
-
-require 'rails'
-if Rails.env == 'development'
-  gem 'eventmachine', "1.0.0.beta.4.1"
-else
-  gem 'eventmachine', "~> 0.12.6"
-end
-
 
 # Use unicorn as the web server
 # gem 'unicorn'
