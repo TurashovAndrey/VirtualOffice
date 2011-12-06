@@ -1,7 +1,12 @@
 VirtualOffice::Application.routes.draw do
+  get "events/new"
+
+  # match '/events(/:year(/:month))' => 'events', :as => :event, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
+
   resource :account
   resource :user_session
   resource :company
+  resources :events
 
   match 'logout' => 'user_sessions#destroy'
 

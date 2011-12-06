@@ -1,0 +1,25 @@
+ru:
+  event:
+    titles:
+      event: Календарь
+    buttons:
+      create: 'Создать'
+      update: 'Сохранить'
+      delete: 'Удалить'
+    flashes:
+      created: 'Событие создано успешно!'
+      create_error: 'Не удалось создать событие.'
+      updated: 'Событие создано сохранено!'
+      update_error: 'Не удалось сохранить событие.'
+      deleted: 'Событе успешно удалено!'
+      delete_error: 'Не удалось удалить событие.'
+  date:
+    formats:
+      default: "%e.%m.%Y"
+
+    day_names: [Воскресение, Понедельник, Вторник, Среда, Четверг, Пятница, Суббота]
+    abbr_day_names: [ВС, ПН, ВТ, СР, ЧТ, ПТ, СБ]
+
+    # Don't forget the nil at the beginning; there's no such thing as a 0th month
+    month_names: [~, Январь, Февраль, Март, Апрель, Май, Июнь, Июль, Август, Сентябрь, Октябрь, Ноябрь, Декабрь]
+    abbr_month_names: [~, Янв, Фев, Март, Апр, Май, Июнь, Июль, Авг, Сен, Окт, Нояб, Дек]

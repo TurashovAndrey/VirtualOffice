@@ -11,11 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111109061318) do
+ActiveRecord::Schema.define(:version => 20111130062440) do
 
   create_table "companies", :force => true do |t|
     t.string "name",     :default => "", :null => false
     t.string "url_base", :default => "", :null => false
+  end
+
+  create_table "events", :force => true do |t|
+    t.string   "name"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "color"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "user_id"
+    t.integer  "company_id"
   end
 
   create_table "users", :force => true do |t|

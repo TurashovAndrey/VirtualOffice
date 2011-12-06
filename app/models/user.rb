@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   belongs_to_active_hash :role
 
   belongs_to :company
+  has_many :events
 
   after_create :create_company_for_manager
 

@@ -15,9 +15,10 @@ gem 'simple-navigation'
 gem 'default_value_for'
 gem 'show_for'
 
-gem 'thin'
+#gem 'thin'
 
 gem 'socky-authenticator'
+gem 'event-calendar', :require => 'event_calendar'
 
 # Gems used only for assets and not required
 # in production environments by default.

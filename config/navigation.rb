@@ -78,6 +78,7 @@ SimpleNavigation::Configuration.run do |navigation|
       company.item :edit_company, t('company.titles.edit'), edit_company_path
     end
     primary.item :chat, t('chat.titles.chat'), chat_path
+    primary.item :events, t('event.titles.event'), events_path
   end
 
 end
