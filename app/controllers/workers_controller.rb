@@ -18,6 +18,8 @@ class WorkersController < ApplicationController
   end
 
   def create
+    @user.role = Role::WORKER
+
     if @user.save
       flash[:notice] = t('company.flashes.worker_created')
       redirect_to company_workers_path
