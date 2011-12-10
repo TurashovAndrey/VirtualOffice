@@ -1,0 +1,22 @@
+<!-- Probably move the stylesheet to you layout. Also make sure you include the javascript. -->
+<%= stylesheet_link_tag "event_calendar"%>
+
+<%= semantic_form_for(@event) do |f| %>
+    <%= f.inputs do %>
+        <%= f.input :name, :as => :string, :required => true %>
+        <%= f.input :start_at, :as => :string, :required => true %>
+        <%= f.input :end_at, :as => :string, :required => true %>
+        <%= f.input :start_time,:as => :string, :required => true %>
+        <%= f.input :end_time, :as => :string, :required => true %>
+    <% end %>
+
+    <%= f.buttons  %>
+
+    <%= unless @event.id.nil?
+        link_to 'Destroy', event_path(@event), :confirm => 'Are you sure?', :method => :delete
+       end
+    %>
+
+    <br/>
+    <%= raw(event_calendar) %>
+<% end %>

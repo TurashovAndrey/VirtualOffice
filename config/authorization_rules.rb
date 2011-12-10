@@ -42,6 +42,7 @@ authorization do
     has_permission_on :users, :to => [:new_account, :show_account]
     has_permission_on :companies, :to => [:show, :edit, :update, :workers]
     has_permission_on :users, :to => :manage
+    has_permission_on :events, :to => [:manage,:create, :update, :delete]
   end
 
 end

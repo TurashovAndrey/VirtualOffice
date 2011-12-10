@@ -16,9 +16,10 @@ gem 'default_value_for'
 gem 'show_for'
 gem 'table_builder', '0.0.3', :git => 'git://github.com/jchunky/table_builder.git'
 
-gem 'thin'
+#gem 'thin'
 
 gem 'socky-authenticator'
+gem 'event-calendar', :require => 'event_calendar'
 
 # Gems used only for assets and not required
 # in production environments by default.
