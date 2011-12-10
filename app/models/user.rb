@@ -12,7 +12,10 @@ class User < ActiveRecord::Base
 
   after_create :create_company_for_manager
 
-  validates_presence_of :email, :company_name
+  validates_presence_of :email
+  validates_presence_of :company_name, :if => Proc.new { |user| user.role == Role::MANAGER }
+
+  default_value_for :password, 'admin'
 
   def role_symbols
     [self.role.name.to_sym]

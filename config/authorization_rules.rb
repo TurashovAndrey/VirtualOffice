@@ -40,13 +40,14 @@ authorization do
   role :manager do
     includes :authorized
     has_permission_on :users, :to => [:new_account, :show_account]
-    has_permission_on :companies, :to => [:show, :edit, :update]
+    has_permission_on :companies, :to => [:show, :edit, :update, :workers]
+    has_permission_on :users, :to => :manage
   end
 
 end
 
 privileges do
-  privilege :manage, :includes => [:index, :show, :new, :edit, :destroy]
+  privilege :manage, :includes => [:index, :show, :new, :create, :edit, :destroy]
 
   privilege :new_account, :users, :includes => :activate_account
   privilege :edit_account, :users, :includes => :edit_password_account

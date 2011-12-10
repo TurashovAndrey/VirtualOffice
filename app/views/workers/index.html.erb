@@ -1,0 +1,10 @@
+<% title t('company.titles.workers') %>
+
+<%= table_for @workers do |t| %>
+  <%= t.head_r do %>
+    <%= render 'workers/index_head', :t => t %>
+  <% end %>
+  <%= t.body_r do |worker| %>
+    <%= render 'workers/index_item', :t => t, :worker => worker %>
+  <% end %>
+<% end %>

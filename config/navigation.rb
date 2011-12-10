@@ -76,6 +76,8 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :company, t('company.titles.my_company'), company_path do |company|
       company.item :show_company, t('company.titles.show'), company_path
       company.item :edit_company, t('company.titles.edit'), edit_company_path
+      company.item :workers_company, t('company.titles.workers'), company_workers_path
+      company.item :new_worker_company, t('company.titles.new_worker'), new_company_worker_path
     end
     primary.item :chat, t('chat.titles.chat'), chat_path
   end

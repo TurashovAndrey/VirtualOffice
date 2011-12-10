@@ -6,11 +6,15 @@ ru:
     flashes:
       updated: 'Компания успешно сохранена!'
       update_error: 'Не удалось сохранить компанию.'
+      worker_created: 'Сотрудник успешно создан'
+      worker_create_error: 'Не удалось создать сотрудника'
 
     titles:
       my_company: 'Компания'
       show: 'Просмотр'
       edit: 'Редактирование'
+      workers: 'Сотрудники'
+      new_worker: 'Создать сотрудника'
 
     #messages:
 
