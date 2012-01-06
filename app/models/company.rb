@@ -2,6 +2,7 @@ class Company < ActiveRecord::Base
 
   has_many :users
   has_many :events
+  has_many :tasks
 
   validates_presence_of :url_base
   validates_uniqueness_of :name, :url_base

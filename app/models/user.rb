@@ -3,6 +3,15 @@ class User < ActiveRecord::Base
     user.require_password_confirmation = false
   end
 
+  def self.current
+    Thread.current[:user]
+  end
+
+  def self.current=(user)
+    Thread.current[:user] = user
+  end
+
+
   attr_accessor :company_name
 
   extend ActiveHash::Associations::ActiveRecordExtensions

@@ -6,4 +6,7 @@ class PagesController < ApplicationController
     @user = User.new
   end
 
+  def id
+    @user = User.new
+  end
 end

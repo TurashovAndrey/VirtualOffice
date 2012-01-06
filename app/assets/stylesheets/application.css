@@ -258,9 +258,9 @@ h2.booking_details {
 
 /* CONTENT TABLE */
 
-#content table {
+/* #content table {
     border-collapse: collapse;
-    width: 99%;
+    width: 100%;
     margin: 0;
 }
 
@@ -313,7 +313,7 @@ h2.booking_details {
 
 #content table tbody td:first-child {
     border-left: 1px solid #005094;
-}
+}  */
 
 /* content table for bookings */
 .my_booking_id { width: 10%; }

@@ -13,6 +13,10 @@
   <div id="content">
     <%= render :partial => 'layouts/flash' %>
     <h1><%= display_headline %></h1>
+    <%= netzke_init %>
+    <style type="text/css" media="screen">
+      .netzke-component { height: 400px; }
+    </style>
     <%= yield %>
   </div>
 
@@ -21,7 +25,6 @@
     <%= render :partial => 'layouts/footer' %>
   </div>
 </div>
-
 <%= link_to('Logout', logout_path, :method => :delete) if logged_in? %>
 </body>
 </html>

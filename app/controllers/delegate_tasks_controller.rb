@@ -1,0 +1,2 @@
+class DelegateTasksController < ApplicationController
+end

@@ -1,7 +1,7 @@
 class UserSessionsController < ApplicationController
   filter_resource_access
   skip_before_filter :check_current_user, :only => [:new, :create]
- 
+
   def new
     if logged_in?
       redirect_session_back_or_root
