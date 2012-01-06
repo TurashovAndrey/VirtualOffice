@@ -1,0 +1,7 @@
+ru:
+  task:
+    titles:
+      task: 'Задания'
+      my_tasks: 'Мои задания'
+      delegate_tasks: 'Делегированные задания'
+      all_tasks: 'Все задания'

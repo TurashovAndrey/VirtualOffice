@@ -17,10 +17,16 @@ VirtualOffice::Application.routes.draw do
     match '/' => 'accounts#show'
   end
 
+  netzke
+  resources :tasks
+
   root :to => 'pages#main'
 
   match "chat" => "chat#chat", :as => :chat
   match 'socky/auth' => 'sockies#auth'
+
+  match "delegate_tasks" => "delegate_tasks#index"
+  match "all_tasks" => "all_tasks#index"
   
   # root :to => "chat#login"
 

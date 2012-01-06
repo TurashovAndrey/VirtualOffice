@@ -1,0 +1,13 @@
+ru:
+  netzke:
+    basepack:
+      grid_panel:
+        actions:
+          add: 'Создать'
+          edit: 'Редактировать'
+          apply: 'Применить'
+          del: 'Удалить'
+          add_in_form: 'Добавить в форме'
+          edit_in_form: 'Редактировать в форме'
+          search: 'Поиск'
+

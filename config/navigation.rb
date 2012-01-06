@@ -81,6 +81,11 @@ SimpleNavigation::Configuration.run do |navigation|
     end
     primary.item :chat, t('chat.titles.chat'), chat_path
     primary.item :events, t('event.titles.event'), events_path
+    primary.item :task, t('task.titles.task'), tasks_path do |tasks|
+      tasks.item :show_tasks, t('task.titles.my_tasks'), tasks_path
+      tasks.item :show_delegate_tasks, t('task.titles.delegate_tasks'), delegate_tasks_path
+      tasks.item :show_all_tasks, t('task.titles.all_tasks'), all_tasks_path
+     end
   end
 
 end
