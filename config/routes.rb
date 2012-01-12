@@ -10,6 +10,7 @@ VirtualOffice::Application.routes.draw do
     resources :workers
   end
   resources :events
+  resources :attachments
 
   match 'logout' => 'user_sessions#destroy'
 

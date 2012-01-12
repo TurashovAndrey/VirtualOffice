@@ -20,6 +20,9 @@ gem 'netzke-core'#, :git => "git://github.com/skozlov/netzke-core.git"
 gem 'netzke-basepack'#, :git => "git://github.com/skozlov/netzke-basepack.git"
 
 #gem 'thin'
+gem 'paperclip'
+
+gem 'ruby-hmac'
 
 gem 'socky-authenticator'
 gem 'event-calendar', :require => 'event_calendar'

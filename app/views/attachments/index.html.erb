@@ -1,0 +1,14 @@
+<%= semantic_form_for(@attachment) do |f| %>
+    <%= f.inputs do %>
+        <%= f.input :attach, :as => :file, :required => true %>
+    <% end %>
+
+    <%= f.buttons  %>
+
+    <%= unless @attachment.id.nil?
+        link_to 'Destroy', event_path(@attachment), :confirm => 'Are you sure?', :method => :delete
+       end
+    %>
+
+    <br/>
+<% end %>

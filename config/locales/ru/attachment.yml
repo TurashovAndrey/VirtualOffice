@@ -1,0 +1,12 @@
+ru:
+  attachment:
+    titles:
+      attachment: Файлы
+    flashes:
+      created: 'Файл успешно сохранен!'
+      create_error: 'Не удалось сохранить файл.'
+      updated: 'Файл успешно сохранен!'
+      update_error: 'Не удалось сохранить файл.'
+      deleted: 'Файл успешно удален!'
+      delete_error: 'Не удалось удалить файл.'
+
