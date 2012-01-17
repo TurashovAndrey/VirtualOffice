@@ -3,6 +3,7 @@ class AllTasksGrid < Netzke::Basepack::GridPanel
     super.merge({
       :model => "Task",
       :scope => {:company_id => User.find(Netzke::Core::session[:netzke_user_id]).company_id},
+      :height => 400,
       # Declaring columns
       :columns => [
         :done,

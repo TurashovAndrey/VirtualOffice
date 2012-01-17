@@ -22,6 +22,7 @@ class WorkersController < ApplicationController
 
     if @user.save
       flash[:notice] = t('company.flashes.worker_created')
+      sendmail
       redirect_to company_workers_path
     else
       flash[:error] = t('company.flashes.worker_create_error')
@@ -36,6 +37,15 @@ class WorkersController < ApplicationController
   def load_worker
     @worker = User.find(params[:id])
   end
+
+  def sendmail
+     UserMailer.welcome_email(@user).deliver
+  #  email = @params["email"]
+	#  recipient = email["recipient"]
+	#  subject = email["subject"]
+	#  message = email["message"]
+  #  Emailer.deliver_contact(recipient, subject, message)
+   end
 
   #def new_worker_for_collection
   #  @worker = @company.users.new
