@@ -8,11 +8,12 @@ ru:
     flashes:
       created: 'Пользователь успешно создан!'
       create_error: 'Не удалось создать пользователя'
+      update_error: 'Не удалось сохранить пользователя'
 
     titles:
       register: Регистрация
       login: Вход
-      account: Аккаунт
+      account: Профиль
 
     messages:
       logged_in_as: '%{login} (%{role})'

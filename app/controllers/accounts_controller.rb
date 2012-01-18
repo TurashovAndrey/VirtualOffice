@@ -24,6 +24,18 @@ class AccountsController < ApplicationController
   def show
   end
 
+   def update
+     @user.update_attribute(:first_name,params[:user][:first_name])
+     @user.update_attribute(:last_name,params[:user][:last_name])
+
+    if @user.save
+      redirect_to account_path
+    else
+      flash[:error] = t('user.flashes.update_error')
+      redirect_to account_path
+    end
+  end
+
   protected
 
   def load_account

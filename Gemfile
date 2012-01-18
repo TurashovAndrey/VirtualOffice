@@ -20,7 +20,7 @@ gem 'netzke-core'#, :git => "git://github.com/skozlov/netzke-core.git"
 gem 'netzke-basepack'#, :git => "git://github.com/skozlov/netzke-basepack.git"
 
 #gem 'thin'
-gem 'paperclip'
+gem 'paperclip', "~> 2.4.5"
 
 gem 'ruby-hmac'
 

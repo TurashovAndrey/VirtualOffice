@@ -1,2 +1,16 @@
-<% title t('user.titles.account') %>
-<%= @user.email %>
+<%= semantic_form_for(@user, :url => account_path(@user)) do |f| %>
+    <br/>
+    <%= f.inputs do %>
+        <%= f.input :email, :as => :string, :input_html => { :readonly => true }, :label => "E-mail" %>
+        <%= f.input :first_name, :as => :string, :label => "First Name" %>
+        <%= f.input :last_name, :as => :string, :label => "Last Name" %>
+    <% end %>
+
+    <%= f.buttons do %>
+        <%= f.commit_button "Сохранить" %>
+    <% end %>
+<% end %>
+
+
+
+
