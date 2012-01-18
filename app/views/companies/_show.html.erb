@@ -1,4 +1,11 @@
-<%= show_for @company do |company| %>
-  <%= company.attribute :name %>
-  <%= company.attribute :url_base %>
+<%= semantic_form_for(@company) do |f| %>
+    <br/>
+    <%= f.inputs do %>
+        <%= f.input :name, :as => :string, :label => "Название компании" %>
+        <%= f.input :url_base, :as => :string, :label => "Адрес в системе", :input_html => { :readonly => true } %>
+    <% end %>
+
+    <%= f.buttons do %>
+        <%= f.commit_button "Сохранить" %>
+    <% end %>
 <% end %>

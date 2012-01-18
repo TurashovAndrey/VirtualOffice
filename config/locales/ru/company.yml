@@ -12,7 +12,7 @@ ru:
     titles:
       my_company: 'Компания'
       show: 'Просмотр'
-      edit: 'Редактирование'
+      edit: 'Компания'
       workers: 'Сотрудники'
       new_worker: 'Создать сотрудника'
 

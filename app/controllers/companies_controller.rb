@@ -9,12 +9,15 @@ class CompaniesController < ApplicationController
   end
 
   def update
+    @company.update_attribute(:name,params[:company][:name])
+    @company.update_attribute(:url_base,params[:company][:url_base])
+
     if @company.save
       flash[:notice] = t('company.flashes.updated')
       redirect_to company_path
     else
       flash[:error] = t('company.flashes.update_error')
-      render 'edit'
+      redirect_to company_path
     end
   end
 
