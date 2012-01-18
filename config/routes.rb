@@ -23,8 +23,8 @@ VirtualOffice::Application.routes.draw do
 
   root :to => 'pages#main'
 
-  match "chat" => "chat#chat", :as => :chat
-  match 'socky/auth' => 'sockies#auth'
+  # match "chat" => "chat#chat", :as => :chat
+  # match 'socky/auth' => 'sockies#auth'
 
   match "delegate_tasks" => "delegate_tasks#index"
   match "all_tasks" => "all_tasks#index"
