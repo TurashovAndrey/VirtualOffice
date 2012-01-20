@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   include AuthenticatedSystem
+  helper_method :get_chat_script
 
   before_filter :current_path, :check_subdomain
 

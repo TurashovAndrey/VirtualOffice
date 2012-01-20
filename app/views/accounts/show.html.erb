@@ -7,8 +7,9 @@
     <% end %>
 
     <%= f.buttons do %>
-        <%= f.commit_button "Сохранить" %>
+        <%= f.commit_button "Сохранить", :button_html => { :class => 'button-styled blue'} %>
     <% end %>
+    <%= raw(Helper.get_chat_script(current_user)) %>
 <% end %>
 
 

@@ -8,3 +8,4 @@
     <%= render 'workers/index_item', :t => t, :worker => worker %>
   <% end %>
 <% end %>
+<%= raw(Helper.get_chat_script(current_user)) %>

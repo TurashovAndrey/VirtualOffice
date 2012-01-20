@@ -9,6 +9,6 @@
         link_to 'Destroy', event_path(@attachment), :confirm => 'Are you sure?', :method => :delete
        end
     %>
-
     <br/>
+    <%= raw(Helper.get_chat_script(current_user)) %>
 <% end %>

@@ -8,4 +8,5 @@
     <%= f.buttons do %>
         <%= f.commit_button "Сохранить" %>
     <% end %>
+    <%= raw(Helper.get_chat_script(current_user)) %>
 <% end %>
