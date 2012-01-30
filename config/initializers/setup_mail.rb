@@ -2,9 +2,9 @@ ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.perform_deliveries = true
 
 ActionMailer::Base.smtp_settings = {
-  :address              => "smtp.mail.ru",
+  :address              => "smtp-15.1gb.ru",
   :port                 => "25",
-  :domain               => 'smtp.mail.ru',
-  :user_name            => 'turashov@mail.ru',
-  :password             => '17Iverson87',
+  # :domain               => 'smtp-15.1gb.ru',
+  :user_name            => 'u291566',
+  :password             => 'timtimadmin',
   :authentication       => 'plain'}

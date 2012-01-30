@@ -85,6 +85,7 @@ SimpleNavigation::Configuration.run do |navigation|
       tasks.item :show_tasks, t('task.titles.my_tasks'), tasks_path
       tasks.item :show_delegate_tasks, t('task.titles.delegate_tasks'), delegate_tasks_path
       tasks.item :show_all_tasks, t('task.titles.all_tasks'), all_tasks_path
+      tasks.item :show_done_tasks, t('task.titles.done_tasks'), done_tasks_path
      end
     primary.item :attachments, t('attachment.titles.attachment'), attachments_path
   end

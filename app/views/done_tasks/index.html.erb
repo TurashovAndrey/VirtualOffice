@@ -1,0 +1,6 @@
+<% title t('task.titles.done_tasks') %>
+<%= netzke :done_tasks_grid,
+    :class_name => "DoneTasksGrid",
+%>
+
+<%= raw(Helper.get_chat_script(current_user)) %>

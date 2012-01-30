@@ -5,9 +5,15 @@ ru:
         actions:
           add: 'Создать'
           edit: 'Редактировать'
-          apply: 'Применить'
+          apply: 'Сохранить'
           del: 'Удалить'
           add_in_form: 'Добавить в форме'
           edit_in_form: 'Редактировать в форме'
           search: 'Поиск'
+        are_you_sure: 'Вы уверены?'
+        confirmation: 'Подтверждение'
+        record_form_window:
+          actions:
+            ok: 'OK'
+            cancel: 'Отменить'
 

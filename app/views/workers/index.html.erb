@@ -1,11 +1,20 @@
 <% title t('company.titles.workers') %>
 
-<%= table_for @workers do |t| %>
-  <%= t.head_r do %>
-    <%= render 'workers/index_head', :t => t %>
-  <% end %>
-  <%= t.body_r do |worker| %>
-    <%= render 'workers/index_item', :t => t, :worker => worker %>
-  <% end %>
+<table>
+  <tr>
+    <th>Имя</th>
+    <th>Фамилия</th>
+    <th>Email</th>
+  </tr>
+
+<% @workers.each do |worker| %>
+  <tr>
+    <td><b><%= worker.first_name %></b></td>
+    <td><%= worker.last_name %></td>
+    <td><%= worker.email %></td>
+    <td><%= button_to( 'Удалить', worker_path(:id => worker.id),  :confirm => 'Вы уверены?', :method => :delete)%></td>
+  </tr>
 <% end %>
+</table>
+
 <%= raw(Helper.get_chat_script(current_user)) %>

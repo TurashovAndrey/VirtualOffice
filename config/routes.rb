@@ -6,9 +6,11 @@ VirtualOffice::Application.routes.draw do
   resource :account
   resource :user_session
 
+  resource :worker
   resource :company do
     resources :workers
   end
+
   resources :events
   resources :attachments
 
@@ -17,6 +19,8 @@ VirtualOffice::Application.routes.draw do
   constraints(Subdomain) do
     match '/' => 'accounts#show'
   end
+
+  resources :users
 
   netzke
   resources :tasks
@@ -28,6 +32,7 @@ VirtualOffice::Application.routes.draw do
 
   match "delegate_tasks" => "delegate_tasks#index"
   match "all_tasks" => "all_tasks#index"
+  match "done_tasks" => "done_tasks#index"
   
   # root :to => "chat#login"
 

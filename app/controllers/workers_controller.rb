@@ -1,8 +1,9 @@
+
 class WorkersController < ApplicationController
 
   filter_resource_access :nested_in => :companies, :context => :users,
       :new => [:new, :create],
-      :member => [:show, :edit, :update],
+      :member => [:show, :edit, :update, :destroy],
       :collection => [:index]
 
 
@@ -19,6 +20,8 @@ class WorkersController < ApplicationController
 
   def create
     @user.role = Role::WORKER
+    k = ActiveSupport::SecureRandom.hex(6)
+    @user.password = k
 
     if @user.save
       flash[:notice] = t('company.flashes.worker_created')
@@ -28,6 +31,11 @@ class WorkersController < ApplicationController
       flash[:error] = t('company.flashes.worker_create_error')
       render :new
     end
+  end
+
+  def destroy
+    @worker.destroy
+    redirect_to company_workers_path
   end
 
   def load_company

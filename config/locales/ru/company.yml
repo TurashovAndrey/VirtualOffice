@@ -8,6 +8,7 @@ ru:
       update_error: 'Не удалось сохранить компанию.'
       worker_created: 'Сотрудник успешно создан'
       worker_create_error: 'Не удалось создать сотрудника'
+      worker_deleted: "Сотрудник удален успешно"
 
     titles:
       my_company: 'Компания'

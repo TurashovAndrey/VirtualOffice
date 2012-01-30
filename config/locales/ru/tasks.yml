@@ -5,3 +5,4 @@ ru:
       my_tasks: 'Мои задания'
       delegate_tasks: 'Делегированные задания'
       all_tasks: 'Все задания'
+      done_tasks: 'Выполненные задания'

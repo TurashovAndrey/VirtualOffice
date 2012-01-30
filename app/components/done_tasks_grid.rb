@@ -1,9 +1,9 @@
 # coding: utf-8
-class DelegateTasksGrid < Netzke::Basepack::GridPanel
+class DoneTasksGrid < Netzke::Basepack::GridPanel
   def configuration
     super.merge({
       :model => "Task",
-      :scope => {:second_user_id => Netzke::Core::session[:netzke_user_id]},
+      :scope => {:company_id => User.find(Netzke::Core::session[:netzke_user_id]).company_id, :done => true},
       :height => 400,
       # Declaring columns
       :columns => [

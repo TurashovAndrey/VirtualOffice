@@ -18,7 +18,8 @@ module Helper
       @envolve_html_code = EnvolveChat::ChatRenderer.get_html("50879-2vO9DDq6kmqbiIViHl2rntDi9mFADrIY",
       {
         :is_admin => false,
-        :strings => "TurnOff : 'Выключить',TurnOnTooltip:'Включить',Sound:'Звук',LogOutTitleText:'Выйти',LoggingOut:'Выйти из чата'"      })
+        :strings => "TurnOff : 'Выключить',TurnOnTooltip:'Включить',Sound:'Звук',LogOutTitleText:'Выйти',LoggingOut:'Выйти из чата'"
+      })
     end
 
     @envolve_html_code
