@@ -135,9 +135,6 @@ html>body #all {
 #main_menu ul li a, #sub_menu ul li a {text-decoration: none;}
 #sub_menu ul li a:hover {text-decoration: underline;}
 
-
-
-
 /* CONTENT */
 
 #content {
@@ -263,6 +260,39 @@ h2.booking_details {
 
 /* CONTENT TABLE */
 
+.profile_table {
+	font: 11px/24px Verdana, Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 320px;
+	padding: 15px;
+	}
+
+.profile_table.th {
+	padding: 0;
+	text-align: left;
+	}
+
+/*.profile_table.tr.yellow td {
+	border-top: 1px solid #FB7A31;
+	border-bottom: 1px solid #FB7A31;
+	background: #FFC;
+	}*/
+
+.profile_table.td {
+	border-bottom: 1px solid #CCC;
+	padding: 0;
+	align: left;
+	}
+
+/*.profile_table.td:first-child {
+	width: 190px;
+	}*/
+
+.profile_table.td+td {
+	border-left: 1px solid #CCC;
+	text-align: left;
+	}
+
 /* #content table {
     border-collapse: collapse;
     width: 100%;
@@ -318,7 +348,7 @@ h2.booking_details {
 
 #content table tbody td:first-child {
     border-left: 1px solid #005094;
-}  */
+}*/
 
 /* content table for bookings */
 .my_booking_id { width: 10%; }
@@ -588,7 +618,7 @@ div.pagination {
 
 .inputs ol li label {
     line-height: 38px;
-    font-size: 18px;
+    font-size: 14px;
     color: #6d6d6d;
     width: 200px;
     text-align: right;
@@ -601,7 +631,7 @@ div.pagination {
     width: 200px;
     height: 30px;
     margin-left: 15px;
-    font-size: 18px;
+    font-size: 14px;
     background: #deeeff;
     border: 1px solid #dddddd;
     float: left;

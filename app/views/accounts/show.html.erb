@@ -1,13 +1,23 @@
-<%= semantic_form_for(@user, :url => account_path(@user)) do |f| %>
+# coding: utf-8
+<%= semantic_form_for(@user, :url => account_path(@user), :html => { :multipart => true }) do |f| %>
     <br/>
-    <%= f.inputs do %>
-        <%= f.input :email, :as => :string, :input_html => { :readonly => true }, :label => "E-mail" %>
-        <%= f.input :first_name, :as => :string, :label => "Имя" %>
-        <%= f.input :last_name, :as => :string, :label => "Фамилия" %>
-    <% end %>
-
+    <table class="profile_table">
+      <tr>
+        <td>
+            <%= image_tag @user.avatar.url, :width => 200, :height => 200 %> <br/>
+            <%= f.file_field :avatar %>
+        </td>
+        <td>
+            <%= f.inputs do %>
+              <%= f.input :email, :as => :string, :input_html => { :readonly => true }, :label => "E-mail" %>
+              <%= f.input :first_name, :as => :string, :label => "Имя" %>
+              <%= f.input :last_name, :as => :string, :label => "Фамилия" %>
+            <% end %>
+        </td>
+      </tr>
+    </table>
     <%= f.buttons do %>
-        <%= f.commit_button "Сохранить", :button_html => { :class => 'button-styled blue'} %>
+      <%= f.commit_button "Сохранить", :button_html => { :class => 'image-styled blue'}%>
     <% end %>
     <%= raw(Helper.get_chat_script(current_user)) %>
 <% end %>

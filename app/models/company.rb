@@ -5,6 +5,8 @@ class Company < ActiveRecord::Base
   has_many :tasks
   has_many :attachments
 
+  has_attached_file :logo
+
   validates_presence_of :url_base
   validates_uniqueness_of :name, :url_base
 

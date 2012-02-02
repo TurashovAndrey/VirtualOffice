@@ -16,7 +16,7 @@
 /* Outer most container */
 .ec-calendar {
   font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 14px;
   margin: 0;
   padding: 0;
@@ -28,6 +28,7 @@
   padding: 5px 0;
   width: 100%;
   table-layout: fixed;
+  align: center;
 }
 
 .ec-month-name {
@@ -113,7 +114,7 @@
   border-top: 1px solid #d5d5d5;
   border-left: 1px solid #d5d5d5;
   border-bottom: 1px dotted #bbbbbb;
-  background-color: #ecede2;
+  background-color: #99CCFF;
   overflow: hidden;
 }
 

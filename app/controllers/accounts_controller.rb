@@ -11,7 +11,6 @@ class AccountsController < ApplicationController
 
   def create
     @user.role = Role::MANAGER
-
     if @user.save
       flash[:notice] = t('user.flashes.created')
       redirect_to account_path
@@ -25,10 +24,9 @@ class AccountsController < ApplicationController
   end
 
   def update
-     if (!@user.update_attribute(:first_name,params[:user][:first_name])) or
-        (!@user.update_attribute(:last_name,params[:user][:last_name]))
-      flash[:error] = t('user.flashes.update_error')
-     end
+     @user.update_attribute(:first_name,params[:user][:first_name])
+     @user.update_attribute(:last_name,params[:user][:last_name])
+     @user.update_attribute(:avatar, params[:user][:avatar])
 
      redirect_to account_path
   end

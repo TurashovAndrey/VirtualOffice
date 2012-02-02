@@ -1,9 +1,19 @@
 <%= semantic_form_for(@company) do |f| %>
     <br/>
-    <%= f.inputs do %>
-        <%= f.input :name, :as => :string, :label => "Название компании" %>
-        <%= f.input :url_base, :as => :string, :label => "Адрес в системе", :input_html => { :readonly => true } %>
-    <% end %>
+    <table class="profile_table">
+      <tr>
+        <td>
+            <%= image_tag @company.logo.url, :width => 200, :height => 200 %> <br/>
+            <%= f.file_field :logo %>
+        </td>
+        <td>
+	    <%= f.inputs do %>
+	        <%= f.input :name, :as => :string, :label => "Название компании" %>
+        	<%= f.input :url_base, :as => :string, :label => "Адрес в системе", :input_html => { :readonly => true } %>
+	    <% end %>
+        </td>
+     </tr>
+   </table>
 
     <%= f.buttons do %>
         <%= f.commit_button "Сохранить" %>

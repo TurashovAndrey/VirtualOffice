@@ -20,7 +20,7 @@ VirtualOffice::Application.routes.draw do
     match '/' => 'accounts#show'
   end
 
-  resources :users
+  # resources :users
 
   netzke
   resources :tasks

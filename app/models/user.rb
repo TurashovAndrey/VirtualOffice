@@ -1,9 +1,13 @@
+# encoding: utf-8
 class User < ActiveRecord::Base
   acts_as_authentic do |user|
     user.require_password_confirmation = false
   end
 
   attr_accessor :company_name
+
+  has_attached_file :avatar
+  # attr_accessible :avatar
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :role

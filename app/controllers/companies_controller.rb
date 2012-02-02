@@ -11,6 +11,7 @@ class CompaniesController < ApplicationController
   def update
     @company.update_attribute(:name,params[:company][:name])
     @company.update_attribute(:url_base,params[:company][:url_base])
+    @company.update_attribute(:logo, params[:company][:logo])
 
     if @company.save
       flash[:notice] = t('company.flashes.updated')

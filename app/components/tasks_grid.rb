@@ -1,19 +1,19 @@
 # coding: utf-8
 class TasksGrid < Netzke::Basepack::GridPanel
 
-  action :delegate_task, :text => "Делегировать задание"
+  # action :delegate_task, :text => "Делегировать задание"
 
-  js_method :on_delegate_task, <<-JS
-  function(){
-    var model = this.getSelectionModel();
+  # js_method :on_delegate_task, <<-JS
+  # function(){
+  #  var model = this.getSelectionModel();
 
-    empl1 = model.selection.get("user__email");
-    empl2 = model.selection.get("second_user__email");
+  #  empl1 = model.selection.get("user__email");
+  #  empl2 = model.selection.get("second_user__email");
 
-    model.selection.set("second_user__email", empl2);
-    model.selection.set("user__email", empl1);  }
-  }
-  JS
+  #  model.selection.set("second_user__email", empl2);
+  #  model.selection.set("user__email", empl1);  }
+  #}
+  #JS
 
   #def default_bbar
   #  [:delegate_task.action, "-", *super]

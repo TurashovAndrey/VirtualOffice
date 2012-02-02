@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120111153244) do
+ActiveRecord::Schema.define(:version => 20120201154423) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "company_id"
@@ -24,8 +24,12 @@ ActiveRecord::Schema.define(:version => 20120111153244) do
   end
 
   create_table "companies", :force => true do |t|
-    t.string "name",     :default => "", :null => false
-    t.string "url_base", :default => "", :null => false
+    t.string   "name",              :default => "", :null => false
+    t.string   "url_base",          :default => "", :null => false
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
   end
 
   create_table "events", :force => true do |t|
@@ -74,6 +78,10 @@ ActiveRecord::Schema.define(:version => 20120111153244) do
     t.string   "last_login_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
 end

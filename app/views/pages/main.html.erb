@@ -1,4 +1,4 @@
 <h2><%= t('user.titles.register') %></h2>
     <%= raw(Helper.get_chat_script(nil)) %>
-<%= render :partial => 'layouts/flash' if !logged_in? %>
-<%= render 'users/form' if !logged_in?  %>
+<%= render :partial => 'layouts/flash' %>
+<%= render 'users/form' %>

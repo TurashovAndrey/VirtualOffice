@@ -1,4 +1,4 @@
-<%= semantic_form_for(@user, :url => account_path) do |f| %>
+<%= semantic_form_for(@user, :url => account_path(@user)) do |f| %>
     <%= f.semantic_errors :email, :password, :company_name %>
 
     <%= f.inputs do %>

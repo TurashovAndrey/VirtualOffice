@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <%= stylesheet_link_tag "../assets/stylesheets/jquery-ui-1.8.custom" %>
+  <style type="text/css">
+    /* css for timepicker */
+    #ui-timepicker-div dl{ text-align: left; }
+    #ui-timepicker-div dl dt{ height: 25px; }
+    #ui-timepicker-div dl dd{ margin: -25px 0 10px 65px; }
+  </style>
+
+  <%= javascript_include_tag "../../assets/javascripts/jquery.ui.datepicker.js", "../../assets/javascripts/jquery-ui-timepicker-addon.js" %>
   <%= render :partial => 'layouts/html_head' %>
   <%= raw(Helper.get_chat_script(nil)) %>
 </head>
@@ -16,12 +25,8 @@
     <h1><%= display_headline %></h1>
     <%= netzke_init %>
     <%= javascript_include_tag "../../../public/extjs/locale/ext-lang-ru.js" %>
-    <style type="text/css" media="screen">
-      .netzke-component { height: 400px; }
-    </style>
     <%= yield %>
   </div>
-
   <div id="empty"></div>
   <div id="footer">
     <%= render :partial => 'layouts/footer' %>
