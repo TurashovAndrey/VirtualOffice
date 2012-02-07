@@ -3,6 +3,7 @@
 <%= stylesheet_link_tag "event_calendar"%>
 
 <%= semantic_form_for(@event) do |f| %>
+    <br/>
     <%= f.inputs do %>
         <%= f.input :name, :as => :string, :label => "Событи", :required => true %>
         <%= f.input :start_at, :as => :string, :type => :date,  :label => "Дата начала", :required => true %>

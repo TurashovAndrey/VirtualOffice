@@ -13,10 +13,14 @@
 	    <% end %>
         </td>
      </tr>
+     <tr>
+       <td>
+         <%= f.buttons do %>
+             <%= f.commit_button "Сохранить" %>
+         <% end %>
+       </td>
+     </tr>
    </table>
 
-    <%= f.buttons do %>
-        <%= f.commit_button "Сохранить" %>
-    <% end %>
     <%= raw(Helper.get_chat_script(current_user)) %>
 <% end %>

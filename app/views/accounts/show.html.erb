@@ -15,10 +15,14 @@
             <% end %>
         </td>
       </tr>
+      <tr>
+        <td>
+          <%= f.buttons do %>
+            <%= f.commit_button "Сохранить", :button_html => { :class => 'button-styled blue'}%>
+          <% end %>
+        </td>
+      </tr>
     </table>
-    <%= f.buttons do %>
-      <%= f.commit_button "Сохранить", :button_html => { :class => 'image-styled blue'}%>
-    <% end %>
     <%= raw(Helper.get_chat_script(current_user)) %>
 <% end %>
 
