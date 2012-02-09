@@ -88,6 +88,7 @@ SimpleNavigation::Configuration.run do |navigation|
       tasks.item :show_done_tasks, t('task.titles.done_tasks'), done_tasks_path
      end
     primary.item :attachments, t('attachment.titles.attachment'), attachments_path
+    primary.item :rooms, t('room.titles.room'), rooms_path
   end
 
 end

@@ -4,6 +4,7 @@ class Company < ActiveRecord::Base
   has_many :events
   has_many :tasks
   has_many :attachments
+  has_many :rooms
 
   has_attached_file :logo
 

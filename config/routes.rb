@@ -14,6 +14,8 @@ VirtualOffice::Application.routes.draw do
   resources :events
   resources :attachments
 
+  resources :rooms
+
   match 'logout' => 'user_sessions#destroy'
 
   constraints(Subdomain) do

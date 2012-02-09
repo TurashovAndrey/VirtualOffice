@@ -13,6 +13,15 @@ class AccountsController < ApplicationController
     @user.role = Role::MANAGER
     if @user.save
       flash[:notice] = t('user.flashes.created')
+
+      config_opentok
+
+      #@new_room = Room.new(:name => @user.company.url_base, :session_id =>"1_MX4xMjMyMDgxfjcwLjQyLjQ3Ljc4fjIwMTItMDItMDggMDc6MDI6MTQuNjYxMjI5KzAwOjAwfjAuMDEwNjcwMTQzMTE1Nn4", :public => true)
+      session = @opentok.create_session request.remote_addr
+	    @new_room = Room.new(:name => @user.company.url_base, :session_id =>session.session_id, :public => true)
+      @new_room.company = @user.company
+      @new_room.save
+
       redirect_to account_path
     else
       flash[:error] = t('user.flashes.create_error')
@@ -36,5 +45,12 @@ class AccountsController < ApplicationController
   def load_account
     @user = self.current_user
   end
+
+   private
+	  def config_opentok
+	    if @opentok.nil?
+	      @opentok = OpenTok::OpenTokSDK.new(11739502, "75d020096690199bd0fd54522a66cd0bd5a2a145", :api_url =>'https://api.opentok.com/hl')
+	    end
+	  end
 
 end

@@ -10,11 +10,13 @@ gem 'mysql'
 gem 'authlogic'
 gem 'declarative_authorization'
 gem 'active_hash'
-gem 'formtastic'
+gem 'formtastic', '2.0.2'
 gem 'simple-navigation'
 gem 'default_value_for'
 gem 'show_for'
 gem 'table_builder', '0.0.3', :git => 'git://github.com/jchunky/table_builder.git'
+
+gem 'opentok'
 
 gem 'magic_encoding'
 

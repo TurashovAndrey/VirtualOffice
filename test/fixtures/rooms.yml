@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: 
+  session_id: 
+  public: 
+  company_id: 1
+
+two:
+  name: 
+  session_id: 
+  public: 
+  company_id: 1
