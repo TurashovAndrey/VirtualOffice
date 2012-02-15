@@ -2,7 +2,9 @@
     <%= f.semantic_errors :email %>
 
     <%= f.inputs do %>
-        <%= f.input :email, :required => true %>
+        <%= f.input :email, :required => true, :label => "E-mail" %>
+        <%= f.input :first_name, :label => "Имя" %>
+        <%= f.input :last_name, :label => "Фамилия" %>
     <% end %>
 
     <%= f.buttons do %>
