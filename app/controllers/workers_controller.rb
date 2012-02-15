@@ -21,7 +21,7 @@ class WorkersController < ApplicationController
   def create
     @user.role = Role::WORKER
     k = ActiveSupport::SecureRandom.hex(6)
-    @user.password = k
+    @user.password = k.to_s
 
     if @user.save
       flash[:notice] = t('company.flashes.worker_created')

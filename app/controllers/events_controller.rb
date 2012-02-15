@@ -32,10 +32,6 @@ class EventsController < ApplicationController
   end
 
   def update
-    #The below is workaround. Why update_attributes doesn't update all attributes?
-    @event.update_attribute(:start_time,params[:event][:start_time])
-    @event.update_attribute(:end_time,params[:event][:end_time])
-
     if @event.update_attributes(params[:event])
       flash[:notice] = t('event.flashes.saves')
     else

@@ -1,6 +1,8 @@
 class AttachmentsController < ApplicationController
   def index
     @attachment = Attachment.new
+    @attachments = Attachment.find_all_by_company_id(current_user.company)
+    @attachment.company = current_user.company
   end
 
   def create

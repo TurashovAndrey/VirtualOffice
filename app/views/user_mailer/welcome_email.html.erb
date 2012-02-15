@@ -4,14 +4,23 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Welcome to example.com, <%= @user.email %></h1>
+    <h1>Добро пожаловать на timtim.ru, <%= @user.email %></h1>
     <p>
-      You have successfully signed up to example.com,
-      your username is: <%= @user.email %>.<br/>
+      Вас зарегистрировали на сайте timtim.ru в компании <%= @user.company.url_base %>.timtim.ru.
     </p>
+    <br/>
     <p>
-      To login to the site, just follow this link: <%= @url %>.
+      Активируйте аккаунт! Пройдите по ссылке: <%= @url %>.
     </p>
-    <p>Thanks for joining and have a great day!</p>
+    <br/>
+    <p>
+      Параметры Вашей учетной записи:<br/>
+      Логин:  <%= @user.email %><br/>
+      Пароль: <%= @user.password %><br/>
+      <br/>
+      <br/>
+    Спасибо за регистрацию и удачного Вам дня!</p>
+    <p>Команда "TimTim.ru."<br/>
+    <a href="http://www.timtim.ru">http://www.timtim.ru</a></p>
   </body>
 </html>

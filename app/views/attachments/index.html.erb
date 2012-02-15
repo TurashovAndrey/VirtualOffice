@@ -1,4 +1,9 @@
+<div class='attachments'>
+  <%= render :partial => 'attachment', :collection => @attachments %>
+</div>
+
 <%= semantic_form_for(@attachment) do |f| %>
+
     <%= f.inputs do %>
         <%= f.input :attach, :as => :file, :required => true %>
     <% end %>
@@ -10,5 +15,4 @@
        end
     %>
     <br/>
-    <%= raw(Helper.get_chat_script(current_user)) %>
 <% end %>
