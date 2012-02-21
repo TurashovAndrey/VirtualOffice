@@ -1,6 +1,6 @@
 class UserSessionsController < ApplicationController
   filter_resource_access
-  skip_before_filter :check_current_user, :only => [:new, :create]
+  skip_before_filter :check_current_user, :only => [:new, :create, :activate]
 
   def new
     if logged_in?
@@ -11,7 +11,7 @@ class UserSessionsController < ApplicationController
   end
 
   def create
-    if logged_in?
+    if (logged_in?)
       redirect_session_back_or_root
     elsif @user_session.save
       new_user = @user_session.record
@@ -32,6 +32,18 @@ class UserSessionsController < ApplicationController
 
     flash[:notice] = t('user_session.flashes.logged_out')
     redirect_to application_root_path
+  end
+
+  def activate
+    @user = User.find_using_perishable_token(params[:activation_code], 1.week)
+    @user.active = true
+    @user.save
+    redirect_to application_root_path
+
+    #if @user.activate!
+    #  UserSession.create(@user, false)
+    #  redirect_session_back_or_root
+    #end
   end
 
   protected

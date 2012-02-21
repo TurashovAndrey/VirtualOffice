@@ -1,6 +1,23 @@
-<div class='attachments'>
+<!-- <div class='attachments'>
   <%= render :partial => 'attachment', :collection => @attachments %>
-</div>
+</div> -->
+
+<table class="content_table">
+  <tr>
+    <th>Файл</th>
+    <th>Сотрудник</th>
+    <th>Дата</th>
+  </tr>
+
+<% @attachments.each do |attachment| %>
+  <tr>
+    <!-- <td><%= image_tag attachment.attach.url , :width => 200, :height => 200 %></td> -->
+    <td><%= link_to attachment.attach.url, attachment.attach.url(:original, false) %></td>
+    <td><b><%= attachment.user.email %></b></td>
+    <td><b><%= attachment.created_at %></b></td>
+  </tr>
+<% end %>
+</table>
 
 <%= semantic_form_for(@attachment) do |f| %>
 

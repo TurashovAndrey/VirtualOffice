@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   belongs_to :company
   has_many :events
 
+  has_many :attachments
+
   after_create :create_company_for_manager
 
   validates_presence_of :email
@@ -31,6 +33,35 @@ class User < ActiveRecord::Base
 
   def role_symbols
     [self.role.name.to_sym]
+  end
+
+  def active?
+    active
+  end
+
+  def activate!
+    active = true
+    save
+  end
+
+  def deactivate!
+    self.active = false
+    save
+  end
+
+  def send_activation_instructions!
+    reset_perishable_token!
+    UserMailer.activation_instructions(self).deliver
+  end
+
+  def deliver_activation_instructions!
+    reset_perishable_token!
+    Notifier.deliver_activation_instructions(self)
+  end
+
+  def deliver_activation_confirmation!
+    reset_perishable_token!
+    Notifier.deliver_activation_confirmation(self)
   end
 
   protected

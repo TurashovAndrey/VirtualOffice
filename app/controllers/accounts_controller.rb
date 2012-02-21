@@ -11,6 +11,7 @@ class AccountsController < ApplicationController
 
   def create
     @user.role = Role::MANAGER
+    @user.active = true
     if @user.save
       flash[:notice] = t('user.flashes.created')
 
@@ -38,6 +39,19 @@ class AccountsController < ApplicationController
      @user.update_attribute(:avatar, params[:user][:avatar])
 
      redirect_to account_path
+  end
+
+  def activate
+    @user = User.find_using_perishable_token(params[:activation_code], 1.week) || (raise Exception)
+
+    raise Exception if @user.active?
+
+    if @user.activate!
+      UserSession.create(@user, false)
+      redirect_to account_url
+    else
+      render :action => :new
+    end
   end
 
   protected

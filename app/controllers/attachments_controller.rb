@@ -8,6 +8,7 @@ class AttachmentsController < ApplicationController
   def create
     @attachment = Attachment.new(params[:attachment])
     @attachment.company = current_user.company
+    @attachment.user = current_user
     if @attachment.save
       flash[:notice] = t('attachment.flashes.created')
     else

@@ -12,7 +12,7 @@ module Helper
         :last_name => user.last_name,
         :is_admin => false,
         :groups => [{:id => user.company.url_base, :name => user.company.name},{:id => "Default", :name => "Default chat"}],
-        :strings => "TurnOff:'Закрыть программу', TurnOnTooltip:'Открыть программу', Sound:'Включить/выключить звук',"+
+        :strings => "{TurnOff:'Закрыть программу', TurnOnTooltip:'Открыть программу', Sound:'Включить/выключить звук',"+
                     "SettingsLink:'Открыть панель администратора', LogOutTitleText:'Выйти из чата', LoggingOut:'Выход из чата',"+
                     "PeopleListHeaderText:'Кто сейчас в чате', ThisIsYou:'Ваш профайл', NoOneIsHere:'В чате никого нет', YourNameIs:'Ваш ник',"+
                     "PleaseLoginBeginning:'Пожалуйста,', PleaseLoginEnd:'чтобы изменить свой ник', PeopleListTitleSingular:'пользователь в чате',"+
@@ -46,7 +46,7 @@ module Helper
                     "ChatFullTooltip:'Новые пользователи не могут присоединиться, так как чат переполнен',WrongDomain:'Запрещенный домен',"+
                     "WrongDomainTooltip:'Попытка доступа с запрещенного домена',MoreInfoLink:'Подробнее об ошибке',BannedFromChat:'Вы забанены в этом чате',"+
                     "LoginRequiredToCreateChat:'Нужно выполнить вход, чтобы создать чат',LoginRequiredToChat:'Нужно выполнить вход, чтобы продолжать',NoSSL:'SSL отключен',"+
-                    "NoSSLTooltip:'Ошибка доступа: отключен SSL'"
+                    "NoSSLTooltip:'Ошибка доступа: отключен SSL'}"
 
         # :strings => "TurnOff : 'Выключить',TurnOnTooltip:'Включить',Sound:'Звук',LogOutTitleText:'Выйти',LoggingOut:'Выйти из чата'"
       })
@@ -54,7 +54,7 @@ module Helper
       @envolve_html_code = EnvolveChat::ChatRenderer.get_html("50879-2vO9DDq6kmqbiIViHl2rntDi9mFADrIY",
       {
         :is_admin => false,
-        :strings => "TurnOff:'Закрыть программу', TurnOnTooltip:'Открыть программу', Sound:'Включить/выключить звук',"+
+        :strings => "{TurnOff:'Закрыть программу', TurnOnTooltip:'Открыть программу', Sound:'Включить/выключить звук',"+
                     "SettingsLink:'Открыть панель администратора', LogOutTitleText:'Выйти из чата', LoggingOut:'Выход из чата',"+
                     "PeopleListHeaderText:'Кто сейчас в чате', ThisIsYou:'Ваш профайл', NoOneIsHere:'В чате никого нет', YourNameIs:'Ваш ник',"+
                     "PleaseLoginBeginning:'Пожалуйста,', PleaseLoginEnd:'чтобы изменить свой ник', PeopleListTitleSingular:'пользователь в чате',"+
@@ -88,7 +88,7 @@ module Helper
                     "ChatFullTooltip:'Новые пользователи не могут присоединиться, так как чат переполнен',WrongDomain:'Запрещенный домен',"+
                     "WrongDomainTooltip:'Попытка доступа с запрещенного домена',MoreInfoLink:'Подробнее об ошибке',BannedFromChat:'Вы забанены в этом чате',"+
                     "LoginRequiredToCreateChat:'Нужно выполнить вход, чтобы создать чат',LoginRequiredToChat:'Нужно выполнить вход, чтобы продолжать',NoSSL:'SSL отключен',"+
-                    "NoSSLTooltip:'Ошибка доступа: отключен SSL'"
+                    "NoSSLTooltip:'Ошибка доступа: отключен SSL'}"
 
         #:strings => "TurnOff : 'Выключить', TurnOnTooltip:'Включить', Sound:'Звук', LogOutTitleText:'Выйти', LoggingOut:'Выйти из чата'"
       })

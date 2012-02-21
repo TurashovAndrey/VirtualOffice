@@ -216,10 +216,7 @@ module EnvolveChat
                 end
              o << "groups : [#{groups.join(',')}]"
            when "strings"
-             opt[1].each do |str|
-                strings << "{str[0] : '#{str[0]}', str[1] : '#{str[1]}'}"
-             end
-             o << "strings : [#{strings.join(',')}]"
+             o << "strings : #{opt[1]}"
           end
           end
         return "envoOptions={#{o.join(',')}};"
@@ -227,7 +224,7 @@ module EnvolveChat
     end
     
     def self.get_options(args)
-      return args.select {|k,v| ["people_here_text","people_list_header_text","enable_socialgo","groups"].include? k.to_s }
+      return args.select {|k,v| ["people_here_text","people_list_header_text","enable_socialgo","groups","strings"].include? k.to_s }
     end
   
   end # close class

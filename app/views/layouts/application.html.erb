@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <%= stylesheet_link_tag "../assets/stylesheets/jquery-ui-1.8.custom" %>
-  <style type="text/css">
-    /* css for timepicker */
-    #ui-timepicker-div dl{ text-align: left; }
-    #ui-timepicker-div dl dt{ height: 25px; }
-    #ui-timepicker-div dl dd{ margin: -25px 0 10px 65px; }
-  </style>
-
-  <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css", "application" %>
-  <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js", "application" %>
   <%= render :partial => 'layouts/html_head' %>
   <%= raw(Helper.get_chat_script(nil)) %>
 </head>

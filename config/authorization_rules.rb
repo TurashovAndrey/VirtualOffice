@@ -4,17 +4,21 @@ authorization do
 
   role :public do
     has_permission_on :static, :to => :home
+    has_permission_on :user_sessions, :to => [:activate]
   end
 
   role :guest do
     includes :public
 
+    has_permission_on :user_sessions, :to => [:new, :create, :activate]
+    # has_permission_on :user_sessions, :to => :activate
     has_permission_on :users, :to => :new_account
     has_permission_on :users, :to => :create_account do
       if_permitted_to :new_account
+    has_permission_on :users, :to => :manage
     end
 
-    has_permission_on :user_sessions, :to => [:new, :create]
+    has_permission_on :user_sessions, :to => [:new, :create, :activate]
   end
 
   role :authorized do

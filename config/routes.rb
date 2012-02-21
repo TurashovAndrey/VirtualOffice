@@ -1,10 +1,13 @@
 VirtualOffice::Application.routes.draw do
   get "events/new"
 
+  default_url_options :host => "lvh.me:3000"
+
   # match '/events(/:year(/:month))' => 'events', :as => :event, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
 
   resource :account
   resource :user_session
+  match 'activate(/:activation_code)' => 'user_sessions#activate', :as => :activate_user_account
 
   resource :worker
   resource :company do
