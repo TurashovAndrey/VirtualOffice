@@ -5,7 +5,6 @@ class AccountsController < ApplicationController
                          :new => [[:new, :new_account], [:create, :new_account]],
                          :member => [[:activate, :activate_account], [:show, :show_account], [:edit, :edit_account], [:update, :edit_account]],
                          :additional_member => [[:edit_password, :edit_password_account], [:update_password, :edit_password_account]]
-
   def new
   end
 
@@ -65,6 +64,5 @@ class AccountsController < ApplicationController
 	    if @opentok.nil?
 	      @opentok = OpenTok::OpenTokSDK.new(11739502, "75d020096690199bd0fd54522a66cd0bd5a2a145", :api_url =>'https://api.opentok.com/hl')
 	    end
-	  end
-
+    end
 end

@@ -1,6 +1,31 @@
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require_tree .
+
+$(function (){
+   $('#event_start_at').datetimepicker({ dateFormat: 'yy-mm-dd' });
+});
+
+$(function (){
+  $.datepicker.regional['ru'];
+  $('#event_end_at').datetimepicker({ dateFormat: 'yy-mm-dd' });
+});
+
+$(function (){
+  $("#login-link").modal();
+});
+
+//ModalBox support
+document.observe('dom:loaded', function() {  
+    $('login-link__').observe('click', function(event) {
+        event.stop();  
+        Modalbox.show(this.href,  
+            {title: 'Login',  
+            width: 500}  
+        );  
+    });  
+})  
 
 // Add message to chat
 function addMessage(type, header, content) {
@@ -160,4 +185,5 @@ function runChat(username,channel) {
 		
 		CURRENT_WIDTH = width;
 	}
+
 	

@@ -6,12 +6,8 @@ class CreateEvents < ActiveRecord::Migration
       t.integer :user_id
       t.integer :company_id
 
-      t.date :start_at
-      t.date :end_at
-
-      t.time :start_time
-      t.time :end_time
-
+      t.datetime :start_at
+      t.datetime :end_at
       t.timestamps
     end
   end

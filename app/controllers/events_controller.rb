@@ -9,6 +9,8 @@ class EventsController < ApplicationController
     @event.user = current_user
     @event.company = current_user.company
 
+    @event.update_attribute("start_at", params[:event][:start_at])
+    @event.update_attribute("end_at", params[:event][:end_at])
     if @event.save
       flash[:notice] = t('event.flashes.created')
     else
@@ -32,7 +34,8 @@ class EventsController < ApplicationController
   end
 
   def update
-    if @event.update_attributes(params[:event])
+    if @event.save
+    #if @event.update_attributes(params[:event])
       flash[:notice] = t('event.flashes.saves')
     else
       flash[:error] = t('event.flashes.save_error')

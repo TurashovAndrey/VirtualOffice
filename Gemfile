@@ -30,6 +30,7 @@ gem 'ruby-hmac'
 
 gem 'socky-authenticator'
 gem 'event-calendar', :require => 'event_calendar'
+gem "combined_time_select", "~> 0.0.1"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -40,6 +41,8 @@ gem 'event-calendar', :require => 'event_calendar'
  end
 
 gem 'jquery-rails'
+gem 'ui_datepicker-rails3'
+gem 'jquery_datepicker'
 
 gem 'execjs'
 

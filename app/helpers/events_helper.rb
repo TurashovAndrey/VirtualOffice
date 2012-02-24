@@ -22,12 +22,6 @@ module EventsHelper
       event = args[:event]
       html = %(<a href="#{edit_event_path(event.id)}" title="#{h(event.name)}">)
       #html = %(<a href="#{edit_event_path(event.id)}" title="#{h(event.name)}">#{h(event.name)}"</a>)
-      if event.start_time
-        html<<%(<span class="ec-event-time">#{h(event.start_time.strftime("%H:%M"))}</span>)
-      end
-      if event.end_time
-        html<<%(<span class="ec-event-time">-#{h(event.end_time.strftime("%H:%M"))}</span>)
-      end
       html<<%(<span class="ec-event-time">#{h(event.user.email)}</span>)
       html<<%(#{h(event.name)}</a>)
       html

@@ -2,14 +2,13 @@
 <!-- Probably move the stylesheet to you layout. Also make sure you include the javascript. -->
 <%= stylesheet_link_tag "event_calendar"%>
 
+
 <%= semantic_form_for(@event) do |f| %>
     <br/>
     <%= f.inputs do %>
         <%= f.input :name, :as => :string, :label => "Событие", :required => true %>
-        <%= f.input :start_at, :as => :string, :type => :date,  :label => "Дата начала", :required => true %>
-        <%= f.input :end_at, :as => :string, :label => "Дата конца", :required => true %>
-        <%= f.input :start_time, :as => :string, :label => "Время начала"%>
-        <%= f.input :end_time, :as => :string, :input_html => { :type => :time }, :label => "Время конца"%>
+        <%= f.input :start_at, :as => :string, :type => :datetime,  :label => "Дата начала", :required => true %>
+        <%= f.input :end_at, :as => :string, :type => :datetime, :label => "Дата конца", :required => true %>
         <%= f.input :description, :label => "Описание", :input_html => { :rows => 10, :cols => 20, :maxlength => 10 } %>
     <% end %>
 

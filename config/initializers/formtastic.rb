@@ -1,4 +1,6 @@
 # encoding: utf-8
+UiDatePickerRails3.activate :formtastic
+
 
 # --------------------------------------------------------------------------------------------------
 # Please note: If you're subclassing Formtastic::FormBuilder, Formtastic uses
