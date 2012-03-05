@@ -8,7 +8,7 @@ class WorkersController < ApplicationController
 
 
   def index
-    @workers = @company.users
+    @workers = @company.users.find(:all, :conditions => ['email != ""'])
   end
 
   def show

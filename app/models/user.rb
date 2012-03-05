@@ -24,12 +24,6 @@ class User < ActiveRecord::Base
   default_value_for :password, 'admin'
 
   attr_accessor :new_password, :new_password_confirmation
-  validates_confirmation_of :new_password, :if=>:password_changed?
-  before_save :save_password, :if=>:password_changed?
-  
-  def password_changed?
-      !@new_password.blank?
-  end
 
   def role_symbols
     [self.role.name.to_sym]

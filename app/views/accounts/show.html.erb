@@ -14,11 +14,16 @@
               <%= f.input :email, :as => :string, :input_html => { :readonly => true }, :label => "E-mail" %>
               <%= f.input :first_name, :as => :string, :label => "Имя" %>
               <%= f.input :last_name, :as => :string, :label => "Фамилия" %>
+              <%= label_tag :change_password, "Изменить пароль" %>
+              <%= check_box_tag :change_password, 1, params[:change_password] %>
+              <br/>
+              <%= f.input :new_password, :as => :string, :label => "Пароль" %>
+              <%= f.input :new_password_confirmation, :as => :string, :label => "Подтверждение" %>
             <% end %>
             <br/>
                  <%= f.buttons do %>
                  <%= f.commit_button "Сохранить", :button_html => { :class => 'button-styled blue'}%> <br/>
-                 <%= link_to 'Login', account_path, :id => 'iframe'  %>
+
             <% end %>
         </td>
     </table>

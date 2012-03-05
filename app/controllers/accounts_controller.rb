@@ -37,7 +37,18 @@ class AccountsController < ApplicationController
      @user.update_attribute(:last_name,params[:user][:last_name])
      @user.update_attribute(:avatar, params[:user][:avatar])
 
-     redirect_to account_path
+     if (params[:change_password])
+       if (params[:user][:password] == params[:user][:password_confirmation])
+         @user.update_attribute(:password,params[:user][:new_password])
+         flash[:notice] = t('user.flashes.change_password')
+         render 'pages/main', :layout => 'main'
+       else
+         flash[:error] = t('user.flashes.change_password_error')
+         redirect_to account_path
+       end
+     else
+       redirect_to account_path
+     end
   end
 
   def activate

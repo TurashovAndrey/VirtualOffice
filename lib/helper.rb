@@ -5,7 +5,7 @@ module Helper
   def self.get_chat_script(user)
 
     if (user!=nil)
-      @firstname = user.first_name=="" ? user.email: user.first_name
+      @firstname = user.first_name.nil? ? user.email: user.first_name
       @envolve_html_code = EnvolveChat::ChatRenderer.get_html("50879-2vO9DDq6kmqbiIViHl2rntDi9mFADrIY",
       {
         :first_name => @firstname,
@@ -53,6 +53,7 @@ module Helper
     else
       @envolve_html_code = EnvolveChat::ChatRenderer.get_html("50879-2vO9DDq6kmqbiIViHl2rntDi9mFADrIY",
       {
+        :first_name => "Гость",
         :is_admin => false,
         :strings => "{TurnOff:'Закрыть программу', TurnOnTooltip:'Открыть программу', Sound:'Включить/выключить звук',"+
                     "SettingsLink:'Открыть панель администратора', LogOutTitleText:'Выйти из чата', LoggingOut:'Выход из чата',"+
