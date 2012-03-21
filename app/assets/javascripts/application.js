@@ -1,31 +1,6 @@
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui
 //= require_tree .
-
-$(function (){
-   $('#event_start_at').datetimepicker({ dateFormat: 'yy-mm-dd' });
-});
-
-$(function (){
-  $.datepicker.regional['ru'];
-  $('#event_end_at').datetimepicker({ dateFormat: 'yy-mm-dd' });
-});
-
-$(function (){
-  $("#login-link").modal();
-});
-
-//ModalBox support
-document.observe('dom:loaded', function() {  
-    $('login-link__').observe('click', function(event) {
-        event.stop();  
-        Modalbox.show(this.href,  
-            {title: 'Login',  
-            width: 500}  
-        );  
-    });  
-})  
 
 // Add message to chat
 function addMessage(type, header, content) {
@@ -105,16 +80,16 @@ function runChat(username,channel) {
 
 	var MIN_WIDTH_VIDEO = 200;
 	var MIN_HEIGHT_VIDEO = 150;
-	
+
 	var MAX_WIDTH_BOX = 800;
 	var MAX_HEIGHT_BOX = 600;
 
 	var CURRENT_WIDTH = MAX_WIDTH_VIDEO;
 	var CURRENT_HEIGHT = MAX_HEIGHT_VIDEO;
-	
+
 	function sessionConnectedHandler(event) {
 		publish();
-		
+
 		for (var i = 0; i < event.streams.length; i++) {
 			addStream(event.streams[i]);
 		}
@@ -128,7 +103,7 @@ function runChat(username,channel) {
 
 	function streamDestroyedHandler(event) {
 		videos--;
-		
+
 		layoutManager();
 	}
 
@@ -167,23 +142,21 @@ function runChat(username,channel) {
 			publisher = session.publish('opentok_publisher', {"width": CURRENT_WIDTH, "height": CURRENT_HEIGHT});
 		}
 	}
-	
+
 	function layoutManager() {
 		var estBoxWidth = MAX_WIDTH_BOX / videos;
 		var width = Math.min(MAX_WIDTH_VIDEO, Math.max(MIN_WIDTH_VIDEO, estBoxWidth));
 		var height = 3*width/4;
-		
+
 		publisherObj.height = height;
 		publisherObj.width = width;
-		
+
 		for(var subscriberDiv in subscriberObj) {
 			subscriberDiv.height = height;
 			subscriberDiv.width = width;
 		}
-		
+
 		CURRENT_HEIGHT = height;
-		
+
 		CURRENT_WIDTH = width;
 	}
-
-	

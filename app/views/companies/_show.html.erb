@@ -1,17 +1,20 @@
 <%= semantic_form_for(@company) do |f| %>
+    <div class="note_message">
+       Заполните информацию о Вашей компании.
+    </div>
     <br/>
     <table class="profile_table">
       <tr>
-        <td>
+        <td valign="top">
             <%= image_tag @company.logo.url, :width => 200, :height => 200 %> <br/>
             <%= f.file_field :logo, :accept => "image/*" %>
         </td>
-        <td>
+        <td valign="top">
 	    <%= f.inputs do %>
 	        <%= f.input :name, :as => :string, :label => "Название" %>
         	<%= f.input :url_base, :as => :string, :label => "URL", :input_html => { :readonly => true } %>
 	    <% end %>
-        <br/><br/>
+        <br/>
         <%= f.buttons do %>
              <%= f.commit_button "Сохранить", :button_html => { :class => 'button-styled blue'} %>
         <% end %>

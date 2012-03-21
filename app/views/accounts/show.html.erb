@@ -1,24 +1,29 @@
 # coding: utf-8
 
 <%= semantic_form_for(@user, :url => account_path(@user), :html => { :multipart => true }) do |f| %>
+    <div class="note_message">
+      Заполните профиль и Ваше имя/фамилия будут отображены в чате.
+    </div>
     <br/>
     <table class="profile_table">
       <tr>
-        <td>
+        <td valign="top">
             <%= image_tag @user.avatar.url, :width => 200, :height => 200 %>
             <br/><br/>
             <%= f.file_field :avatar, :accept => "image/*" %>
         </td>
-        <td>
+        <td valign="top">
             <%= f.inputs do %>
               <%= f.input :email, :as => :string, :input_html => { :readonly => true }, :label => "E-mail" %>
               <%= f.input :first_name, :as => :string, :label => "Имя" %>
               <%= f.input :last_name, :as => :string, :label => "Фамилия" %>
-              <%= label_tag :change_password, "Изменить пароль" %>
-              <%= check_box_tag :change_password, 1, params[:change_password] %>
-              <br/>
-              <%= f.input :new_password, :as => :string, :label => "Пароль" %>
-              <%= f.input :new_password_confirmation, :as => :string, :label => "Подтверждение" %>
+            <% end %>
+            <br/>
+            <%= label_tag :change_password, "Изменить пароль" %>
+            <%= check_box_tag :change_password, 1, params[:change_password] %>
+            <%= f.inputs do %>
+              <%= f.input :new_password, :as => :password, :label => "Пароль" %>
+              <%= f.input :new_password_confirmation, :as => :password, :label => "Подтверждение" %>
             <% end %>
             <br/>
                  <%= f.buttons do %>

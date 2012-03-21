@@ -7,9 +7,65 @@
 </head>
 <body>
 <div id="main">
-    <%= render :partial => 'layouts/main_header' %>
-    <h1><%= t('application.title') %></h1>
+    <div class="header_label">
+      <%= render :partial => 'layouts/main_header' %>
+      <table class="center">
+        <tr>
+          <td>
+             <%= image_tag "Logo.jpg" %>
+          </td>
+          <td>
+            <div class="header_td">
+              <h1>Совместная работа</h1>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
     <%= yield %>
 </div>
+<br/><br/><br/><br/><br/>
+ <div class="body_label">
+ <br/>
+ <h2><b>TimTim.ru включает в себя:</b></h2>
+ <table class="center">
+   <tr>
+     <td>
+       <div id="boxes">
+         <div id="box1"><h3><b>Компания:</b><br/>управление сотрудниками компании </h3>
+         </div>
+       </div>
+     </td>
+     <td>
+       <div id="boxes">
+         <div id="box1"><h3><b>Чат,<br/> конференция:</b><br/>коммуникации внутри компании</h3>
+         </div>
+       </div>
+     </td>
+     <td>
+       <div id="boxes">
+         <div id="box1"><h3><b>Календарь:</b><br/>календарь событий сотрудников компании</h3>
+         </div>
+       </div>
+     </td>
+     <td>
+       <div id="boxes">
+         <div id="box1"><h3><b>Задания</b>:</b><br/>Планировщик заданий для компании</h3>
+         </div>
+       </div>
+     </td>
+     <td>
+       <div id="boxes">
+         <div id="box1"><h3><b>Файлы</b>:</b><br/>Хранилище файлов компании<br/><br/></h3>
+         </div>
+       </div>
+     </td>
+   </tr>
+ </table>
+ </div>
+ <br/>
+ <div class="footer_label">
+   <p> &copy; <a href="http://timtim.ru">TimTim.ru</a>, 2012. Служба поддержки: <a href="mailto:support@timtim.ru">support@timtim.ru</a></p>
+ </div>
 </body>
 </html>

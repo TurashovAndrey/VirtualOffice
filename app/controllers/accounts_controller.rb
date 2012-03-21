@@ -18,11 +18,11 @@ class AccountsController < ApplicationController
 
       #@new_room = Room.new(:name => @user.company.url_base, :session_id =>"1_MX4xMjMyMDgxfjcwLjQyLjQ3Ljc4fjIwMTItMDItMDggMDc6MDI6MTQuNjYxMjI5KzAwOjAwfjAuMDEwNjcwMTQzMTE1Nn4", :public => true)
       session = @opentok.create_session request.remote_addr
-	    @new_room = Room.new(:name => @user.company.url_base, :session_id =>session.session_id, :public => true)
+      @new_room = Room.new(:name => @user.company.url_base, :session_id =>session.session_id, :public => true)
       @new_room.company = @user.company
       @new_room.save
 
-      redirect_to account_path
+      redirect_to company_path
     else
       flash[:error] = t('user.flashes.create_error')
       render 'pages/main', :layout => 'main'
@@ -41,7 +41,12 @@ class AccountsController < ApplicationController
        if (params[:user][:password] == params[:user][:password_confirmation])
          @user.update_attribute(:password,params[:user][:new_password])
          flash[:notice] = t('user.flashes.change_password')
-         render 'pages/main', :layout => 'main'
+
+         @user_session = UserSession.find
+         @user_session.destroy
+
+         redirect_to application_root_path
+         #render 'pages/main', :layout => 'main'
        else
          flash[:error] = t('user.flashes.change_password_error')
          redirect_to account_path

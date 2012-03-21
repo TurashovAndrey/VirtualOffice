@@ -15,5 +15,19 @@ ru:
         record_form_window:
           actions:
             ok: 'OK'
-            cancel: 'Отменить'
+            cancel: 'Отмена'
+      search_window:
+        title: 'Поиск'
+        action:
+          search: 'Поиск'
+          cancel: 'Отмена'
+      query_builder:
+        actions:
+          clear_all: 'Очистить'
+          reset: 'Сброс'
+          presets: 'Пресет'
+          save_preset_tool: 'Сохранить пресет'
+      search_panel:
+        date_equals: 'Равно'
+
 

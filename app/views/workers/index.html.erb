@@ -1,5 +1,6 @@
-<% title t('company.titles.workers') %>
-
+    <div class="note_message">
+      В данном окне Вы можете просмотреть сотрудников фирмы.
+    </div>
 <br/>
 <table class="content_table">
   <tr>
@@ -14,7 +15,11 @@
     <td><b><%= worker.first_name %></b></td>
     <td><%= worker.last_name %></td>
     <td><%= worker.email %></td>
-    <td><%= button_to( 'Удалить', worker_path(:id => worker.id),  :confirm => 'Вы уверены?', :method => :delete)%></td>
+    <td>
+      <%= if current_user.role == Role::MANAGER
+       button_to( 'Удалить', worker_path(:id => worker.id),  :confirm => 'Вы уверены?', :method => :delete)
+      end %>
+    </td>
   </tr>
 <% end %>
 </table>

@@ -1,4 +1,0 @@
-source :rubygems
-
-gem "socky-server", "0.5.0.beta1"
-gem "thin"

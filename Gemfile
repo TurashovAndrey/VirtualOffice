@@ -41,8 +41,8 @@ gem "combined_time_select", "~> 0.0.1"
  end
 
 gem 'jquery-rails'
-gem 'ui_datepicker-rails3'
-gem 'jquery_datepicker'
+#gem 'ui_datepicker-rails3'
+#gem 'jquery_datepicker'
 
 gem 'execjs'
 

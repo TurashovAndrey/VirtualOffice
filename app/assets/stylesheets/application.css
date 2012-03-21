@@ -9,7 +9,8 @@
     position: relative;
     height: 100%;
     min-height: 100%;
-    background: #F2F2F2;
+    /*background: #F2F2F2;*/
+    background: #FAFAFA;
     font-family: "Verdana";
 }
 
@@ -156,7 +157,8 @@ html>body #all {
 }
 
 h1 {
-    color: #005094;
+    /* color: #005094;*/
+       color: #0e6dbe;
 }
   
 /* PAGINATION */
@@ -280,6 +282,9 @@ h2.booking_details {
     width:100px;
 }
 
+.profile_table.td {
+    valign: middle;
+	}
 
 /*.profile_table.th {
 	padding: 0;
@@ -320,8 +325,9 @@ h2.booking_details {
 
 .content_table {
     border-collapse: collapse;
-    width: 100%;
+    width: 50%;
     margin: 0;
+    border: none;
 }
 
 .content_table th a {
@@ -331,33 +337,15 @@ h2.booking_details {
 
 .content_table th {
     padding: 6px 5px;
-    border-top: 1px solid #005094;
+    background: #e8f8fd;
 }
 
 .content_table td {
     padding: 3px 5px;
-    border-left: 1px solid #b0b0b0;
-}
-
-.content_table tbody tr {
-    border-top: 1px solid #b0b0b0;
-}
-
-.content_table tbody tr:first-child {
-    border-top: none;
 }
 
 .content_table tbody tr:hover {
     background: #e8f8fd;
-}
-
-.content_table thead {
-    border-right: 1px solid #005094;
-}
-
-.content_table tbody {
-    border-bottom: 1px solid #005094;
-    border-right: 1px solid #005094;
 }
 
 .content_table thead th {
@@ -366,14 +354,6 @@ h2.booking_details {
     color: #f0f0f0;
     border-left: 1px solid #ffffff;
 }
-
-.content_table thead th:first-child {
-    border-left: 1px solid #005094;
-}
-
-.content_table tbody td:first-child {
-    border-left: 1px solid #005094;
-}*/
 
 /* content table for bookings */
 .my_booking_id { width: 10%; }
@@ -489,12 +469,16 @@ div.pagination {
 #main h1 {
     font-size: 45px;
     margin-top: 20px;
+    /* color: #00C9C9;*/
+    color: #0e6dbe;
+    font-family: "Timeless Bold (Timeless-Bold)";
 }
 
 #main h2 {
     font-size: 30px;
     font-weight: normal;
     color: #0e6dbe;
+    font-family:"Timeless Bold (Timeless-Bold)";
 }
 
 #main form.user {
@@ -545,7 +529,7 @@ textarea {
     float: left;
     width: 200px;
     height: 60px;
-    margin-left: 15px;
+    left: 150px;
     font-size: 18px;
     background: #deeeff;
     border: 1px solid #dddddd;
@@ -557,9 +541,8 @@ textarea label {
     font-size: 18px;
     color: #6d6d6d;
     width: auto;
+    margin-right: 15px;
 }
-
-
 
 #main .buttons {
     margin-left: 20px;
@@ -691,6 +674,121 @@ textarea label {
     list-style-type: none;
 }
 
+.header_label
+{
+  background: #FFFFFF;
+  text-shadow: 0 1px 1px rgba(0,0,0,.3);
+ -webkit-border-radius: .5em;
+ -moz-border-radius: .5em;
+ border-radius: .5em;
+ /*-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+ -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);*/
+ /*box-shadow: 0 1px 2px rgba(0,0,0,.2);*/
+}
+
+.body_label
+{
+  background: #FFFFFF;
+  text-shadow: 0 1px 1px rgba(0,0,0,.3);
+ -webkit-border-radius: .5em;
+ -moz-border-radius: .5em;
+ border-radius: .5em;
+ /*-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+ -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);*/
+ /*box-shadow: 0 1px 2px rgba(0,0,0,.2);*/
+}
+
+.body_label h2 {
+    font-size: 30px;
+    font-weight: normal;
+    color: #0e6dbe;
+    text-align: center;
+    font-family: "Timeless Bold (Timeless-Bold)";
+}
+
+.footer_label {
+
+}
+
+.footer_label p
+{
+  text-align:center;
+}
+
+
+#boxes {
+ float: none;
+ width:145px;
+ margin:10px;
+ }
+ #box1,#box2,#box3 {
+
+ margin-bottom:20px;
+ background: url(../images/bottom.gif);
+ background-position:left bottom;
+ background-repeat:no-repeat
+ }
+ #box1 h3,#box2 h3,#box3 h3 {
+ text-align:center;
+ padding:5px 5px 5px 5px;
+ margin:0 0 0 0px;
+ width: auto;
+ font-size: 15px;
+ font-weight: normal;
+ color: #0e6dbe;
+ background: #EFFFFF;
+ text-shadow: 0 1px 1px rgba(0,0,0,.3);
+ -webkit-border-radius: .5em;
+ -moz-border-radius: .5em;
+ border-radius: .5em;
+ -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+ -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+ box-shadow: 0 1px 2px rgba(0,0,0,.2);
+ font-family: "Corbel";
+ }
+ #box1 p,#box2 p,#box3 p {
+ padding:9px 19px 24px 12px;
+ margin:0
+ }
+
+table.center {
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+div.header_td {
+   margin-top: 30px;
+   color: #0e6dbe;
+}
+
+.note_message
+{
+   text-align:left;
+   padding:5px 5px 5px 5px;
+   margin:0 0 0 0px;
+   width: auto;
+   font-weight:600;
+   font-size: 15px;
+   font-weight: normal;
+   color: #0e6dbe;
+   background: #FFFFCC;
+   /*text-shadow: 0 1px 1px rgba(0,0,0,.3);
+   -webkit-border-radius: .5em;
+   -moz-border-radius: .5em;
+   border-radius: .5em;
+   -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+   -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+   box-shadow: 0 1px 2px rgba(0,0,0,.2);*/
+}
+
+#main h3 {
+    font-size: 15px;
+    font-weight: normal;
+    color: #0e6dbe;
+    background: #EFFFFF;
+    align: justify;
+}
+
 #videobox {
 	width: 100%;
 	height: 100%;
@@ -705,3 +803,5 @@ textarea label {
 #videobox object {
 	float: left;
 }
+
+

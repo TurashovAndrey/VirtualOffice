@@ -1,6 +1,10 @@
 <%= semantic_form_for(@user, :url => company_workers_path) do |f| %>
+    <div class="note_message">
+      Добавьте нового сотрудника в систему и после нажатия кнопки "Сохранить" письмо с активацией автоматически будет выслано по указанному E-mail.
+    </div>
     <%= f.semantic_errors :email %>
 
+    <br/>
     <%= f.inputs do %>
         <%= f.input :email, :required => true, :label => "E-mail" %>
         <%= f.input :first_name, :label => "Имя" %>

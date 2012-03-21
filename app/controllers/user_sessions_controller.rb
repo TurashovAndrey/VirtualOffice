@@ -39,11 +39,6 @@ class UserSessionsController < ApplicationController
     @user.active = true
     @user.save
     redirect_to application_root_path
-
-    #if @user.activate!
-    #  UserSession.create(@user, false)
-    #  redirect_session_back_or_root
-    #end
   end
 
   protected

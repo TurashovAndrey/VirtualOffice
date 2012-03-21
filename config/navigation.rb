@@ -74,10 +74,9 @@ SimpleNavigation::Configuration.run do |navigation|
 
     primary.item :account, t('user.titles.account'), account_path
     primary.item :company, t('company.titles.my_company'), company_path do |company|
-      # company.item :show_company, t('company.titles.show'), company_path
       company.item :show_company, t('company.titles.edit'), company_path
       company.item :workers_company, t('company.titles.workers'), company_workers_path
-      company.item :new_worker_company, t('company.titles.new_worker'), new_company_worker_path
+      company.item :new_worker_company, t('company.titles.new_worker'), new_company_worker_path, :if => Proc.new {current_user.role == Role::MANAGER}
     end
     # primary.item :chat, t('chat.titles.chat'), chat_path
     primary.item :events, t('event.titles.event'), events_path

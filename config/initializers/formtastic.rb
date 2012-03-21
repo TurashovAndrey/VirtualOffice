@@ -1,5 +1,5 @@
 # encoding: utf-8
-UiDatePickerRails3.activate :formtastic
+#UiDatePickerRails3.activate :formtastic
 
 
 # --------------------------------------------------------------------------------------------------

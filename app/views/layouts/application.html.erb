@@ -2,13 +2,9 @@
 <html>
 <head>
   <%= render :partial => 'layouts/html_head' %>
-  <%= raw(Helper.get_chat_script(nil)) %>
-
   <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css", "application" %>
-  <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js", "application" %>
-  <%= javascript_include_tag "http://jquery-ui.googlecode.com/svn/trunk/ui/i18n/jquery.ui.datepicker-ru.js", "application" %>
-  <%= javascript_include_tag "../../assets/javascripts/jquery-ui-timepicker-addon.js" %>
-  <%= csrf_meta_tag %>
+  <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js", "application" %>  <%= csrf_meta_tag %>
+
 </head>
 <body>
 <div id="all">
