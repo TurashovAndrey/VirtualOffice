@@ -325,7 +325,7 @@ h2.booking_details {
 
 .content_table {
     border-collapse: collapse;
-    width: 50%;
+    /* width: 50%; */
     margin: 0;
     border: none;
 }
@@ -707,7 +707,7 @@ textarea label {
 }
 
 .footer_label {
-
+padding-top: 80px;
 }
 
 .footer_label p
@@ -803,5 +803,3 @@ div.header_td {
 #videobox object {
 	float: left;
 }
-
-

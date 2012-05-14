@@ -1,6 +1,6 @@
 class UserSessionsController < ApplicationController
   filter_resource_access
-  skip_before_filter :check_current_user, :only => [:new, :create, :activate]
+  skip_before_filter :check_current_user, :only => [:new, :create, :activate, :create_demo]
 
   def new
     if logged_in?
@@ -8,6 +8,21 @@ class UserSessionsController < ApplicationController
     else
       render :action => :new, :layout => 'main'
     end
+  end
+
+  def create_demo
+   @user_session = UserSession.new
+   @user_session.email = "test@test.com"
+   @user_session.password = "test"
+
+   if @user_session.save
+      new_user = @user_session.record
+      Authorization.current_user = new_user
+      redirect_to application_root_path(current_user.company.url_base)
+   else
+      flash[:notice] = t('user_session.flashes.login_failed')
+      render :action => :new, :layout => "main"
+   end
   end
 
   def create
@@ -36,8 +51,10 @@ class UserSessionsController < ApplicationController
 
   def activate
     @user = User.find_using_perishable_token(params[:activation_code], 1.week)
-    @user.active = true
-    @user.save
+    if (@user)
+      @user.active = true
+      @user.save
+    end
     redirect_to application_root_path
   end
 

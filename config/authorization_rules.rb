@@ -18,7 +18,7 @@ authorization do
     has_permission_on :users, :to => :manage
     end
 
-    has_permission_on :user_sessions, :to => [:new, :create, :activate]
+    has_permission_on :user_sessions, :to => [:new, :create, :activate, :create_demo]
   end
 
   role :authorized do

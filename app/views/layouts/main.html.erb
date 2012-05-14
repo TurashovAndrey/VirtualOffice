@@ -3,69 +3,43 @@
 <head>
   <%= render :partial => 'layouts/html_head' %>
   <%= csrf_meta_tags %>
-  <%= raw(Helper.get_chat_script(nil)) %>
+
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+  (function (d, w, c) {
+      (w[c] = w[c] || []).push(function() {
+          try {
+              w.yaCounter13444135 = new Ya.Metrika({id:13444135, enableAll: true, webvisor:true});
+          } catch(e) {}
+      });
+    
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f);
+    } else { f(); }
+  })(document, window, "yandex_metrika_callbacks");
+  </script>
 </head>
 <body>
+
 <div id="main">
+    <%= render :partial => 'layouts/main_header' %>
     <div class="header_label">
-      <%= render :partial => 'layouts/main_header' %>
-      <table class="center">
-        <tr>
-          <td>
-             <%= image_tag "Logo.jpg" %>
-          </td>
-          <td>
-            <div class="header_td">
-              <h1>Совместная работа</h1>
-            </div>
-          </td>
-        </tr>
-      </table>
+      <div id="header">
+        <div class="shell">
+          <h1 id="logo"> <%= image_tag "Logo.jpg" %> <span>Начни бизнес сейчас!</span> </h1>
+      </div>
     </div>
-    <%= yield %>
 </div>
-<br/><br/><br/><br/><br/>
- <div class="body_label">
- <br/>
- <h2><b>TimTim.ru включает в себя:</b></h2>
- <table class="center">
-   <tr>
-     <td>
-       <div id="boxes">
-         <div id="box1"><h3><b>Компания:</b><br/>управление сотрудниками компании </h3>
-         </div>
-       </div>
-     </td>
-     <td>
-       <div id="boxes">
-         <div id="box1"><h3><b>Чат,<br/> конференция:</b><br/>коммуникации внутри компании</h3>
-         </div>
-       </div>
-     </td>
-     <td>
-       <div id="boxes">
-         <div id="box1"><h3><b>Календарь:</b><br/>календарь событий сотрудников компании</h3>
-         </div>
-       </div>
-     </td>
-     <td>
-       <div id="boxes">
-         <div id="box1"><h3><b>Задания</b>:</b><br/>Планировщик заданий для компании</h3>
-         </div>
-       </div>
-     </td>
-     <td>
-       <div id="boxes">
-         <div id="box1"><h3><b>Файлы</b>:</b><br/>Хранилище файлов компании<br/><br/></h3>
-         </div>
-       </div>
-     </td>
-   </tr>
- </table>
- </div>
- <br/>
- <div class="footer_label">
-   <p> &copy; <a href="http://timtim.ru">TimTim.ru</a>, 2012. Служба поддержки: <a href="mailto:support@timtim.ru">support@timtim.ru</a></p>
- </div>
+    <%= yield %>
+    <div class="footer_label">
+      <p> &copy; <a href="http://timtim.ru">TimTim.ru</a>, 2012. Служба поддержки: <a href="http://vk.com/timtim_ru">http://vk.com/timtim_ru</a></p>
+    </div>
 </body>
 </html>

@@ -1,4 +1,5 @@
 <%= semantic_form_for(@company) do |f| %>
+
     <div class="note_message">
        Заполните информацию о Вашей компании.
     </div>
@@ -20,6 +21,7 @@
         <% end %>
         </td>
      </tr>
+
    </table>
 
     <%= raw(Helper.get_chat_script(current_user)) %>

@@ -7,6 +7,7 @@ VirtualOffice::Application.routes.draw do
 
   resource :account
   resource :user_session
+  match 'create_demo' => 'user_sessions#create_demo', :as => :create_demo_user_session
   match 'activate(/:activation_code)' => 'user_sessions#activate', :as => :activate_user_account
 
   resource :worker

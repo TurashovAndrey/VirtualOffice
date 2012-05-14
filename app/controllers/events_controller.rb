@@ -5,6 +5,11 @@ class EventsController < ApplicationController
     load_calendar
   end
 
+  def new
+    @event.user = current_user
+    @event.company = current_user.company
+  end
+
   def create
     @event.user = current_user
     @event.company = current_user.company
@@ -34,8 +39,7 @@ class EventsController < ApplicationController
   end
 
   def update
-    if @event.save
-    #if @event.update_attributes(params[:event])
+    if @event.update_attributes(params[:event])
       flash[:notice] = t('event.flashes.saves')
     else
       flash[:error] = t('event.flashes.save_error')

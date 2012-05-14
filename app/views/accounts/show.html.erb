@@ -19,11 +19,19 @@
               <%= f.input :last_name, :as => :string, :label => "Фамилия" %>
             <% end %>
             <br/>
-            <%= label_tag :change_password, "Изменить пароль" %>
-            <%= check_box_tag :change_password, 1, params[:change_password] %>
+            <%= if current_user.email!="test@test.com"
+              label_tag :change_password, "Изменить пароль"
+            end %>
+            <%= if current_user.email!="test@test.com"
+              check_box_tag :change_password, 1, params[:change_password]
+            end %>
             <%= f.inputs do %>
-              <%= f.input :new_password, :as => :password, :label => "Пароль" %>
-              <%= f.input :new_password_confirmation, :as => :password, :label => "Подтверждение" %>
+              <%= if current_user.email!="test@test.com"
+                   f.input :new_password, :as => :password, :label => "Пароль"
+              end %>
+              <%= if current_user.email!="test@test.com"
+                   f.input :new_password_confirmation, :as => :password, :label => "Подтверждение"
+              end %>
             <% end %>
             <br/>
                  <%= f.buttons do %>
