@@ -2,7 +2,8 @@
       В данном окне Вы можете просмотреть сотрудников фирмы.
     </div>
 <br/>
-<table class="content_table">
+
+<table id="users_table" class="content_table">
   <tr>
     <th>Имя</th>
     <th>Фамилия</th>
@@ -17,11 +18,13 @@
     <td><%= worker.email %></td>
     <td>
       <%= if current_user.role == Role::MANAGER
-       button_to( 'Удалить', worker_path(:id => worker.id),  :confirm => 'Вы уверены?', :method => :delete)
+       button_to( 'Удалить', worker_path(:id => worker.id),  :confirm => 'Вы уверены?', :method => :delete, :class => 'button-styled blue')
       end %>
     </td>
   </tr>
 <% end %>
 </table>
+
+</div><!-- End demo -->
 
 <%= raw(Helper.get_chat_script(current_user)) %>

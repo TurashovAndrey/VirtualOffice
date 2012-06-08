@@ -57,6 +57,10 @@ html>body #all {
     float: right;
 }
 
+#logo {
+    margin-top: 40px;
+}
+
 #logged_in_status {
     background: url('../images/icons/account.gif') no-repeat left center;
     padding-left: 20px;
@@ -665,6 +669,16 @@ textarea label {
     float: left;
 }
 
+.inputs ol li select {
+    width: 200px;
+    height: 30px;
+    margin-left: 15px;
+    font-size: 14px;
+    background: #deeeff;
+    border: 1px solid #dddddd;
+    float: left;
+}
+
 .buttons {
     margin-left: 213px;
     margin-top: 20px;
@@ -681,6 +695,8 @@ textarea label {
  -webkit-border-radius: .5em;
  -moz-border-radius: .5em;
  border-radius: .5em;
+ padding-top: 5px;
+ padding-bottom: 5px;
  /*-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);*/
  /*box-shadow: 0 1px 2px rgba(0,0,0,.2);*/
@@ -707,7 +723,8 @@ textarea label {
 }
 
 .footer_label {
-padding-top: 80px;
+    padding-top: 150px;
+    background: #FFFFFF;
 }
 
 .footer_label p
@@ -715,28 +732,20 @@ padding-top: 80px;
   text-align:center;
 }
 
-
-#boxes {
- float: none;
- width:145px;
- margin:10px;
- }
- #box1,#box2,#box3 {
-
- margin-bottom:20px;
- background: url(../images/bottom.gif);
+ #box {
  background-position:left bottom;
- background-repeat:no-repeat
+ background-repeat:no-repeat;
+ margin: 20px 5px 5px 5px;
  }
- #box1 h3,#box2 h3,#box3 h3 {
+
+ #box h3 {
  text-align:center;
- padding:5px 5px 5px 5px;
- margin:0 0 0 0px;
- width: auto;
+ padding:5px 5px 10px 5px;
+ height: 120px;
  font-size: 15px;
  font-weight: normal;
  color: #0e6dbe;
- background: #EFFFFF;
+ background: #E9E9E9;
  text-shadow: 0 1px 1px rgba(0,0,0,.3);
  -webkit-border-radius: .5em;
  -moz-border-radius: .5em;
@@ -746,10 +755,15 @@ padding-top: 80px;
  box-shadow: 0 1px 2px rgba(0,0,0,.2);
  font-family: "Corbel";
  }
- #box1 p,#box2 p,#box3 p {
+ #box p {
  padding:9px 19px 24px 12px;
  margin:0
  }
+
+#clear
+{
+ margin: 5px 5px 5px 5px;
+}
 
 table.center {
     margin-left:auto;
@@ -785,9 +799,17 @@ div.header_td {
     font-size: 15px;
     font-weight: normal;
     color: #0e6dbe;
-    background: #EFFFFF;
+    /* background: #EFFFFF; */
     align: justify;
 }
+
+#main h4 {
+    font-size: 30px;
+    font-weight: normal;
+    color: #0e6dbe;
+    align: right;
+}
+
 
 #videobox {
 	width: 100%;
@@ -802,4 +824,9 @@ div.header_td {
 
 #videobox object {
 	float: left;
+}
+
+#footer_box {
+    color: #0e6dbe;
+    background: #F3F3F3;
 }

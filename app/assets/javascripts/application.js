@@ -2,6 +2,54 @@
 //= require jquery_ujs
 //= require_tree .
 
+ jQuery(function() {
+    jQuery("#new_ev").dialog({
+        autoOpen: true,
+        show: "slide",
+        hide: "slide",
+        title: "Событие",
+        width: 400
+    });
+});
+
+jQuery(function() {
+        jQuery("#opener").click(function() {
+			jQuery("#new_ev").dialog("open");
+			return false;
+		});
+});
+
+jQuery(function() {
+    jQuery("#dialog").dialog({
+        title: "Вход"
+    });
+});
+
+/* jQuery(function() {
+    jQuery("#div_worker").dialog({
+        autoOpen: false,
+        show: "slide",
+        hide: "slide",
+        title: "Сотрудник"
+    });
+}); */
+
+jQuery(function() {
+    jQuery("table#users_table td").click(function() {
+	    jQuery("#worker").dialog("open");
+			return false;
+		});
+});
+
+jQuery(function() {
+    jQuery("#event_start_at").datetimepicker();
+});
+
+jQuery(function() {
+    jQuery("#event_end_at").datetimepicker();
+});
+
+
 // Add message to chat
 function addMessage(type, header, content) {
   $("<li class='" + type + "'><span>" + header + "</span>" + content + "</li>").appendTo("#messages");
@@ -160,3 +208,12 @@ function runChat(username,channel) {
 
 		CURRENT_WIDTH = width;
 	}
+
+$("#customer-form").dialog({
+    autoOpen: true,
+    height: 'auto',
+    width: 'auto',
+    modal: true,
+    closeOnEscape: true,
+    title: 'New Customer'
+    });

@@ -28,18 +28,48 @@
 </head>
 <body>
 
-<div id="main">
-    <%= render :partial => 'layouts/main_header' %>
-    <div class="header_label">
-      <div id="header">
-        <div class="shell">
-          <h1 id="logo"> <%= image_tag "Logo.jpg" %> <span>Начни бизнес сейчас!</span> </h1>
-      </div>
+    <div id="main">
+       <div class="header_label">
+         <%= render :partial => 'layouts/main_header' %>
+         <div id="header">
+           <div class="shell">
+            <%= image_tag "Logo.jpg" %> <h4>Ваша удаленная реальность</h4>
+         </div>
+       </div>
     </div>
-</div>
     <%= yield %>
-    <div class="footer_label">
-      <p> &copy; <a href="http://timtim.ru">TimTim.ru</a>, 2012. Служба поддержки: <a href="http://vk.com/timtim_ru">http://vk.com/timtim_ru</a></p>
+
+    <div class="clear">
+          <div id= "box" style = "width:19%; float:left">
+            <h3><b>Видеоконференция:</b><br/>Организовуйте видеоконференцию внутри Вашей компании легко путем нажатия на вкладку "Конференция"</h3>
+          </div>
+
+          <div id= "box" style = "width:19%; float:left">
+            <h3><b>Чат:</b><br/>Предоставляет возможность в пределах одной компании учавствовать в диалогах в режиме реального времени, обмениваясь при этом текстовой ифнормацией</h3>
+          </div>
+
+          <div id= "box" style = "width:19%; float:left">
+            <h3><b>Таск-менеджер:</b><br/>Позволяет аккумулировать целевые потоки задач в пределах одной компании.</h3>
+          </div>
+
+          <div id= "box" style = "width:19%; float:left">
+            <h3><b>Календарь событий:</b><br/>Служит для обозначения ключевых событий компании.</h3>
+          </div>
+
+          <div id= "box" style = "width:19%; float:left">
+            <h3><b>Файловое хранилище:</b><br/>Сетевая система хранения данных, которая обеспечивает надежность хранения данных и легкость доступа к файлам компании, и предоставляет неограниченное пространство для хранения ифнормации.</h3>
+          </div>
+    </div>
+
+      <div id="footer_box">
+        <h2> Что такое TimTim.ru </h2>
+        <p align="justify" size="14 px">Больше нет необходимости снимать дорогостоящий офис, оплачивать коммунальные услуги и тратить огромное количество времени в пробках по пути на работу. <b>TimTim.ru - Ваша удаленная реальность</b>, которая позволяет дистанционно осуществлять
+          полноценную деятельность компании за счет емкого функционала, охватывающего все необходимые направления деятельности компании.  </p>
+      </div>
+
+      <div class="clear" style ="margin-top:10px">
+        <p> &copy; <a href="http://timtim.ru">TimTim.ru</a>, 2012. Служба поддержки: <a href="http://vk.com/timtim_ru">http://vk.com/timtim_ru</a></p>
+      </div>
     </div>
 </body>
 </html>

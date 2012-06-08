@@ -19,9 +19,8 @@
   font-size: 12px;
   line-height: 14px;
   margin: 0;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-bottom: 0px solid #d5d5d5;
+  padding: 0;
+  border-bottom: 1px solid #d5d5d5;
 }
 
 /* Month name header & links */

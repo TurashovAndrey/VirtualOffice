@@ -15,7 +15,7 @@ ru:
       show: 'Просмотр'
       edit: 'Компания'
       workers: 'Сотрудники'
-      new_worker: 'Добавить сотрудника'
+      new_worker: 'Новый сотрудник'
 
     #messages:
 

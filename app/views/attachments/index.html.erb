@@ -5,39 +5,38 @@
 <div class="note_message">
     Добавляйте новые файлы и они автоматически будут видны сотрудникам фирмы.
 </div>
-<table class="content_table">
-  <tr>
-    <th>Файл</th>
-    <th>Сотрудник</th>
-    <th>Дата</th>
-  </tr>
 
-<% @attachments.each do |attachment| %>
-  <tr>
-    <!-- <td><%= image_tag attachment.attach.url , :width => 200, :height => 200 %></td> -->
-    <td><%= link_to attachment.attach_file_name, attachment.attach.url(:original, false) %></td>
-    <td><b><%= attachment.user.email %></b></td>
-    <td><b><%= attachment.created_at %></b></td>
-  </tr>
-<% end %>
-</table>
+<style>
+#feedback { font-size: 1.4em; }
+#selectable .ui-selecting { background: #FECA40; }
+#selectable .ui-selected { background: #F39814; color: white; }
+#selectable { list-style-type: none; margin: 0; padding: 0; }
+#selectable li { margin: 3px; padding: 1px; float: left; width: 200px; height: 200px; font-size: 10px; text-align:left; }
+</style>
 
-<br/>
-<br/>
 <%= semantic_form_for(@attachment) do |f| %>
 
     <%= f.inputs do %>
-        <%= f.input :attach, :as => :file, :required => true, :label => "Файл" %>
+        <%= f.file_field :attach %>
     <% end %>
 
-    <%= f.buttons do %>
-       <%= button_to 'Сохранить', @attachment, :method => :create, :class => 'button-styled blue' %>
-    <% end %>
+    <br/>
+    <!-- <%= f.buttons do %> -->
+       <%= button_to 'Сохранить', @attachment, :method => :create, :class => 'button-styled blue', :align=>"light" %>
+    <!-- <% end %> -->
 
+    <br/>
     <%= unless @attachment.id.nil?
         link_to 'Destroy', event_path(@attachment), :confirm => 'Are you sure?', :method => :delete
        end
     %>
-    <br/>
+    <ol id="selectable">
+        <% @attachments.each do |attachment| %>
+            <li class="ui-state-default">
+              <%= link_to attachment.attach_file_name, attachment.attach.url(:original, false) %>
+              <%= image_tag attachment.attach.url, :width => 200, :height => 200 %>
+            </li>
+        <% end %>
+    </ol>
     <%= raw(Helper.get_chat_script(current_user)) %>
 <% end %>

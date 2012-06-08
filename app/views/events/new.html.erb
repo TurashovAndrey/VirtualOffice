@@ -1,13 +1,11 @@
-# coding: utf-8
 <!-- Probably move the stylesheet to you layout. Also make sure you include the javascript. -->
 <%= stylesheet_link_tag "event_calendar"%>
-
-  <br/>
-  <button id="opener" class="button-styled blue">Добавить</button>
-  <br/><br/>
-  <div id="new_ev">
-  <%= semantic_form_for(@event) do |f| %>
-    <br/><br/>
+<div id="new_ev">
+<%= semantic_form_for(@event) do |f| %>
+    <div class="note_message">
+      Добавляйте новые события фирмы в календарь и они автоматически будут отображены в календаре. Изменяйте/удаляйте событие нажав на событие в календаре.
+    </div>
+    <br/>
     <%= f.inputs do %>
         <%= f.input :name, :as => :string, :label => "Событие", :required => true %>
         <%= f.input :start_at, :as => :string, :type => :datetime,  :label => "Дата начала", :required => true %>
@@ -20,16 +18,13 @@
     <% end %>
 
     <%= f.buttons do %>
-         <%= button_to 'Сохранить', @event, :method => :update, :class => 'button-styled blue', :width=>50 %>
+         <%= button_to 'Сохранить', @event, :method => :update, :class => 'button-styled blue', :size => 50 %>
 
          <br/>
          <%= if !@event.id.nil? and @event.user == current_user
-            button_to 'Удалить', event_path(@event), :confirm => 'Вы уверены?', :method => :delete, :class => 'button-styled blue', :width=>50
+            button_to 'Удалить', event_path(@event), :confirm => 'Are you sure?', :method => :delete, :class => 'button-styled blue', :size => 50
            end
          %>
       <% end %>
-  <% end %>
-  </div>
-
-<%= raw(event_calendar) %>
-<%= raw(Helper.get_chat_script(current_user)) %>
+<% end %>
+</div>

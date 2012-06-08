@@ -30,11 +30,15 @@ class UserSessionsController < ApplicationController
       redirect_session_back_or_root
     elsif @user_session.save
       new_user = @user_session.record
-      Authorization.current_user = new_user
 
-      # flash[:notice] = t('user_session.flashes.logged_in')
-
-      redirect_to application_root_path(current_user.company.url_base)
+      if (new_user.company.expire_date >= DateTime.now)
+        Authorization.current_user = new_user
+        # flash[:notice] = t('user_session.flashes.logged_in')
+        redirect_to application_root_path(current_user.company.url_base)
+      else
+        flash[:notice] = t('user_session.flashes.login_failed')
+        render :action => :new, :layout => "main"
+      end
     else
       flash[:notice] = t('user_session.flashes.login_failed')
       render :action => :new, :layout => "main"

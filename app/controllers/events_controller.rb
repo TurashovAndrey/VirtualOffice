@@ -1,3 +1,4 @@
+# coding: utf-8
 class EventsController < ApplicationController
   filter_resource_access :additional_new => :index
 
@@ -14,8 +15,19 @@ class EventsController < ApplicationController
     @event.user = current_user
     @event.company = current_user.company
 
+    if (params[:event][:color] == 'Красный')
+      @event.update_attribute("color","#FF0000")
+    end
+    if (params[:event][:color] == 'Зеленый')
+      @event.update_attribute("color","#00FF00")
+    end
+    if (params[:event][:color] == 'Синий')
+      @event.update_attribute("color","#0000FF")
+    end
+
     @event.update_attribute("start_at", params[:event][:start_at])
     @event.update_attribute("end_at", params[:event][:end_at])
+
     if @event.save
       flash[:notice] = t('event.flashes.created')
     else
@@ -39,6 +51,16 @@ class EventsController < ApplicationController
   end
 
   def update
+    if (params[:event][:color] == 'Красный')
+      @event.update_attribute("color","#FF0000")
+    end
+    if (params[:event][:color] == 'Зеленый')
+      @event.update_attribute("color","#00FF00")
+    end
+    if (params[:event][:color] == 'Синий')
+      @event.update_attribute("color","#0000FF")
+    end
+
     if @event.update_attributes(params[:event])
       flash[:notice] = t('event.flashes.saves')
     else

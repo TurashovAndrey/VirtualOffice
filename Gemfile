@@ -2,6 +2,8 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.1'
 
+gem 'jquery-rails', '>= 1.0.12'
+
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
@@ -40,7 +42,6 @@ gem "combined_time_select", "~> 0.0.1"
   gem 'uglifier'
  end
 
-gem 'jquery-rails'
 #gem 'ui_datepicker-rails3'
 #gem 'jquery_datepicker'
 
