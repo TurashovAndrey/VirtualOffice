@@ -1,1 +1,19 @@
-<%= render :partial => 'companies/show' %>
+<div id="box-styled-grey">
+  <%= semantic_form_for(@company) do |f| %>
+     <%= image_tag @company.logo.url, :width => 200, :height => 200 %> <br/>
+     <%= f.inputs do %>
+        <%= f.file_field :logo, :accept => "image/*" %>
+	    <%= f.input :name, :as => :string, :label => "Название" %>
+        <%= f.input :url_base, :as => :string, :label => "URL", :input_html => { :readonly => true } %>
+	 <% end %>
+     <%= f.buttons do %>
+        <%= f.commit_button "Сохранить", :button_html => { :class => 'button-styled grey'} %>
+        <br/>
+     <% end %>
+<% end %>
+</div>
+
+<div id="box-styled-grey" style="width:70%">
+</div>
+
+  <%= raw(Helper.get_chat_script(current_user)) %>

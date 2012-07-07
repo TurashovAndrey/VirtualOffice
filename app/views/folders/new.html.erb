@@ -1,0 +1,47 @@
+<div id="box-styled-grey">
+    <div id="box-styled-lightgrey" style="width:95%">
+      <h1>Папки</h1>
+      <p><%= link_to "Все папки", folders_path %></p>
+      <% if !@folders.nil? %>
+         <% @folders.each do |folder| %>
+            <p><%= link_to folder.folder_name, folder_path(folder) %>
+               <%= link_to image_tag("/system/icons/Edit.gif"), edit_folder_path(folder) %>
+               <%= link_to image_tag("/system/icons/Delete.gif"), folder_path(folder), :confirm => 'Вы уверены?', :method => :delete %>
+            </p>
+         <% end %>
+      <% end %>
+    </div>
+</div>
+
+<div id="box-styled-grey" style="width:70%">
+  <%= semantic_form_for(@folder) do |f| %>
+     <%= f.inputs do %>
+        <%= f.input :folder_name, :label=>"Название", :as => :text, :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 100  }, :required => true %>
+     <% end %>
+         <div id="box-styled-grey" style="border:0; width:95%" >
+          <div id="box-styled-grey" style="width:35%;margin-left:30px;">
+            <h1>Группы</h1>
+            <br/>
+            <li>
+              <div style="padding-left:7px">
+                 <%= check_box_tag 'group_ids[]', 0, false %>
+                 <%= label_tag "Все" %>
+              </div>
+              <br/>
+            <% current_user.company.groups.each do |group| %>
+                <div style="padding-left:7px">
+                   <%= check_box_tag 'group_ids[]', group.id, false %>
+                   <%= label_tag group.group_name %>
+                </div>
+                <br/>
+            <% end %>
+            </li>
+          </div>
+         </div>
+      <%= f.buttons do %>
+        <%= button_to 'Сохранить', @folder, :method => :create, :class => 'button-styled grey' %>
+        <br/>
+      <% end %>
+  <% end %>
+</div>
+    <%= raw(Helper.get_chat_script(current_user)) %>

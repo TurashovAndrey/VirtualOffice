@@ -80,16 +80,19 @@ SimpleNavigation::Configuration.run do |navigation|
       #company.item :new_worker_company, t('company.titles.new_worker'), new_company_worker_path, :if => Proc.new {current_user.role == Role::MANAGER}
     end
     #primary.item :workers_company, t('company.titles.workers'), company_workers_path
-    primary.item :new_worker_company, t('company.titles.new_worker'), new_company_worker_path, :if => Proc.new {current_user.role == Role::MANAGER}
+    #primary.item :new_worker_company, t('company.titles.new_worker'), new_company_worker_path, :if => Proc.new {current_user.role == Role::MANAGER}
     # primary.item :chat, t('chat.titles.chat'), chat_path
-    primary.item :events, t('event.titles.event'), events_path
-    primary.item :task, t('task.titles.task'), tasks_path do |tasks|
-      tasks.item :show_tasks, t('task.titles.my_tasks'), tasks_path
-      tasks.item :show_delegate_tasks, t('task.titles.delegate_tasks'), delegate_tasks_path
-      tasks.item :show_all_tasks, t('task.titles.all_tasks'), all_tasks_path
-      tasks.item :show_done_tasks, t('task.titles.done_tasks'), done_tasks_path
-     end
-    primary.item :attachments, t('attachment.titles.attachment'), attachments_path
+    primary.item :calendars, t('calendar.titles.calendars'), calendars_path
+    #primary.item :task, t('task.titles.task'), tasks_path do |tasks|
+    #  tasks.item :show_tasks, t('task.titles.my_tasks'), tasks_path
+    #  tasks.item :show_delegate_tasks, t('task.titles.delegate_tasks'), delegate_tasks_path
+    #  tasks.item :show_all_tasks, t('task.titles.all_tasks'), all_tasks_path
+    #  tasks.item :show_done_tasks, t('task.titles.done_tasks'), done_tasks_path
+    #end
+    primary.item :project, t('project.titles.projects'), projects_path do |projects|
+    end
+    primary.item :folders, t('folder.titles.folders'), folders_path
+    primary.item :themes, t('theme.titles.themes'), themes_path
     primary.item :rooms, t('room.titles.room'), rooms_path
   end
 

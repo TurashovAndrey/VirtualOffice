@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  task_id: 1
+  user_id: 1
+  company_id: 1
+  comment: MyString
+  comment_date: 2012-06-21 11:35:29
+
+two:
+  task_id: 1
+  user_id: 1
+  company_id: 1
+  comment: MyString
+  comment_date: 2012-06-21 11:35:29

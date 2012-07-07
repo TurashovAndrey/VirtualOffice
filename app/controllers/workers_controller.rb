@@ -9,9 +9,12 @@ class WorkersController < ApplicationController
 
   def index
     @workers = @company.users.find(:all, :conditions => ['email != ""'])
+    @groups = Group.where(:company_id => @company.id).where(:parent_id => nil)
   end
 
   def show
+    @groups = Group.where(:company_id => @company.id).where(:parent_id => nil)
+    @tasks = Permission.where(:user_id => current_user).where(:task_id => !nil )
   end
 
   def new
@@ -48,15 +51,5 @@ class WorkersController < ApplicationController
 
   def sendmail
      UserMailer.welcome_email(@user).deliver
-  #  email = @params["email"]
-	#  recipient = email["recipient"]
-	#  subject = email["subject"]
-	#  message = email["message"]
-  #  Emailer.deliver_contact(recipient, subject, message)
    end
-
-  #def new_worker_for_collection
-  #  @worker = @company.users.new
-  #end
-
 end

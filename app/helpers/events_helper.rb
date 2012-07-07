@@ -20,11 +20,11 @@ module EventsHelper
     # args is an argument hash containing :event, :day, and :options
     calendar event_calendar_opts do |args|
       event = args[:event]
-      #html = %(<a href="#{edit_event_path(event.id)}" title="#{h(event.name)}">)
+      html = %(<a href="#{edit_event_path(event.id)}" title="#{h(event.name)}" style="padding:0; color:white">#{h(event.name)}</a>)
       #html = %(<a href="" title="#{h(event.name)}">#{h(event.name)}"</a>)
-      html = %(<a href="#{edit_event_path(event.id)}" title="#{h(event.name)}">#{h(event.name)}</a>)
-      html<<%(<span class="ec-event-time">#{h(event.user.email)}</span>)
-      html<<%(#{h(event.name)}</a>)
+      #html = %(<a href="#{edit_event_path(event.id)}" title="#{h(event.name)}">#{h(event.name)})
+      #html<<%(<span class="ec-event-time">#{h(event.user.email)}</span>)
+      #html = %(#{h(event.name)})
       html
     end
   end

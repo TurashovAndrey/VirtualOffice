@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  calendar_name: MyString
+  user_id: 1
+  company_id: 1
+
+two:
+  calendar_name: MyString
+  user_id: 1
+  company_id: 1

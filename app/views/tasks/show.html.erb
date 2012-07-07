@@ -1,0 +1,80 @@
+<%= semantic_form_for(@task, :remote=>false, :html => { :multipart => true}) do |f| %>
+<div id="box-styled-grey">
+    <div id="box-styled-lightgrey" style="width:95%">
+      <h1>Проекты</h1>
+      <p><%= link_to 'Все проекты', projects_path %></p>
+      <% if !@projects.nil? %>
+         <% @projects.each do |project| %>
+             <div>
+               <% if project == @project %>
+                 <p><b><%= link_to project.project_name, project_path(project) %></b></p>
+               <% else %>
+                 <p><%= link_to project.project_name, project_path(project) %></p>
+               <% end %>
+               <% project.stages.each do |stage| %>
+                 <div id="stage-link">
+                    <% if stage == @stage %>
+                      <p><b><%= link_to stage.stage_name, stage_path(stage) %></b></p>
+                    <% else %>
+                      <p><%= link_to stage.stage_name, stage_path(stage) %></p>
+                    <% end %>
+                 </div>
+               <% end %>
+             </div>
+         <% end %>
+      <% end %>
+    </div>
+
+  <% if !@task_attachments.empty? %>
+      <div id="box-styled-lightgrey" style="width:95%">
+        <h1>Файлы</h1>
+        <% @task_attachments.each do |attachment| %>
+            <div id="box-styled-grey-attachment">
+              <%= image_tag AttachmentHelper.get_icon_path(attachment.attachment) %> <br/>
+              <%= link_to attachment.attachment_file_name, attachment.attachment.url(:original, false) %>
+            </div>
+        <% end %>
+      </div>
+    <% end %>
+
+</div>
+
+         <div id="box-styled-grey" style="width:70%">
+          <div id="box-styled-lightgrey" style="width:95%" >
+             <p><b><%= link_to @task.title, task_path(@task)%>
+             <%= link_to image_tag("/system/icons/Edit.gif"), edit_task_path(@task) %>
+             <%= link_to image_tag("/system/icons/Delete.gif"), task_path(@task), :confirm => 'Вы уверены?', :method => :delete %>
+             </b></p>
+             <div id="box-styled-lightgrey-comment">
+                <p><%= @task.notes %></p>
+                <br/>
+             </div>
+             <p><%= @task.due %></p>
+             <p><%= image_tag @task.user.avatar.url, :height => "30px", :width => "30px" %> <%=@task.user.email%> <%= @task.created_at %></p>
+          </div>
+
+          <% @comments.each do |comment| %>
+              <br/>
+              <div id="box-styled-lightgrey" style="width:95%">
+                <p><%= image_tag comment.user.avatar.url, :width => 50, :height => 50, :align=>'middle' %>
+                <%= comment.user.email %> <%= Helper.distance_of_time_in_words(comment.comment_date,DateTime.now.utc) %></p>
+                <p><%= comment.comment %></p>
+                <% comment.task_attachments.each do |attachment| %>
+                   <div id="box-styled-grey-attachment">
+                      <%= image_tag AttachmentHelper.get_icon_path(attachment.attachment) %> <br/>
+                      <%= link_to attachment.attachment_file_name, attachment.attachment.url(:original, false) %>
+                   </div>
+                <% end %>
+              </div>
+          <% end %>
+
+          <div id="box-styled-lightgrey" style="width:95%" >
+               <%= render :partial => new_comment_path(@comment) %>
+
+               <%= f.buttons do %>
+                  <%= f.commit_button "Добавить", :button_html => { :class => 'button-styled grey', :id =>"add_comment"}%>
+                  <br/>
+               <% end %>
+          </div>
+         </div>
+    <% end %>

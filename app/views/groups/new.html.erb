@@ -1,0 +1,41 @@
+<div id="box-styled-grey">
+    <div id="box-styled-lightgrey" style="width:95%">
+      <p><%= link_to "Новый сотрудник", new_company_worker_path %></p>
+      <p><%= link_to "Новая группа", new_group_path %></p>
+    </div>
+    <div id="box-styled-lightgrey" style="width:95%">
+      <h1>Сотрудники</h1>
+      <% if !@groups.nil? %>
+         <% @groups.each do |group| %>
+             <div>
+               <p><%= link_to group.group_name, group_path(group) %></p>
+             </div>
+
+              <% if !Group.where(:parent_id => group.id).empty? %>
+                 <% Group.where(:parent_id => group.id).each do |child_group| %>
+                      <div>
+                        <p><%= link_to child_group.group_name, group_path(child_group) %></p>
+                      </div>
+                 <% end %>
+              <% end %>
+         <% end %>
+
+      <% end %>
+    </div>
+</div>
+
+<div id="box-styled-grey" style="width: 70%">
+  <%= semantic_form_for(@group, :remote=>false, :html => { :multipart => true}) do |f| %>
+     <%= f.inputs do %>
+        <%= f.input :group_name, :as => :string %>
+        <%= f.input :parent_id, :as => :hidden %>
+        <br/>
+     <% end %>
+
+        <%= f.buttons do %>
+           <%= f.commit_button "Сохранить", :button_html => { :class => 'button-styled grey'} %>
+           <br/>
+        <% end %>
+  <% end %>
+</div>
+    <%= raw(Helper.get_chat_script(current_user)) %>

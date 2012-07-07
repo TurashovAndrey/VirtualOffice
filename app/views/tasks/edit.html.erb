@@ -1,0 +1,50 @@
+    <%= semantic_form_for(@task, :remote=>false, :html => { :multipart => true}) do |f| %>
+      <div id="box-styled-grey" style="width:35%">
+        <div id="box-styled-lightgrey" style="width:95%">
+          <h1>Проекты</h1>
+          <p><%= link_to 'Все проекты', projects_path %></p>
+          <% if !@projects.nil? %>
+            <% @projects.each do |project| %>
+               <div>
+               <p><%= link_to project.project_name, project_path(project) %></p>
+               <% project.stages.each do |stage| %>
+                 <div id="stage-link">
+                    <p><%= link_to stage.stage_name, stage_path(stage) %></p>
+                 </div>
+               <% end %>
+             </div>
+         <% end %>
+      <% end %>
+      </div>
+      </div>
+
+     <div id="box-styled-grey" style="width:60%; height:100%" >
+       <div id="box-styled-lightgrey" style="width:98%" >
+           <%= f.inputs do %>
+            <%= f.input :done, :label => "Статус",  :as => :select, :collection => options_for_select([["В процессе",0],
+                       ["Выполнено",1]]) %>
+           <%= f.input :title, :as => :text, :label => "Название", :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 50  }%>
+           <%= f.input :notes, :as => :text, :label => "Описание", :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 50  }%>
+           <%= f.input :priority, :label => "Приоритет",  :as => :select, :collection => options_for_select([["Высокий",3],
+                      ["Средний",2],["Низкий",1]]) %>
+           <%= f.input :due, :as => :string, :type => :datetime, :label => "Окончание"%>
+           <%= f.input :second_user, :as => :select, :collection => Hash[current_user.company.users.map{|b| [b.email]}] %>
+           <% end %>
+
+           <br/>
+           <%= f.buttons do %>
+               <%= f.commit_button "Сохранить", :button_html => { :class => 'button-styled grey'}, :align=>"right" %>
+           <% end %>
+           <br/>
+       </div>
+
+       <div id="box-styled-lightgrey" style="width:98%" >
+           <%= render :partial => new_comment_path(@comment) %>
+
+           <%= f.buttons do %>
+              <%= f.commit_button "Добавить", :button_html => { :class => 'button-styled grey', :id =>"add_comment"}%>
+             <br/>
+           <% end %>
+       </div>
+     </div>
+  <% end %>

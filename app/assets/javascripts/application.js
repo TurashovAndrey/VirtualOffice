@@ -49,6 +49,9 @@ jQuery(function() {
     jQuery("#event_end_at").datetimepicker();
 });
 
+jQuery(function() {
+    jQuery("#task_due").datetimepicker();
+});
 
 // Add message to chat
 function addMessage(type, header, content) {

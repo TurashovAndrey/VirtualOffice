@@ -1,0 +1,61 @@
+<%= semantic_form_for(@task, :remote=>false, :html => { :multipart => true}) do |f| %>
+
+    <div id="box-styled-grey">
+        <div id="box-styled-lightgrey" style="width:95%">
+          <h1>Проекты</h1>
+          <p><%= link_to 'Все проекты', projects_path %></p>
+          <% if !@projects.nil? %>
+             <% @projects.each do |project| %>
+                 <div>
+                   <p><%= link_to project.project_name, project_path(project) %></p>
+                   <% project.stages.each do |stage| %>
+                     <div id="stage-link">
+                        <p><%= link_to stage.stage_name, stage_path(stage) %></p>
+                     </div>
+                   <% end %>
+                 </div>
+             <% end %>
+          <% end %>
+        </div>
+    </div>
+
+  <div id="box-styled-grey" style="width:70%">
+
+    <div id="box-styled-lightgrey" style="width:95%" >
+        <%= f.inputs do %>
+
+         <% if !@project.nil? %>
+           <% if @stage.nil?  %>
+              <%= f.input :stage_id, :as => :select, :collection => Hash[@project.stages.map {|b| [b.stage_name, b.id]}] %>
+           <% else %>
+              <h1><%= @stage.stage_name%></h1>
+               <br/>
+           <% end %>
+         <% end %>
+
+         <%= f.input :done, :label => "Статус",  :as => :select, :collection => options_for_select([["В процессе",0],
+                    ["Выполнено",1]]) %>
+        <%= f.input :title, :as => :text, :label => "Название", :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 50  }%>
+        <%= f.input :notes, :as => :text, :label => "Описание", :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 50  }%>
+        <%= f.input :priority, :label => "Приоритет",  :as => :select, :collection => options_for_select([["Высокий",3],
+                   ["Средний",2],["Низкий",1]]) %>
+        <%= f.input :due, :as => :string, :type => :datetime, :label => "Окончание"%>
+        <%= f.input :second_user, :as => :select, :label =>"Исполнитель", :collection => Hash[current_user.company.users.all.map{|b| [b.email,b.id]}] %>
+        <%= f.input :project_id, :as => :hidden %>
+        <%= f.input :stage_id, :as => :hidden %>
+
+        <!-- <%= f.input :group_id, :label => "Группы", :as => :select, :input_html => { :size => 1 }, :collection => Hash[current_user.company.groups.all.map {|p| [ p.group_name, p.id ] }], :multiple => true %> -->
+        <% end %>
+
+        <%= f.input :group_id, :as => :check_boxes, :collection => Hash[current_user.company.groups.all.map {|p| [ p.group_name, p.id ] }], :multiple => true, :label => "Группы" %>
+
+        <br/>
+        <%= f.buttons do %>
+           <%= f.commit_button "Сохранить", :button_html => { :class => 'button-styled grey'}, :align=>"right" %>
+           <br/>
+        <% end %>
+    </div>
+  </div>
+<% end %>
+  <%= raw(Helper.get_chat_script(current_user)) %>
+

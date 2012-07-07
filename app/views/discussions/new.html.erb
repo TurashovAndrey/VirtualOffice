@@ -1,0 +1,33 @@
+<%= semantic_form_for(@discussion, :remote=>false, :html => { :multipart => true}) do |f| %>
+
+    <div id="box-styled-grey">
+      <div id="box-styled-lightgrey" style="width:95%">
+         <h1>Темы</h1>
+         <p><%= link_to "Все темы", themes_path %></p>
+         <% if !@themes.nil? %>
+            <% @themes.each do |theme| %>
+               <p><%= link_to theme.theme, theme_path(theme) %>
+                  <%= link_to image_tag("/system/icons/Delete.gif"), theme_path(theme), :confirm => 'Вы уверены?', :method => :delete %>
+               </p>
+            <% end %>
+         <% end %>
+      </div>
+    </div>
+
+  <div id="box-styled-grey" style="width:70%">
+
+    <div id="box-styled-lightgrey" style="width:95%" >
+        <%= f.inputs do %>
+          <%= f.input :discussion, :as => :text, :label => "Название", :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 50  }%>
+          <%= f.input :theme_id, :as => :hidden %>
+        <% end %>
+
+        <%= f.buttons do %>
+           <%= f.commit_button "Сохранить", :button_html => { :class => 'button-styled grey'}, :align=>"right" %>
+           <br/>
+        <% end %>
+    </div>
+  </div>
+<% end %>
+  <%= raw(Helper.get_chat_script(current_user)) %>
+

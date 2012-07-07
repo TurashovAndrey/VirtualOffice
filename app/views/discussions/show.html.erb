@@ -1,0 +1,56 @@
+<%= semantic_form_for(@discussion, :remote=>false, :html => { :multipart => true}) do |f| %>
+
+    <div id="box-styled-grey">
+      <div id="box-styled-lightgrey" style="width:95%">
+         <h1>Темы</h1>
+         <p><%= link_to "Все темы", themes_path %></p>
+         <% if !@themes.nil? %>
+            <% @themes.each do |theme| %>
+               <p><%= link_to theme.theme, theme_path(theme) %>
+                  <%= link_to image_tag("/system/icons/Delete.gif"), theme_path(theme), :confirm => 'Вы уверены?', :method => :delete %>
+               </p>
+            <% end %>
+         <% end %>
+      </div>
+    </div>
+
+  <div id="box-styled-grey" style="width:70%">
+
+    <div id="box-styled-lightgrey" style="width:95%" >
+        <%= f.inputs do %>
+          <%= f.input :discussion, :as => :text, :label => "Название", :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 50  }%>
+          <%= f.input :theme_id, :as => :hidden %>
+        <% end %>
+
+        <%= f.buttons do %>
+           <%= f.commit_button "Сохранить", :button_html => { :class => 'button-styled grey'}, :align=>"right" %>
+           <br/>
+        <% end %>
+    </div>
+
+    <% @comments.each do |comment| %>
+              <br/>
+              <div id="box-styled-lightgrey" style="width:95%">
+                <p><%= image_tag comment.user.avatar.url, :width => 50, :height => 50, :align=>'middle' %>
+                <%= comment.user.email %> <%= comment.comment_date %></p>
+                <p><%= comment.comment %></p>
+                <% comment.task_attachments.each do |attachment| %>
+                   <div id="box-styled-grey-attachment">
+                      <%= image_tag AttachmentHelper.get_icon_path(attachment.attachment) %> <br/>
+                      <%= link_to attachment.attachment_file_name, attachment.attachment.url(:original, false) %>
+                   </div>
+                <% end %>
+              </div>
+          <% end %>
+
+    <div id="box-styled-lightgrey" style="width:95%" >
+        <%= render :partial => new_comment_path(@comment) %>
+
+        <%= f.buttons do %>
+            <%= f.commit_button "Добавить", :button_html => { :class => 'button-styled grey', :id =>"add_comment"}%>
+            <br/>
+        <% end %>
+    </div>
+  </div>
+<% end %>
+  <%= raw(Helper.get_chat_script(current_user)) %>

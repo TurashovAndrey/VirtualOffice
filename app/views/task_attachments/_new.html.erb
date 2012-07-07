@@ -1,0 +1,5 @@
+<%= semantic_form_for(@task_attachment, :url => new_task_attachment_path(@task_attachment)) do |f| %>
+  <%= f.inputs do %>
+       <%= f.file_field :attachment, :id => "attachment", :label =>"Прикрепить" %>
+  <% end %>
+<% end %>

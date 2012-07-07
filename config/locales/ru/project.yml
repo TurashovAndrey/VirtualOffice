@@ -1,0 +1,8 @@
+ru:
+  project:
+    titles:
+      projects: 'Проекты'
+      my_projects: 'Мои задачи'
+      delegate_projects: 'Делегированные задачи'
+      all_projects: 'Все задачи'
+      done_projects: 'Выполненные задачи'

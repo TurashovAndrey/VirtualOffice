@@ -1,0 +1,59 @@
+<div id="box-styled-grey">
+   <div id="box-styled-lightgrey" style="width:90%">
+      <p><%= link_to "Новое задание", new_task_path(:stage_id => @stage.id) %></p>
+   </div>
+    <div id="box-styled-lightgrey" style="width:90%">
+      <h1>Проекты</h1>
+      <div>
+        <p><%= link_to 'Все проекты', projects_path %></p>
+        <p><b><%= link_to @project.project_name, project_path(@project) %></b></p>
+        <% @project.stages.each do |stage| %>
+          <div id="stage-link">
+            <% if stage == @stage %>
+               <p><b><%= link_to stage.stage_name, stage_path(stage) %></b></p>
+            <% else %>
+               <p><%= link_to stage.stage_name, stage_path(stage) %></p>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  <% if !@task_attachments.empty? %>
+      <div id="box-styled-lightgrey" style="width:95%">
+        <h1>Файлы</h1>
+        <% @task_attachments.each do |attachment| %>
+            <div id="box-styled-grey-attachment">
+              <%= image_tag AttachmentHelper.get_icon_path(attachment.attachment) %> <br/>
+              <%= link_to attachment.attachment_file_name, attachment.attachment.url(:original, false) %>
+            </div>
+        <% end %>
+      </div>
+    <% end %>
+
+</div>
+
+<div id="box-styled-grey" style="width:70%">
+     <h1>Задачи</h1>
+     <% if !@tasks.empty? %>
+        <% @tasks.each do |task| %>
+          <div id="box-styled-lightgrey" style="width:98%">
+            <div id="box-styled-lightgrey" style="width:98%">
+              <p><b><%=link_to task.title, task_path(task) %>
+              <%= link_to image_tag("/system/icons/Edit.gif"), edit_task_path(task) %>
+              <%= link_to image_tag("/system/icons/Delete.gif"), task_path(task), :confirm => 'Вы уверены?', :method => :delete %></b></p>
+              <div id="box-styled-lightgrey-comment">
+                <p><%= task.notes %></p>
+                <br/>
+              </div>
+              <p> До <%= task.due %></p>
+              <p> <%= image_tag task.user.avatar.url, :height => "30px", :width => "30px" %> <%=task.user.email%> <%= task.created_at %></p>
+             <!--  <%= link_to "Подробнее", task_path(task) %> -->
+            </div>
+          </div>
+        <% end %>
+     <% end %>
+</div>
+
+
+<%= raw(Helper.get_chat_script(current_user)) %>

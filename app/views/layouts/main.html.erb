@@ -39,7 +39,7 @@
     </div>
     <%= yield %>
 
-    <div class="clear">
+    <div id="clear">
           <div id= "box" style = "width:19%; float:left">
             <h3><b>Видеоконференция:</b><br/>Организовуйте видеоконференцию внутри Вашей компании легко путем нажатия на вкладку "Конференция"</h3>
           </div>
@@ -61,15 +61,15 @@
           </div>
     </div>
 
-      <div id="footer_box">
+      <!-- <div id="footer_box">
         <h2> Что такое TimTim.ru </h2>
         <p align="justify" size="14 px">Больше нет необходимости снимать дорогостоящий офис, оплачивать коммунальные услуги и тратить огромное количество времени в пробках по пути на работу. <b>TimTim.ru - Ваша удаленная реальность</b>, которая позволяет дистанционно осуществлять
           полноценную деятельность компании за счет емкого функционала, охватывающего все необходимые направления деятельности компании.  </p>
-      </div>
+      </div> -->
 
-      <div class="clear" style ="margin-top:10px">
-        <p> &copy; <a href="http://timtim.ru">TimTim.ru</a>, 2012. Служба поддержки: <a href="http://vk.com/timtim_ru">http://vk.com/timtim_ru</a></p>
-      </div>
+       <div id="footer">
+         <%= render :partial => 'layouts/footer' %>
+       </div>
     </div>
 </body>
 </html>

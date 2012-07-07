@@ -10,15 +10,27 @@ VirtualOffice::Application.routes.draw do
   match 'create_demo' => 'user_sessions#create_demo', :as => :create_demo_user_session
   match 'activate(/:activation_code)' => 'user_sessions#activate', :as => :activate_user_account
 
-  resource :worker
   resource :company do
     resources :workers
   end
 
   resources :events
   resources :attachments
+  resources :task_attachments
+  resources :comments
+  resources :folders
+  resources :groups
+  resources :calendars
+  resources :permission
 
+  resources :tasks
   resources :rooms
+  resources :projects
+
+  resources :discussions
+  resources :themes
+
+  resources :stages
 
   match 'logout' => 'user_sessions#destroy'
 
@@ -27,9 +39,6 @@ VirtualOffice::Application.routes.draw do
   end
 
   # resources :users
-
-  netzke
-  resources :tasks
 
   root :to => 'pages#main'
 

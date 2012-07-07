@@ -1,8 +1,55 @@
-  <div class="note_message">
-      В данном окне отображаются задания, которые назначены Вам (Сотрудник1 - Ваш E-mail). Создавайте/изменяйте/удаляйте задания для сотрудников фирмы.
-   </div>
-  <br/>
-  <%= netzke :tasks_grid,
-      :class_name => "TasksGrid",
-  %>
-  <%= raw(Helper.get_chat_script(current_user)) %>
+<div id="box-styled-grey">
+    <div id="box-styled-lightgrey" style="width:98%">
+      <%= link_to "Новый проект", new_project_path %><br/>
+      <%= link_to "Новое задание", new_task_path %><br/>
+      <%= link_to "Новый этап", new_stage_path %>
+    </div>
+    <div id="box-styled-lightgrey" style="width:98%">
+      <div id="box-styled-lightgrey" style="width:98%">
+         <p>Все</p>
+         <% if !@projects.nil? %>
+            <% @projects.each do |project| %>
+              <p><%= project.project_name %></p>
+            <% end %>
+         <% end %>
+      </div>
+    </div>
+</div>
+
+<div id="box-styled-grey" style="width:70%">
+  <% if !@stages.empty? %>
+     <% @stages.each do |stage| %>
+        <% stage.tasks.each do |task| %>
+           <div id="box-styled-lightgrey" style="width:98%">
+              <p><b><%=link_to task.title, task_path(task) %>
+              <%= link_to image_tag("/system/icons/Edit.gif"), edit_task_path(@task) %>
+              <%= link_to image_tag("/system/icons/Delete.gif"), task_path(@task), :confirm => 'Вы уверены?', :method => :delete %></b></p>
+              <div id="box-styled-lightgrey-comment">
+                <p><%= task.notes %></p>
+                <br/>
+              </div>
+              <p> До <%= task.due %></p>
+              <p> <%= image_tag task.user.avatar.url, :height => "30px", :width => "30px" %> <%=task.user.email%> <%= task.created_at %></p>
+             <!--  <%= link_to "Подробнее", task_path(task) %> -->
+           </div>
+        <% end %>
+
+     <% end %>
+  <% end %>
+
+     <% if !@tasks.nil? %>
+        <% @tasks.each do |task| %>
+          <div id="box-styled-lightgrey" style="width:98%">
+            <span>Приоритет:<%= task.priority %></span>
+            <h2><%= task.title %></h2>
+            <p><%= task.notes %></p>
+            <p><%= task.due %></p>
+            <%= image_tag task.user.avatar.url, :class => 'box-styled-grey small_image' %>
+            <%= link_to "Подробнее", task_path(task) %>
+          </div>
+        <% end %>
+     <% end %>
+</div>
+
+
+<%= raw(Helper.get_chat_script(current_user)) %>

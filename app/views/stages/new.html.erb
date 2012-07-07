@@ -1,0 +1,41 @@
+<%= semantic_form_for(@stage, :remote=>false, :html => { :multipart => true}) do |f| %>
+    <div id="box-styled-grey">
+        <div id="box-styled-lightgrey" style="width:95%">
+          <h1>Проекты</h1>
+          <p><%= link_to 'Все проекты', projects_path %></p>
+          <% if !@projects.nil? %>
+             <% @projects.each do |project| %>
+                 <div>
+                   <% if project == @stage.project %>
+                     <p><b><%= link_to project.project_name, project_path(project) %></b></p>
+                   <% else %>
+                     <p><%= link_to project.project_name, project_path(project) %></p>
+                   <% end %>
+                   <% project.stages.each do |stage| %>
+                     <div id="stage-link">
+                        <p><%= link_to stage.stage_name, stage_path(stage) %></p>
+                     </div>
+                   <% end %>
+                 </div>
+             <% end %>
+          <% end %>
+        </div>
+    </div>
+
+  <div id="box-styled-grey" style="width:70%">
+
+    <div id="box-styled-lightgrey" style="width:95%" >
+       <%= f.inputs do %>
+          <%= f.input :stage_name, :as => :text, :label => "Описание", :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 50  }%>
+          <%= f.input :project_id, :as => :hidden %>
+       <% end %>
+
+       <%= f.buttons do %>
+         <%= f.commit_button "Сохранить", :button_html => { :class => 'button-styled grey'}, :align=>"right" %>
+       <% end %>
+       <br/>
+    </div>
+  </div>
+<% end %>
+
+<%= raw(Helper.get_chat_script(current_user)) %>

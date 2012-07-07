@@ -1,9 +1,7 @@
 # coding: utf-8
 class EventsController < ApplicationController
-  filter_resource_access :additional_new => :index
-
   def index
-    load_calendar
+    redirect_to calendars_path
   end
 
   def new
@@ -12,28 +10,11 @@ class EventsController < ApplicationController
   end
 
   def create
+    @event = Event.new
     @event.user = current_user
-    @event.company = current_user.company
-
-    if (params[:event][:color] == 'Красный')
-      @event.update_attribute("color","#FF0000")
-    end
-    if (params[:event][:color] == 'Зеленый')
-      @event.update_attribute("color","#00FF00")
-    end
-    if (params[:event][:color] == 'Синий')
-      @event.update_attribute("color","#0000FF")
-    end
-
-    @event.update_attribute("start_at", params[:event][:start_at])
-    @event.update_attribute("end_at", params[:event][:end_at])
-
-    if @event.save
-      flash[:notice] = t('event.flashes.created')
-    else
-      flash[:error] = t('event.flashes.create_error')
-    end
-    redirect_to events_path
+    @event.calendar = Calendar.find(params[:event][:calendar_id])
+    @event.update_attributes(params[:event])
+    redirect_to calendars_path
   end
 
   def destroy
@@ -51,14 +32,14 @@ class EventsController < ApplicationController
   end
 
   def update
-    if (params[:event][:color] == 'Красный')
+    if (params[:event][:color] == 'Очень важно')
       @event.update_attribute("color","#FF0000")
     end
-    if (params[:event][:color] == 'Зеленый')
-      @event.update_attribute("color","#00FF00")
+    if (params[:event][:color] == 'Важно')
+      @event.update_attribute("color","#FFFF00")
     end
-    if (params[:event][:color] == 'Синий')
-      @event.update_attribute("color","#0000FF")
+    if (params[:event][:color] == 'Не важно')
+      @event.update_attribute("color","#00FF00")
     end
 
     if @event.update_attributes(params[:event])
@@ -71,12 +52,33 @@ class EventsController < ApplicationController
 
   protected
 
-  def load_calendar
+  def get_calendars ()
+      @users_calendars =[]
+      @company_perms = Permission.where(:company_id => current_user.company).where(!:calendar_id.nil?).order(:group_id)
+      @company_perms.each do |company_perm|
+        if (((company_perm.group == current_user.group) && (company_perm.company == current_user.company)) ||
+           ((company_perm.group.nil?) && (company_perm.user.nil?)  && (company_perm.company == current_user.company)))
+          @users_calendars << Calendar.find(company_perm.calendar_id)
+        end
+      end
+      @users_calendars
+  end
+
+  def get_private_calendars ()
+      @private_calendars = []
+      @private_perms = Permission.where(:user_id => current_user).where(!:calendar_id.nil?)
+      @private_perms.each do |private_perm|
+        @private_calendars << Calendar.find(private_perm.calendar_id)
+      end
+      @private_calendars
+  end
+
+  def load_calendar(calendar)
     @month = (params[:month] || (Time.zone || Time).now.month).to_i
     @year = (params[:year] || (Time.zone || Time).now.year).to_i
 
     @shown_month = Date.civil(@year, @month)
     @first_day_of_week = 1
-    @event_strips = current_user.company.events.event_strips_for_month(@shown_month, @first_day_of_week)
+    @event_strips = calendar.events.event_strips_for_month(@shown_month, @first_day_of_week)
   end
 end

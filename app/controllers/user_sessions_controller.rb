@@ -33,7 +33,6 @@ class UserSessionsController < ApplicationController
 
       if (new_user.company.expire_date >= DateTime.now)
         Authorization.current_user = new_user
-        # flash[:notice] = t('user_session.flashes.logged_in')
         redirect_to application_root_path(current_user.company.url_base)
       else
         flash[:notice] = t('user_session.flashes.login_failed')

@@ -12,9 +12,15 @@ class User < ActiveRecord::Base
   belongs_to_active_hash :role
 
   belongs_to :company
-  has_many :events
+  has_many   :events
+  has_many   :streams
+  has_many   :attachments
+  has_many   :comments
+  has_many   :projects
+  has_many   :folders
+  has_many   :permissions
 
-  has_many :attachments
+  belongs_to :group
 
   after_create :create_company_for_manager
 
@@ -24,6 +30,22 @@ class User < ActiveRecord::Base
   default_value_for :password, 'admin'
 
   attr_accessor :new_password, :new_password_confirmation
+
+  def name
+    if (self.first_name.nil?) && (self.last_name.nil?)
+      self.email
+    else
+      if (self.first_name.nil?)
+        self.last_name
+      else
+        if (self.last_name.nil?)
+          self.first_name
+        else
+          self.first_name+" "+self.last_name
+        end
+      end
+    end
+  end
 
   def role_symbols
     [self.role.name.to_sym]
@@ -63,6 +85,25 @@ class User < ActiveRecord::Base
   def create_company_for_manager
     if self.role == Role::MANAGER
       self.company = Company.new(:url_base => self.company_name)
+
+      @group = Group.new
+      @group.group_name = "Company"
+      @group.company = self.company
+      @group.save
+
+      self.company.default_group = @group.id
+
+      @calendar = Calendar.new
+      @calendar.calendar_name = "Company"
+      @calendar.company = self.company
+      @calendar.save
+
+      @permission = Permission.new
+      @permission.calendar_id = @calendar
+      @permission.company = self.company
+      @permission.save
+
+      self.group = @group
       self.save
     end
   end

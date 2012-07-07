@@ -1,30 +1,79 @@
-    <div class="note_message">
-      В данном окне Вы можете просмотреть сотрудников фирмы.
+<div id="box-styled-grey">
+    <div id="box-styled-lightgrey" style="width:95%">
+      <p><%= link_to "Новый сотрудник", new_company_worker_path %></p>
+      <p><%= link_to "Новая группа", new_group_path %></p>
     </div>
-<br/>
+      <div id="box-styled-lightgrey" style="width:95%">
+        <h1>Сотрудники</h1>
+        <div>
+        <% if !@groups.nil? %>
+           <% @groups.each do |group| %>
+                 <p><%= link_to group.group_name, group_path(group) %></p>
 
-<table id="users_table" class="content_table">
-  <tr>
-    <th>Имя</th>
-    <th>Фамилия</th>
-    <th>E-mail</th>
-    <th></th>
-  </tr>
+                  <% if !group.users.empty? %>
+                     <% group.users.each do |user| %>
+                            <div style="padding-left:10px">
+                              <p><%= link_to user.email, company_worker_path(user) %></p>
+                            </div>
+                     <% end %>
+                  <% end %>
 
-<% @workers.each do |worker| %>
-  <tr>
-    <td><b><%= worker.first_name %></b></td>
-    <td><%= worker.last_name %></td>
-    <td><%= worker.email %></td>
-    <td>
-      <%= if current_user.role == Role::MANAGER
-       button_to( 'Удалить', worker_path(:id => worker.id),  :confirm => 'Вы уверены?', :method => :delete, :class => 'button-styled blue')
-      end %>
-    </td>
-  </tr>
-<% end %>
-</table>
+                <% if !Group.where(:parent_id => group.id).empty? %>
+                   <% Group.where(:parent_id => group.id).each do |child_group_first| %>
+                          <div style="padding-left:10px">
+                            <p><%= link_to child_group_first.group_name, group_path(child_group_first) %></p>
+                          </div>
 
-</div><!-- End demo -->
+                          <% if !child_group_first.users.empty? %>
+                              <% child_group_first.users.each do |user| %>
+                                 <div style="padding-left:20px">
+                                     <p><%= link_to user.email, company_worker_path(user) %></p>
+                              </div>
+                          <% end %>
+                  <% end %>
+
+                        <% if !Group.where(:parent_id => child_group_first.id).empty? %>
+                           <% Group.where(:parent_id => child_group_first.id).each do |child_group_second| %>
+                                <div style="padding-left:20px">
+                                  <p><%= link_to child_group_second.group_name, group_path(child_group_second) %></p>
+                                </div>
+
+                                <% if !child_group_second.users.empty? %>
+                                      <% child_group_second.users.each do |user| %>
+                                         <div style="padding-left:30px">
+                                             <p><%= link_to user.email, company_worker_path(user) %></p>
+                                      </div>
+                                <% end %>
+
+                                <div>
+                                <% if !Group.where(:parent_id => child_group_second.id).empty? %>
+                                   <% Group.where(:parent_id => child_group_second.id).each do |child_group_third| %>
+                                        <div style="padding-left:30px">
+                                          <p><%= link_to child_group_third.group_name, group_path(child_group_third) %></p>
+                                        </div>
+
+                                        <% if !child_group_second.users.empty? %>
+                                          <% child_group_second.users.each do |user| %>
+                                            <div style="padding-left:40px">
+                                              <p><%= link_to user.email, company_worker_path(user) %></p>
+                                            </div>
+                                          <% end %>
+                                        <% end %>
+                                <% end %>
+                                   <% end %>
+                                <% end %>
+                                </div>
+                           <% end %>
+                        <% end %>
+                   <% end %>
+                <% end %>
+           <% end %>
+
+        <% end %>
+        </div>
+      </div>
+</div>
+
+
 
 <%= raw(Helper.get_chat_script(current_user)) %>

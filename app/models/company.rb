@@ -1,10 +1,16 @@
 class Company < ActiveRecord::Base
 
   has_many :users
-  has_many :events
   has_many :tasks
   has_many :attachments
   has_many :rooms
+  has_many :projects
+  has_many :folders
+
+  has_many :comments
+  has_many :groups
+
+  has_many :permissions
 
   has_attached_file :logo
 

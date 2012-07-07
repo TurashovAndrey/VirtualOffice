@@ -1,0 +1,35 @@
+<div id="box-styled-grey">
+    <div id="box-styled-lightgrey" style="width:95%">
+      <p><%= link_to "Новое обсуждение", new_discussion_path(:theme_id => @theme.id) %></p>
+    </div>
+
+    <div id="box-styled-lightgrey" style="width:95%">
+      <h1>Темы</h1>
+      <p><%= link_to "Все темы", themes_path %></p>
+      <% if !@themes.nil? %>
+         <% @themes.each do |theme| %>
+            <p><%= link_to theme.theme, theme_path(theme) %>
+               <%= link_to image_tag("/system/icons/Delete.gif"), theme_path(theme), :confirm => 'Вы уверены?', :method => :delete %>
+            </p>
+         <% end %>
+      <% end %>
+    </div>
+</div>
+
+<div id="box-styled-grey" style="width: 70%">
+            <% if !@theme.discussions.empty? %>
+               <h1><%= link_to @theme.theme, theme_path(@theme) %></h1>
+               <% @theme.discussions.each do |discussion| %>
+                 <div id="box-styled-lightgrey" style="width:98%">
+                   <p><b><%= link_to discussion.discussion, discussion_path(discussion)%>
+                   <%= link_to image_tag("/system/icons/Edit.gif"), edit_discussion_path(discussion) %>
+                   <%= link_to image_tag("/system/icons/Delete.gif"), discussion_path(discussion), :confirm => 'Вы уверены?', :method => :delete %></b></p>
+                   <div id="box-styled-lightgrey-comment">
+                     <br/>
+                   </div>
+                   <p><%= image_tag discussion.user.avatar.url, :height => "30px", :width => "30px" %> <%=discussion.user.email%> <%= discussion.created_at %></p>
+                 </div>
+               <% end %>
+            <% end %>
+</div>
+    <%= raw(Helper.get_chat_script(current_user)) %>

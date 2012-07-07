@@ -1,0 +1,68 @@
+# coding: utf-8
+<!-- Probably move the stylesheet to you layout. Also make sure you include the javascript. -->
+<%= stylesheet_link_tag "event_calendar"%>
+ <div id="box-styled-grey" style="width:25%">
+    <div id="box-styled-lightgrey" style="width:95%">
+      <p><%= link_to "Новый календарь", new_calendar_path %></p>
+    </div>
+
+    <div id="box-styled-lightgrey" style="width:95%">
+      <h1><%= link_to "Календари компании", calendars_path %></h1>
+      <% if !@company_calendars.nil? %>
+         <% @company_calendars.each do |calendar| %>
+             <div>
+               <p><%= link_to calendar.calendar_name, calendar_path(calendar) %>
+                  <%= link_to image_tag("/system/icons/Edit.gif"), edit_calendar_path(calendar) %>
+                  <%= link_to image_tag("/system/icons/Delete.gif"), calendar_path(calendar), :confirm => 'Вы уверены?', :method => :delete %></p>
+             </div>
+         <% end %>
+      <% end %>
+    </div>
+
+  <div id="box-styled-lightgrey" style="width:95%">
+    <h1><%= link_to "Мои календари",calendars_path %></h1>
+    <% if !@my_calendars.nil? %>
+       <% @my_calendars.each do |calendar| %>
+           <div>
+             <p><%= link_to calendar.calendar_name, calendar_path(calendar) %>
+                <%= link_to image_tag("/system/icons/Edit.gif"), edit_calendar_path(calendar) %>
+                <%= link_to image_tag("/system/icons/Delete.gif"), calendar_path(calendar), :confirm => 'Вы уверены?', :method => :delete %></p>
+           </div>
+       <% end %>
+    <% end %>
+  </div>
+
+    <div id="box-styled-lightgrey" style="width:95%">
+      <h1> Новое событие</h1>
+      <%= semantic_form_for(@event) do |f| %>
+        <%= f.inputs do %>
+          <%= f.input :name, :as => :text, :label => "Событие", :required => true,:input_html => {:class => 'autogrow', :rows => 2, :maxlength => 100  } %>
+          <%= f.input :description, :as => :text, :label => "Описание", :input_html => { :class => 'autogrow', :rows => 2, :maxlength => 100  } %>
+          <%= f.input :calendar_id, :as => :hidden %>
+          <%= f.input :start_at, :as => :string, :type => :datetime,  :label => "Дата начала", :required => true %>
+          <%= f.input :end_at, :as => :string, :type => :datetime, :label => "Дата конца", :required => true %>
+          <%= f.input :color, :label => "Важность",  :as => :select, :collection => options_for_select([["Очень важно","#FF0000", {:style => "background-color:Red; color: #FFFFFF;"}],
+                      ["Важно","#FFFF00", {:style => "background-color: Yellow; color: #FFFFFF;"}],
+                      ["Не важно","#00FF00", {:style => "background-color: Green; color: #FFFFFF;"}]]) %>
+      <% end %>
+
+      <%= f.buttons do %>
+          <%= button_to 'Сохранить', @event, :method => :update, :class => 'button-styled grey', :width=>50 %>
+
+          <br/>
+          <%= if !@event.id.nil? and @event.user == current_user
+             button_to 'Удалить', event_path(@event), :confirm => 'Вы уверены?', :method => :delete, :class => 'button-styled blue', :width=>50
+          end%>
+      <% end %>
+     <% end %>
+    </div>
+ </div>
+
+<div id="box-styled-grey" style="width:73%">
+  <% if !@first_calendar.nil? %>
+    <h1><%= link_to @first_calendar.calendar_name, calendar_path(@first_calendar) %></h1><br/>
+    <%= raw(event_calendar) %>
+  <% end %>
+</div>
+
+<%= raw(Helper.get_chat_script(current_user)) %>

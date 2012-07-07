@@ -33,8 +33,10 @@ class AccountsController < ApplicationController
   end
 
   def update
-     @user.update_attribute(:first_name,params[:user][:first_name])
-     @user.update_attribute(:last_name,params[:user][:last_name])
+     @user.update_attributes(:first_name => params[:user][:first_name],
+                             :last_name => params[:user][:last_name],
+                             :telephone => params[:user][:telephone],
+                             :address => params[:user][:address])
      @user.update_attribute(:avatar, params[:user][:avatar])
 
      if (params[:change_password])
@@ -46,7 +48,6 @@ class AccountsController < ApplicationController
          @user_session.destroy
 
          redirect_to application_root_path
-         #render 'pages/main', :layout => 'main'
        else
          flash[:error] = t('user.flashes.change_password_error')
          redirect_to account_path

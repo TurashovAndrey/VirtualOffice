@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120607163152) do
+ActiveRecord::Schema.define(:version => 20120706090401) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "company_id"
@@ -22,6 +22,28 @@ ActiveRecord::Schema.define(:version => 20120607163152) do
     t.integer  "attach_file_size"
     t.datetime "attach_updated_at"
     t.integer  "user_id"
+    t.integer  "folder_id"
+  end
+
+  create_table "calendars", :force => true do |t|
+    t.string   "calendar_name"
+    t.integer  "user_id"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "comments", :force => true do |t|
+    t.integer  "task_id"
+    t.integer  "user_id"
+    t.integer  "company_id"
+    t.string   "comment"
+    t.datetime "comment_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "stage_id"
+    t.integer  "project_id"
+    t.integer  "discussion_id"
   end
 
   create_table "companies", :force => true do |t|
@@ -32,6 +54,16 @@ ActiveRecord::Schema.define(:version => 20120607163152) do
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
     t.date     "expire_date",       :default => '2099-01-01'
+    t.integer  "default_group"
+  end
+
+  create_table "discussions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "company_id"
+    t.integer  "theme_id"
+    t.string   "discussion"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "events", :force => true do |t|
@@ -44,6 +76,43 @@ ActiveRecord::Schema.define(:version => 20120607163152) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
+    t.integer  "calendar_id"
+  end
+
+  create_table "folders", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "company_id"
+    t.string   "folder_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "groups", :force => true do |t|
+    t.string   "group_name"
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "company_id"
+  end
+
+  create_table "permissions", :force => true do |t|
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "description"
+    t.integer  "task_id"
+    t.integer  "company_id"
+    t.integer  "folder_id"
+    t.integer  "calendar_id"
+  end
+
+  create_table "projects", :force => true do |t|
+    t.string   "project_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "company_id"
   end
 
   create_table "rooms", :force => true do |t|
@@ -53,6 +122,31 @@ ActiveRecord::Schema.define(:version => 20120607163152) do
     t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "stages", :force => true do |t|
+    t.string   "stage_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "comment_id"
+    t.integer  "task_attachment_id"
+    t.integer  "project_id"
+  end
+
+  create_table "task_attachments", :force => true do |t|
+    t.integer  "task_id"
+    t.integer  "user_id"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.integer  "comment_id"
+    t.integer  "project_id"
+    t.integer  "stage_id"
+    t.integer  "discussion_id"
   end
 
   create_table "tasks", :force => true do |t|
@@ -66,6 +160,17 @@ ActiveRecord::Schema.define(:version => 20120607163152) do
     t.integer  "user_id"
     t.integer  "second_user_id"
     t.integer  "company_id"
+    t.datetime "task_date"
+    t.integer  "project_id"
+    t.integer  "stage_id"
+  end
+
+  create_table "themes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "company_id"
+    t.string   "theme"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
@@ -93,6 +198,9 @@ ActiveRecord::Schema.define(:version => 20120607163152) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.boolean  "active",              :default => false, :null => false
+    t.string   "telephone"
+    t.string   "address"
+    t.integer  "group_id"
   end
 
 end
