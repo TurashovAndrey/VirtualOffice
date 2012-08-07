@@ -1,0 +1,21 @@
+<script>
+    $(document).ready(function() {
+       $('.best_in_place').best_in_place();
+    });
+</script>
+
+<div id="box-styled-lightgrey" style="width:95%">
+  <h1>Темы</h1>
+  <p><%= link_to "Все темы", themes_path, :remote => true %></p>
+  <% if !@themes.nil? %>
+     <% @themes.each do |theme| %>
+        <p>
+          <%= link_to image_tag("/system/icons/Theme.png", :height=>16, :width=>16), theme_path(theme) %>
+          <%= link_to best_in_place(theme, :theme, :activator => "#activator_#{theme.id}"), theme_path(theme), :remote => true %>
+          <a href="#" id="activator_<%= theme.id %>">...</a>
+          <%= link_to image_tag("/system/icons/Edit.png", :height => 16, :width => 16), edit_theme_path(theme) %>
+          <%= link_to image_tag("/system/icons/Delete.png", :height => 16, :width => 16), theme_path(theme), :confirm => 'Вы уверены?', :method => :delete %>
+        </p>
+     <% end %>
+  <% end %>
+</div>

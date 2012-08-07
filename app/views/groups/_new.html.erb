@@ -1,0 +1,14 @@
+<div id="box-styled-lightgrey" style="width:98%" >
+  <h1>Новая группа</h1>
+  <%= semantic_form_for(@group, :remote=>false, :html => { :multipart => true}) do |f| %>
+     <%= f.inputs do %>
+        <%= f.input :group_name, :label =>'Название', :as => :string %>
+        <%= f.input :parent_id, :as => :select, :label =>"Родитель", :collection => Hash[current_user.company.groups.all.map{|b| [b.group_name,b.id]}] %>
+     <% end %>
+
+        <%= f.buttons do %>
+           <%= f.commit_button "Сохранить", :button_html => { :class => 'button-styled grey'} %>
+           <br/>
+        <% end %>
+  <% end %>
+</div>

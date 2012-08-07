@@ -1,37 +1,15 @@
-# coding: utf-8
-<!-- Probably move the stylesheet to you layout. Also make sure you include the javascript. -->
-<%= stylesheet_link_tag "event_calendar"%>
- <div id="box-styled-grey" style="width:30%">
-    <div id="box-styled-lightgrey" style="width:95%">
-      <p><%= link_to "Новый календарь", new_calendar_path %></p>
-    </div>
+<script>
+    $(document).ready(function() {
+       $('.best_in_place').best_in_place();
+    });
+</script>
 
-    <div id="box-styled-lightgrey" style="width:95%">
-      <h1><%= link_to "Календари компании", calendars_path %></h1>
-      <% if !@company_calendars.nil? %>
-         <% @company_calendars.each do |calendar| %>
-             <div>
-               <p><%= link_to calendar.calendar_name, calendar_path(calendar) %>
-                  <%= link_to image_tag("/system/icons/Edit.gif"), edit_calendar_path(calendar) %>
-                  <%= link_to image_tag("/system/icons/Delete.gif"), calendar_path(calendar), :confirm => 'Вы уверены?', :method => :delete %></p>
-             </div>
-         <% end %>
-      <% end %>
-    </div>
+<div id="box-styled-grey" style="width:30%">
+   <div id="calendar_list">
+     <%= render :partial => "calendar_list" %>
+   </div>
+</div>
 
-  <div id="box-styled-lightgrey" style="width:95%">
-    <h1><%= link_to 'Мои календари', calendars_path %></h1>
-    <% if !@my_calendars.nil? %>
-       <% @my_calendars.each do |calendar| %>
-           <div>
-             <p><%= link_to calendar.calendar_name, calendar_path(calendar) %>
-                <%= link_to image_tag("/system/icons/Edit.gif"), edit_calendar_path(calendar) %>
-                <%= link_to image_tag("/system/icons/Delete.gif"), calendar_path(calendar), :confirm => 'Вы уверены?', :method => :delete %></p>
-           </div>
-       <% end %>
-    <% end %>
-  </div>
- </div>
 
 <div id="box-styled-grey" style="width:65%">
   <%= semantic_form_for(@calendar) do |f| %>
@@ -39,11 +17,9 @@
         <%= f.input :calendar_name, :label=>"Название", :as => :text, :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 100  }, :required => true %>
      <% end %>
 
-      <div id="box-styled-grey" style="border:0; width:95%" >
-       <div id="box-styled-grey" style="width:35%;margin-left:30px;">
+      <div id="box-styled-lightgrey" style="border:0; width:95%" >
          <h1>Группы</h1>
          <br/>
-         <li>
            <div style="padding-left:7px">
               <%= check_box_tag 'group_ids[]', 0, false %>
               <%= label_tag "Все" %>
@@ -56,15 +32,16 @@
              </div>
              <br/>
          <% end %>
-         </li>
-       </div>
       </div>
 
    <%= f.buttons do %>
+     <br/>
      <%= button_to 'Сохранить', @calendar, :method => :create, :class => 'button-styled grey' %>
      <br/>
    <% end %>
   <% end %>
 </div>
 
-<%= raw(Helper.get_chat_script(current_user)) %>
+<% if current_user.set_chat == true %>
+  <%= raw(Helper.get_chat_script(current_user)) %>
+<% end %>

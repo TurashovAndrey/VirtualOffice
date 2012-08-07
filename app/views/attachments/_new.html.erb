@@ -1,0 +1,18 @@
+<div id="box-styled-lightgrey" style="width:98%" >
+<%= semantic_form_for(@attachment) do |f| %>
+  <div id="box-styled-lightgrey" style="width:98%" >
+    <h1>Прикрепить файл</h1>
+    <br/>
+
+    <%= f.inputs do %>
+       <%= f.file_field :attach %>
+       <%= f.input :folder_id, :as => :select, :label=>"Папка", :collection => Hash[@all_folders.map {|b| [b.folder_name, b.id]}].merge({"" => nil}) %>
+    <% end %>
+
+    <br/>
+    <div style="position:relative; text-align:center">
+      <%= button_to 'Сохранить', @attachment, :method => :create, :class => 'button-styled grey' %>
+    </div>
+  </div>
+<% end %>
+</div>

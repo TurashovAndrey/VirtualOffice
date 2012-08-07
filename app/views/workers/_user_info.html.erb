@@ -1,0 +1,10 @@
+<div id="box-styled-lightgrey" style="width:95%">
+   <%= image_tag @user.avatar.url, :width => 100, :height => 100 %> <br/>
+   <h3 style="padding-left:10px">Email: <i><%= @user.email %></i></h3>
+   <h3 style="padding-left:10px">Имя:   <%= @user.first_name %></h3>
+   <h3 style="padding-left:10px">Фамилия:   <%= @user.last_name %></h3>
+   <h3 style="padding-left:10px">Телефон:   <%= @user.telephone %></h3>
+   <h3 style="padding-left:10px">Адрес:     <%= @user.address %></h3>
+</div>
+
+

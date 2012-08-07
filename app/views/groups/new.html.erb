@@ -38,4 +38,7 @@
         <% end %>
   <% end %>
 </div>
-    <%= raw(Helper.get_chat_script(current_user)) %>
+
+<% if current_user.set_chat == true %>
+  <%= raw(Helper.get_chat_script(current_user)) %>
+<% end %>

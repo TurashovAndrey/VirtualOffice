@@ -1,0 +1,17 @@
+<%= semantic_form_for(@discussion, :remote=>false, :html => { :multipart => true}) do |f| %>
+  <div id="box-styled-lightgrey" style="width:98%" >
+    <h1>Новое обсуждение</h1>
+    <br/>
+
+    <%= f.inputs do %>
+      <%= f.input :discussion, :as => :text, :label => "Название", :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 50  }%>
+      <%= f.input :theme_id, :as => :select, :label => "Тема", :collection => Hash[@themes.map {|b| [b.theme, b.id]}].merge({"" => nil}) %>
+    <% end %>
+
+    <div style="width:100%; text-align:center">
+       <%= button_to 'Сохранить', @discussion, :method => :create, :class => 'button-styled grey' %>
+       <br/>
+    </div>
+  <% end %>
+</div>
+

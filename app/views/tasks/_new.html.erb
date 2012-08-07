@@ -1,0 +1,36 @@
+
+<%= semantic_form_for(@task, :remote=>false, :html => { :multipart => true}) do |f| %>
+
+<div id="box-styled-lightgrey" style="width:98%" >
+    <h1>Новая задача</h1>
+    <br/>
+    <%= f.inputs do %>
+
+     <% if !@project.nil? %>
+       <% if @stage.nil?  %>
+          <% if !@project.stages.empty? %>
+            <%= f.input :stage_id, :as => :select, :collection => Hash[@project.stages.map {|b| [b.stage_name, b.id]}] %>
+          <% end %>
+       <% else %>
+          <h1><%= @stage.stage_name%></h1>
+           <br/>
+       <% end %>
+     <% end %>
+
+    <%= f.input :title, :as => :text, :label => "Название", :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 50  }%>
+    <%= f.input :notes, :as => :text, :label => "Описание", :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 50  }%>
+    <%= f.input :priority, :label => "Приоритет",  :as => :select, :collection => options_for_select([["Высокий",3],
+               ["Средний",2],["Низкий",1]]) %>
+    <%= f.input :due, :as => :string, :type => :datetime, :label => "Окончание"%>
+    <%= f.input :second_user, :as => :select, :label =>"Исполнитель", :collection => Hash[current_user.company.users.all.map{|b| [b.email,b.id]}] %>
+    <%= f.input :project_id, :as => :select, :label => "Проект", :collection => Hash[@projects.map {|b| [b.project_name, b.id]}] %>
+    <%= f.input :stage_id, :as => :hidden %>
+    <% end %>
+
+  <br/>
+  <div style="width:100%; text-align:center">
+     <%= button_to 'Сохранить', @task, :method => :update, :class => 'button-styled grey' %>
+  </div>
+  <br/>
+</div>
+<% end %>

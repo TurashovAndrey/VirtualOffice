@@ -1,13 +1,17 @@
+<div id="main_header" >
 <%= semantic_form_for(@user, :url => account_path(@user)) do |f| %>
     <%= f.semantic_errors :email, :password, :company_name %>
 
-    <%= f.inputs do %>
-        <%= f.input :email, :required => false, :label => false %>
-        <%= f.input :password, :required => false, :label => false %>
-        <%= f.input :company_name, :required => false, :label => '.timtim.ru' %>
-    <% end %>
+    <div style="margin-left:20px">
+      <%= f.inputs do %>
+          <%= f.input :email, :required => false, :label => false %>
+          <%= f.input :password, :required => false, :label => false %>
+          <%= f.input :company_name, :required => false, :label => '.timtim.ru' %>
+      <% end %>
+    </div>
 
     <%= f.buttons do %>
-        <%= f.commit_button :label => t('user.buttons.register'), :button_html => { :class => 'button-styled blue'} %>
+        <%= button_to t('user.buttons.register'), new_company_worker_path(@user), :method => :create, :class => 'button-styled blue', :style=>"margin-top:-4px" %>
     <% end %>
 <% end %>
+</div>

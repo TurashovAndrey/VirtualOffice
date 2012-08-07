@@ -5,4 +5,6 @@ class Permission < ActiveRecord::Base
   belongs_to :company
   belongs_to :folder
   belongs_to :calendar
+  belongs_to :theme
+  belongs_to :project
 end

@@ -1,3 +1,4 @@
+# coding: utf-8
 class AccountsController < ApplicationController
   skip_before_filter :check_current_user, :only => [:new, :create, :activate]
 
@@ -13,15 +14,6 @@ class AccountsController < ApplicationController
     @user.active = true
     if @user.save
       flash[:notice] = t('user.flashes.created')
-
-      config_opentok
-
-      #@new_room = Room.new(:name => @user.company.url_base, :session_id =>"1_MX4xMjMyMDgxfjcwLjQyLjQ3Ljc4fjIwMTItMDItMDggMDc6MDI6MTQuNjYxMjI5KzAwOjAwfjAuMDEwNjcwMTQzMTE1Nn4", :public => true)
-      session = @opentok.create_session request.remote_addr
-      @new_room = Room.new(:name => @user.company.url_base, :session_id =>session.session_id, :public => true)
-      @new_room.company = @user.company
-      @new_room.save
-
       redirect_to company_path
     else
       flash[:error] = t('user.flashes.create_error')
@@ -30,6 +22,22 @@ class AccountsController < ApplicationController
   end
 
   def show
+    @task = Task.new
+    @projects = ProjectsHelper.get_projects(current_user)
+    @themes = ThemesHelper.get_themes(current_user)
+
+    @all_calendars = CalendarsHelper.get_calendars(current_user)
+    @all_calendars += CalendarsHelper.get_private_calendars(current_user)
+
+    @all_folders = FoldersHelper.get_folders(current_user)
+    @all_folders += FoldersHelper.get_private_folders(current_user)
+
+    @discussion = Discussion.new
+
+    @event = Event.new
+    @event.calendar = Calendar.find(current_user.company.calendar_id)
+
+    @attachment = Attachment.new
   end
 
   def update
@@ -37,7 +45,18 @@ class AccountsController < ApplicationController
                              :last_name => params[:user][:last_name],
                              :telephone => params[:user][:telephone],
                              :address => params[:user][:address])
-     @user.update_attribute(:avatar, params[:user][:avatar])
+
+     if (!params[:set_chat].nil?)
+       @user.update_attribute(:set_chat,true)
+     else
+       @user.update_attribute(:set_chat,false)
+     end
+
+     if (@user.update_attribute(:avatar, params[:user][:avatar]))
+       flash[:notice] = "Данные пользователя успешно изменены"
+     else
+       flash[:error] = "Не удалось изменить данные пользователя"
+     end
 
      if (params[:change_password])
        if (params[:user][:password] == params[:user][:password_confirmation])
@@ -75,11 +94,4 @@ class AccountsController < ApplicationController
   def load_account
     @user = self.current_user
   end
-
-   private
-	  def config_opentok
-	    if @opentok.nil?
-	      @opentok = OpenTok::OpenTokSDK.new(11739502, "75d020096690199bd0fd54522a66cd0bd5a2a145", :api_url =>'https://api.opentok.com/hl')
-	    end
-    end
 end

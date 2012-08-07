@@ -1,38 +1,24 @@
 <div id="box-styled-grey">
-    <div id="box-styled-lightgrey" style="width:95%">
-      <p><%= link_to "Новая папка", new_folder_path %></p>
-    </div>
-    <div id="box-styled-lightgrey" style="width:95%">
-      <h1><%= link_to @folder.folder_name, folder_path(@folder) %></h1>
-      <p><%= link_to "Все папки", folders_path %></p>
-      <% if !@folders.nil? %>
-         <% @folders.each do |folder| %>
-             <div>
-               <p><%= link_to folder.folder_name, folder_path(folder) %>
-                  <%= link_to image_tag("/system/icons/Edit.gif"), edit_folder_path(folder) %>
-                  <%= link_to image_tag("/system/icons/Delete.gif"), folder_path(folder), :confirm => 'Вы уверены?', :method => :delete %>
-               </p>
-             </div>
-         <% end %>
-      <% end %>
-    </div>
-    <div id="box-styled-lightgrey" style="width:95%">
-      <h1>Прикрепить файл</h1><br/>
+  <div id="box-styled-lightgrey" style="width:95%">
+    <p><a class='inline_folder' href="#folder_content">Новая папка</a></p>
+    <p><a class='inline_attachment' href="#attachment_content">Новый файл</a></p>
+  </div>
 
-      <%= semantic_form_for(@attachment) do |f| %>
-
-          <%= f.inputs do %>
-              <%= f.file_field :attach %>
-              <%= f.input :folder_id, :as => :hidden %>
-          <% end %>
-
-          <br/>
-          <div style="position:relative; text-align:center">
-            <%= button_to 'Сохранить', @attachment, :method => :create, :class => 'button-styled grey' %>
-          </div>
-          <br/>
-      <% end %>
+  <div style='display:none'>
+    <div id='folder_content' style='padding:10px'>
+       <%= render :partial => 'new' %>
     </div>
+  </div>
+
+  <div style='display:none'>
+     <div id='attachment_content' style='padding:10px'>
+       <%= render :partial => 'new_attachment' %>
+     </div>
+  </div>
+
+  <div id="folder_list">
+    <%= render :partial => "folder_list" %>
+  </div>
 </div>
 
 <div id="box-styled-grey" style="width: 70%">
@@ -50,4 +36,7 @@
         <% end %>
         </div>
 </div>
-    <%= raw(Helper.get_chat_script(current_user)) %>
+
+<% if current_user.set_chat == true %>
+  <%= raw(Helper.get_chat_script(current_user)) %>
+<% end %>

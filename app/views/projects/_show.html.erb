@@ -1,0 +1,63 @@
+     <h1><%= link_to @project.project_name, project_path(@project) %></h1>
+     <% if !@stages.empty? %>
+        <% @stages.each do |stage| %>
+          <% if !stage.tasks.empty? %>
+            <h1><%= stage.stage_name %></h1>
+            <% stage.tasks.each do |task| %>
+              <div id="box-styled-lightgrey" style="width:98%">
+                <p><b><%=link_to task.title, task_path(task) %>
+                <%= link_to image_tag("/system/icons/Edit.png", :height => 16, :width => 16), edit_task_path(task) %>
+                <%= link_to image_tag("/system/icons/Delete.png", :height => 16, :width => 16), task_path(task), :confirm => 'Вы уверены?', :method => :delete %></b></p>
+                <div id="box-styled-lightgrey-comment">
+                  <p><%= task.notes %></p>
+                  <br/>
+                </div>
+                <p> До <%= task.due %></p>
+                <p> <%= image_tag task.user.avatar.url, :height => "30px", :width => "30px" %> <%=task.user.email%> <%= task.created_at %></p>
+               <!--  <%= link_to "Подробнее", task_path(task) %> -->
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+     <% end %>
+
+     <% if !@tasks.empty? %>
+        <h1>Задачи</h1>
+        <% @tasks.each do |task| %>
+             <a href= <%= task_path(task) %> >
+             <div id="box-styled-lightgrey-task" style="width:98%">
+                 <% if task.priority == 3 %>
+                   <div class="tooltip-red">
+                      <p style="margin:0 0 0 0"> Приоритет: Высокий&nbsp;(до:
+                 <% end %>
+
+                 <% if task.priority == 2 %>
+                      <div class="tooltip-yellow">
+                         <p style="margin:0 0 0 0"> Приоритет: Средний&nbsp;(до:
+                 <% end %>
+
+                 <% if task.priority == 1 %>
+                      <div class="tooltip-green">
+                         <p style="margin:0 0 0 0"> Приоритет: Низкий&nbsp;(до:
+                 <% end %>
+
+                 <% if task.due.nil? %>
+                    <i>не указано)</i>
+                 <% else %>
+                    <i><%= task.due %></i>)
+                 <% end %>
+
+                 </p>
+                 </div>
+
+               <h1 style="text-align:center;"><b><%= link_to task.title, task_path(task)%>
+               <%= link_to image_tag("/system/icons/Edit.png", :height => 16, :width => 16), edit_task_path(task) %>
+               <%= link_to image_tag("/system/icons/Delete.png", :height => 16, :width => 16), task_path(task), :confirm => 'Вы уверены?', :method => :delete %></b>(<%= task.comments.all.count %> комментариев)</h1>
+               <div id="box-styled-lightgrey-comment">
+                 <p><b>Описание:</b> <%= task.notes %></p>
+               </div>
+               <!-- <p><%= image_tag task.user.avatar.url, :height => "30px", :width => "30px" %> <%=task.user.name%> <i><%= Helper.distance_of_time_in_words(DateTime.now.utc,task.created_at) %></i></p> -->
+             </div>
+             </a>
+        <% end %>
+     <% end %>

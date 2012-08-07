@@ -1,0 +1,27 @@
+<%= semantic_form_for(@discussion, :remote=>false, :html => { :multipart => true}) do |f| %>
+
+    <div id="box-styled-grey">
+      <div id="theme_list">
+        <%= render :partial => "themes/theme_list" %>
+      </div>
+    </div>
+
+  <div id="box-styled-grey" style="width:70%">
+
+    <div id="box-styled-lightgrey" style="width:95%" >
+        <%= f.inputs do %>
+          <%= f.input :discussion, :as => :text, :label => "Название", :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 50  }%>
+          <%= f.input :theme_id, :as => :hidden %>
+        <% end %>
+
+        <%= f.buttons do %>
+           <%= button_to 'Сохранить', @discussion, :method => :create, :class => 'button-styled grey' %>
+           <br/>
+        <% end %>
+    </div>
+  </div>
+<% end %>
+
+<% if current_user.set_chat == true %>
+  <%= raw(Helper.get_chat_script(current_user)) %>
+<% end %>

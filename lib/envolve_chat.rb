@@ -205,6 +205,8 @@ module EnvolveChat
           case opt[0].to_s
             when "people_here_text"
               o << "peopleHereText : '#{opt[1]}'"
+            when "divID"
+              o << "divID : '#{opt[1]}'"
             when "people_list_header_text"
               o << "peopleListHeaderText : '#{opt[1]}'"
             when "enable_socialgo"

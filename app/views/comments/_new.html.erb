@@ -1,7 +1,7 @@
-<%= semantic_form_for(@comment, :url => new_comment_path(@comment)) do |f| %>
+<%= semantic_form_for(@comment, :url => new_comment_path(@comment), :multipart => true) do |f| %>
+  <h1> Добавить комментарий </h1>
   <%= f.inputs do %>
-     <p> <%= image_tag @comment.user.avatar.url, :width => 50, :height => 50, :align => 'middle' %> <%= @comment.user.email %> </p>
-     <%= f.input :comment, :as => :text, :label => false, :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 50 } %>
+     <%= f.input :comment, :as => :text, :label => "Комментарий", :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 50 } %>
   <% end %>
   <%= render :partial => new_task_attachment_path(@task_attachment) %>
 <% end %>

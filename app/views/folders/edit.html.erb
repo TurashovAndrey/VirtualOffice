@@ -5,8 +5,8 @@
       <% if !@folders.nil? %>
          <% @folders.each do |folder| %>
             <p><%= link_to folder.folder_name, folder_path(folder) %>
-               <%= link_to image_tag("/system/icons/Edit.gif"), edit_folder_path(folder), :id=>"link_tag" %>
-               <%= link_to image_tag("/system/icons/Delete.gif"), folder_path(folder), :confirm => 'Вы уверены?', :method => :delete, :id=>"link_tag" %>
+               <%= link_to image_tag("/system/icons/Edit.png", :height => 16, :width => 16), edit_folder_path(folder), :id=>"link_tag" %>
+               <%= link_to image_tag("/system/icons/Delete.png", :height => 16, :width => 16), folder_path(folder), :confirm => 'Вы уверены?', :method => :delete, :id=>"link_tag" %>
             </p>
          <% end %>
       <% end %>
@@ -22,7 +22,6 @@
           <div id="box-styled-grey" style="width:35%;margin-left:30px;">
             <h1>Группы</h1>
             <br/>
-            <li>
               <div style="padding-left:7px">
                  <% if (@permissions.first.group_id.nil?) && (@permissions.first.user_id.nil?) %>
                    <%= check_box_tag 'group_ids[]', 0, true %>
@@ -43,7 +42,6 @@
                 </div>
                 <br/>
             <% end %>
-            </li>
           </div>
          </div>
       <%= f.buttons do %>
@@ -52,4 +50,7 @@
       <% end %>
   <% end %>
 </div>
-    <%= raw(Helper.get_chat_script(current_user)) %>
+
+<% if current_user.set_chat == true %>
+  <%= raw(Helper.get_chat_script(current_user)) %>
+<% end %>

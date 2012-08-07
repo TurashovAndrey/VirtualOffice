@@ -16,4 +16,6 @@
 <div id="box-styled-grey" style="width:70%">
 </div>
 
+<% if current_user.set_chat == true %>
   <%= raw(Helper.get_chat_script(current_user)) %>
+<% end %>

@@ -7,13 +7,18 @@
              <% @projects.each do |project| %>
                  <div>
                    <% if project == @stage.project %>
-                     <p><b><%= link_to project.project_name, project_path(project) %></b></p>
+                     <p><b><%= link_to project.project_name, project_path(project) %></b>
+                           <%= link_to image_tag("/system/icons/Edit.png", :height => 16, :width => 16), edit_stage_path(@stage) %>
+                           <%= link_to image_tag("/system/icons/Delete.png", :height => 16, :width => 16), stage_path(@stage), :confirm => 'Вы уверены?', :method => :delete %></p>
                    <% else %>
                      <p><%= link_to project.project_name, project_path(project) %></p>
                    <% end %>
                    <% project.stages.each do |stage| %>
                      <div id="stage-link">
-                        <p><%= link_to stage.stage_name, stage_path(stage) %></p>
+                        <p><%= link_to stage.stage_name, stage_path(stage) %>
+                           <%= link_to image_tag("/system/icons/Edit.png", :height => 16, :width => 16), edit_stage_path(stage) %>
+                           <%= link_to image_tag("/system/icons/Delete.png", :height => 16, :width => 16), stage_path(stage), :confirm => 'Вы уверены?', :method => :delete %>
+                        </p>
                      </div>
                    <% end %>
                  </div>
@@ -30,6 +35,26 @@
           <%= f.input :project_id, :as => :hidden %>
        <% end %>
 
+      <div id="box-styled-grey" style="border:0; width:95%" >
+       <div id="box-styled-grey" style="width:35%;margin-left:30px;">
+         <h1>Группы</h1>
+         <br/>
+           <div style="padding-left:7px">
+              <%= check_box_tag 'group_ids[]', 0, false %>
+              <%= label_tag "Все" %>
+           </div>
+           <br/>
+         <% current_user.company.groups.each do |group| %>
+             <div style="padding-left:7px">
+                <%= check_box_tag 'group_ids[]', group.id, false %>
+                <%= label_tag group.group_name %>
+             </div>
+             <br/>
+         <% end %>
+       </div>
+      </div>
+
+
        <%= f.buttons do %>
          <%= f.commit_button "Сохранить", :button_html => { :class => 'button-styled grey'}, :align=>"right" %>
        <% end %>
@@ -38,4 +63,6 @@
   </div>
 <% end %>
 
-<%= raw(Helper.get_chat_script(current_user)) %>
+<% if current_user.set_chat == true %>
+  <%= raw(Helper.get_chat_script(current_user)) %>
+<% end %>

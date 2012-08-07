@@ -1,40 +1,40 @@
-<br/>
-<%= raw(Helper.get_chat_script(current_user)) %>
-<div class="note_message">
-    Зайдите в данное окно и оставайтесь в нем некоторое время (до 1мин.). Автоматически Вы увидите себя, а также сотрудников фирмы, участвующих в конференции (сотрудники, зашедшие в это окно)
+<div id="box-styled-grey">
+      <% if !@my_rooms.empty? %>
+       <div id="box-styled-lightgrey" style="width:95%">
+         <% @my_rooms.each do |room| %>
+            <p>
+               <%= link_to image_tag("/system/icons/Conference.png", :width=>"16px", :height=>"16px"), room_path(room) %>
+               <%= link_to room.name, room_path(room)%>
+               <%= link_to image_tag("/system/icons/Delete.png", :height => 16, :width => 16), room_path(room), :confirm => 'Вы уверены?', :method => :delete %>
+            </p>
+         <% end %>
+       </div>
+      <% end %>
+
+     <% if !@rooms_with_me.empty? %>
+      <div id="box-styled-lightgrey" style="width:95%">
+       <% @rooms_with_me.each do |room| %>
+          <p>
+             <%= link_to image_tag("/system/icons/ConferenceOrange.png", :width=>"16px", :height=>"16px"), room_path(room) %>
+             <%= link_to room.name, room_path(room)%>
+             <%= link_to image_tag("/system/icons/Delete.png", :height => 16, :width => 16), room_path(room), :confirm => 'Вы уверены?', :method => :delete %>
+          </p>
+       <% end %>
+      </div>
+    <% end %>
+
+  <div id="box-styled-lightgrey" style="width:95%">
+     <h1>Сотрудники</h1>
+     <div id="room_list">
+        <%= render :partial => "room_list" %>
+     </div>
+  </div>
 </div>
-<div id="videobox">
 
+<div id="box-styled-grey" style="width:70%">
+   <h1> Чат </h1>
+   <div id="exampledivchat">
+     <%= raw(Helper.get_chat_script_div(current_user)) %>
+   </div>
 </div>
-<script src="http://static.opentok.com/v0.91/js/TB.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-	var apiKey = '11739502';
-	var sessionId = "<%= @room.session_id %>";
-	var token = "<%= @tok_token %>";
 
-    /*var apiKey = '11739502';
-    var sessionId = '1_MX4xMjMyMDgxfjcwLjQyLjQ3Ljc4fjIwMTItMDItMDggMDc6MDI6MTQuNjYxMjI5KzAwOjAwfjAuMDEwNjcwMTQzMTE1Nn4';
-    var token = 'devtoken';
-
-    TB.setLogLevel(TB.DEBUG); // Set this for helpful debugging messages in console
-
-    var session = TB.initSession(sessionId);
-    session.addEventListener('sessionConnected', sessionConnectedHandler);
-    session.connect(apiKey, token);
-
-    function sessionConnectedHandler(event) {
-      alert('Hello world. I am connected to OpenTok :).');
-    } */
-
-	var session;
-
-	TB.addEventListener('exception', exceptionHandler);
-	session = TB.initSession(sessionId);
-
-	//Video chat event listeners
-	session.addEventListener('sessionConnected', sessionConnectedHandler);
-	session.addEventListener('streamCreated', streamCreatedHandler);
-    session.addEventListener('streamDestroyed', streamDestroyedHandler);
-
-	session.connect(apiKey, token);
-</script>

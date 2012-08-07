@@ -3,42 +3,25 @@ class TasksController < ApplicationController
   def edit
     @task = Task.find(params[:id])
     @comment = Comment.new
+    @change_project_name = false
     @comment.user = current_user
     @task_attachment = TaskAttachment.new
-    @projects = current_user.projects
+    @projects = ProjectsHelper.get_projects(current_user)
   end
 
   def index
     @tasks = Task.where(:user_id => current_user).where(:done => 0)
     @task = Task.new
 
-    @projects = Project.where(:company_id => current_user.company)
+    @projects = ProjectsHelper.get_projects(current_user)
+    @change_project_name = false
   end
 
   def create
     @task = Task.new
     @task.user = current_user
     @task.company = current_user.company
-
-    @permissions = []
-
-    #Добавить парсилку по группам
-    if !params[:task][:group_id].empty?
-      @groups = params[:task][:group_id]
-      @groups.each do |new_group|
-        @new_permission = Permission.new
-        @new_permission.task_id = @task
-        @new_permission.company = current_user.company
-        @new_permission.group = Group.find(new_group)
-        @new_permission.save
-      end
-    end
-
-    @permission = Permission.new
-    @permission.description = "New task has been created"
-    @permission.task = @task
-    @permission.user = current_user
-    @permission.company = current_user.company
+    @task.done = 0
 
     if (!params[:task].nil? && params[:task][:project_id]!="")
       @task.project = Project.find(params[:task][:project_id])
@@ -48,17 +31,16 @@ class TasksController < ApplicationController
         redirect_to stage_path(@task.stage)
       else
         @task.update_attributes(params[:task])
-        @permission.save
         redirect_to project_path(@task.project)
       end
     else
       @task.update_attributes(params[:task])
-      @permission.save
       redirect_to projects_path
     end
   end
 
   def new
+    @change_project_name = false
     @task = Task.new
     if (!params[:project_id].nil?)
       @project = Project.find(params[:project_id])
@@ -74,13 +56,14 @@ class TasksController < ApplicationController
     @comment = Comment.new
     @comment.user = current_user
     @task_attachment = TaskAttachment.new
-    @projects = current_user.projects
+    @projects = ProjectsHelper.get_projects(current_user)
   end
 
   def show
     @task = Task.find(params[:id])
+    @change_project_name = false
 
-    @projects = current_user.projects
+    @projects = ProjectsHelper.get_projects(current_user)
     @stage = @task.stage
     @project = @task.project
 
@@ -133,8 +116,4 @@ class TasksController < ApplicationController
   end
 
   protected
-  def load_task
-    @task = Task.new
-  end
-
 end

@@ -1,0 +1,72 @@
+<%= semantic_form_for(@stage, :remote=>false, :html => { :multipart => true}) do |f| %>
+    <div id="box-styled-grey">
+        <div id="box-styled-lightgrey" style="width:95%">
+          <h1>Проекты</h1>
+          <p><%= link_to 'Все проекты', projects_path %></p>
+          <% if !@projects.nil? %>
+             <% @projects.each do |project| %>
+                 <div>
+                   <% if project == @stage.project %>
+                     <p><b><%= link_to project.project_name, project_path(project) %></b></p>
+                   <% else %>
+                     <p><%= link_to project.project_name, project_path(project) %></p>
+                   <% end %>
+                   <% project.stages.each do |stage| %>
+                     <div id="stage-link">
+                        <p><%= link_to stage.stage_name, stage_path(@stage) %>
+                           <%= link_to image_tag("/system/icons/Edit.png", :height => 16, :width => 16), edit_stage_path(@stage) %>
+                           <%= link_to image_tag("/system/icons/Delete.png", :height => 16, :width => 16), stage_path(@stage), :confirm => 'Вы уверены?', :method => :delete %></p>
+                     </div>
+                   <% end %>
+                 </div>
+             <% end %>
+          <% end %>
+        </div>
+    </div>
+
+  <div id="box-styled-grey" style="width:70%">
+
+    <div id="box-styled-lightgrey" style="width:95%" >
+       <%= f.inputs do %>
+          <%= f.input :stage_name, :as => :text, :label => "Описание", :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 50  }%>
+          <%= f.input :project_id, :as => :hidden %>
+       <% end %>
+
+      <div id="box-styled-grey" style="border:0; width:95%" >
+       <div id="box-styled-grey" style="width:35%;margin-left:30px;">
+         <h1>Группы</h1>
+         <br/>
+           <div style="padding-left:7px">
+              <% if (@permissions.first.group_id.nil?) && (@permissions.first.user_id.nil?) %>
+                <%= check_box_tag 'group_ids[]', 0, true %>
+              <% else %>
+                <%= check_box_tag 'group_ids[]', 0, false %>
+              <% end %>
+                  <%= label_tag "Все" %>
+               </div>
+           <br/>
+         <% current_user.company.groups.each do |group| %>
+             <div style="padding-left:7px">
+                <% if @permissions.where(:group_id => group.id).empty? %>
+                  <%= check_box_tag 'group_ids[]', group.id, false %>
+                <% else %>
+                  <%= check_box_tag 'group_ids[]', group.id, true %>
+                <% end %>
+                <%= label_tag group.group_name %>
+             </div>
+             <br/>
+         <% end %>
+       </div>
+      </div>
+
+       <%= f.buttons do %>
+         <%= f.commit_button "Сохранить", :button_html => { :class => 'button-styled grey'}, :align=>"right" %>
+       <% end %>
+       <br/>
+    </div>
+  </div>
+<% end %>
+
+<% if current_user.set_chat == true %>
+  <%= raw(Helper.get_chat_script(current_user)) %>
+<% end %>

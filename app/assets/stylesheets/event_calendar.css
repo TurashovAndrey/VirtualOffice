@@ -38,11 +38,14 @@
 }
 
 .ec-month-nav {
+  text-align: left;
+  font-size: 14px;
 }
 
 .ec-next-month
 {
- text-align: right;
+  text-align: right;
+  font-size: 14px;
 }
 
 /* Containers */

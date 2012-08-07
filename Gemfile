@@ -22,11 +22,9 @@ gem 'opentok'
 
 gem 'magic_encoding'
 
-gem 'netzke-core'#, :git => "git://github.com/skozlov/netzke-core.git"
-gem 'netzke-basepack'#, :git => "git://github.com/skozlov/netzke-basepack.git"
-
 #gem 'thin'
 gem 'paperclip', "~> 2.4.5"
+gem 'best_in_place'
 
 gem 'ruby-hmac'
 

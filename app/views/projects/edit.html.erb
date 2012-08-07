@@ -1,0 +1,49 @@
+<%= semantic_form_for(@project, :remote=>false, :html => { :multipart => true}) do |f| %>
+    <div id="box-styled-grey">
+      <div id="project_list">
+        <%= render :partial => "project_list" %>
+      </div>
+    </div>
+
+    <div id="box-styled-grey" style="width:70%" >
+       <%= f.inputs do %>
+          <%= f.input :project_name, :as => :text, :label => "Описание", :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 50  }%>
+       <% end %>
+
+      <div id="box-styled-lightgrey" style="border:0; width:95%" >
+         <h1>Группы</h1>
+         <br/>
+           <div style="padding-left:7px">
+              <% if (@permissions.first.group_id.nil?) && (@permissions.first.user_id.nil?) %>
+                <%= check_box_tag 'group_ids[]', 0, true %>
+              <% else %>
+                <%= check_box_tag 'group_ids[]', 0, false %>
+              <% end %>
+                  <%= label_tag "Все" %>
+               </div>
+           <br/>
+         <% current_user.company.groups.each do |group| %>
+             <div style="padding-left:7px">
+                <% if @permissions.where(:group_id => group.id).empty? %>
+                  <%= check_box_tag 'group_ids[]', group.id, false %>
+                <% else %>
+                  <%= check_box_tag 'group_ids[]', group.id, true %>
+                <% end %>
+                <%= label_tag group.group_name %>
+             </div>
+             <br/>
+         <% end %>
+      </div>
+
+       <%= f.buttons do %>
+         <br/>
+         <%= f.commit_button "Сохранить", :button_html => { :class => 'button-styled grey'}, :align=>"right" %>
+         <br/>
+       <% end %>
+       <br/>
+    </div>
+<% end %>
+
+<% if current_user.set_chat == true %>
+  <%= raw(Helper.get_chat_script(current_user)) %>
+<% end %>

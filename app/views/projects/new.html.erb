@@ -6,7 +6,9 @@
           <% if !@projects.nil? %>
              <% @projects.each do |project| %>
                  <div>
-                   <p><%= link_to project.project_name, project_path(project) %></p>
+                   <p><%= link_to project.project_name, project_path(project) %>
+                      <%= link_to image_tag("/system/icons/Edit.png", :height => 16, :width => 16), edit_project_path(project) %>
+                      <%= link_to image_tag("/system/icons/Delete.png", :height => 16, :width => 16), project_path(project), :confirm => 'Вы уверены?', :method => :delete %></p>
                    <% project.stages.each do |stage| %>
                      <div id="stage-link">
                         <p><%= link_to stage.stage_name, stage_path(stage) %></p>
@@ -19,18 +21,34 @@
     </div>
 
   <div id="box-styled-grey" style="width:70%">
-
-    <div id="box-styled-lightgrey" style="width:95%" >
        <%= f.inputs do %>
-          <%= f.input :project_name, :as => :text, :label => "Описание", :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 50  }%>
+          <%= f.input :project_name, :as => :text, :label => "Описание", :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 100  }%>
        <% end %>
+
+      <div id="box-styled-lightgrey" style="border:0; width:95%" >
+         <h1>Группы</h1>
+         <br/>
+           <div style="padding-left:7px">
+              <%= check_box_tag 'group_ids[]', 0, false %>
+              <%= label_tag "Все" %>
+           </div>
+           <br/>
+         <% current_user.company.groups.each do |group| %>
+             <div style="padding-left:7px">
+                <%= check_box_tag 'group_ids[]', group.id, false %>
+                <%= label_tag group.group_name %>
+             </div>
+             <br/>
+         <% end %>
+      </div>
 
        <%= f.buttons do %>
          <%= f.commit_button "Сохранить", :button_html => { :class => 'button-styled grey'}, :align=>"right" %>
        <% end %>
        <br/>
-    </div>
   </div>
 <% end %>
 
-<%= raw(Helper.get_chat_script(current_user)) %>
+<% if current_user.set_chat == true %>
+  <%= raw(Helper.get_chat_script(current_user)) %>
+<% end %>

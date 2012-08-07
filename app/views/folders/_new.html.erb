@@ -1,0 +1,28 @@
+<div id="box-styled-grey" style="width:95%" >
+ <h1>Новая папка</h1>
+ <%= semantic_form_for(@folder) do |f| %>
+     <%= f.inputs do %>
+        <%= f.input :folder_name, :label=>"Название", :as => :text, :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 100  }, :required => true %>
+     <% end %>
+         <div id="box-styled-lightgrey" style="border:0; width:95%" >
+            <h1>Группы</h1>
+            <br/>
+              <div style="padding-left:7px">
+                 <%= check_box_tag 'group_ids[]', 0, false %>
+                 <%= label_tag "Все" %>
+              </div>
+              <br/>
+            <% current_user.company.groups.each do |group| %>
+                <div style="padding-left:7px">
+                   <%= check_box_tag 'group_ids[]', group.id, false %>
+                   <%= label_tag group.group_name %>
+                </div>
+                <br/>
+            <% end %>
+         </div>
+        <div style="width:100%; text-align:center">
+          <%= button_to 'Сохранить', @folder, :method => :create, :class => 'button-styled grey' %>
+        </div>
+        <br/>
+  <% end %>
+</div>

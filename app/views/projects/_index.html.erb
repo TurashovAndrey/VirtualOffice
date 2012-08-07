@@ -1,0 +1,40 @@
+<% if !@projects.empty? %>
+     <% @projects.each do |project| %>
+        <% if !project.tasks.empty? %>
+          <h1><%= project.project_name %></h1>
+          <% project.tasks.each do |task| %>
+            <div id="box-styled-lightgrey" style="width:98%">
+              <p><b><%= link_to task.title, task_path(task)%>
+              <%= link_to image_tag("/system/icons/Edit.png", :height => 16, :width => 16), edit_task_path(task) %>
+              <%= link_to image_tag("/system/icons/Delete.png", :height => 16, :width => 16), task_path(task), :confirm => 'Вы уверены?', :method => :delete %></b></p>
+              <div id="box-styled-lightgrey-comment">
+                <p><%= task.notes %></p>
+                <br/>
+              </div>
+              <p><%= task.due %></p>
+              <p><%= image_tag task.user.avatar.url, :height => "30px", :width => "30px" %> <%=task.user.email%> <%= task.created_at %></p>
+              <!-- <%= link_to "Подробнее", task_path(task) %> -->
+            </div>
+          <% end %>
+        <% end %>
+     <% end %>
+  <% end %>
+
+     <% if !@tasks.empty? %>
+        <h1>Задачи</h1>
+        <% @tasks.each do |task| %>
+          <div id="box-styled-lightgrey" style="width:98%">
+            <p><b><%=link_to task.title, task_path(task) %>
+            <%= link_to image_tag("/system/icons/Edit.png", :height => 16, :width => 16), edit_task_path(task) %>
+            <%= link_to image_tag("/system/icons/Delete.png", :height => 16, :width => 16), task_path(task), :confirm => 'Вы уверены?', :method => :delete %></b></p>
+            <div id="box-styled-lightgrey-comment">
+              <p><%= task.notes %></p>
+              <br/>
+            </div>
+            <p> До <%= task.due %></p>
+            <p> <%= image_tag task.user.avatar.url, :height => "30px", :width => "30px" %> <%=task.user.email%> <%= task.created_at %></p>
+           <!--  <%= link_to "Подробнее", task_path(task) %> -->
+          </div>
+        <% end %>
+     <% end %>
+   </div>

@@ -22,7 +22,7 @@
           <br/>
           <%= if !@event.id.nil? and @event.user == current_user
              button_to 'Удалить', event_path(@event), :confirm => 'Вы уверены?', :method => :delete, :class => 'button-styled blue', :width=>50
-          end%>
+          end %>
       <% end %>
      <% end %>
     </div>
@@ -58,4 +58,6 @@
   <%= raw(event_calendar) %>
 </div>
 
-<%= raw(Helper.get_chat_script(current_user)) %>
+<% if current_user.set_chat == true %>
+  <%= raw(Helper.get_chat_script(current_user)) %>
+<% end %>

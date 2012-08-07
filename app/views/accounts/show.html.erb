@@ -1,41 +1,129 @@
 # coding: utf-8
+<script>
+    $(document).ready(function(){
+        $(".inline_task").colorbox({inline:true, width:"40%"});
+    });
+    $(document).ready(function(){
+        $(".inline_discussion").colorbox({inline:true, width:"40%"});
+    });
+    $(document).ready(function(){
+        $(".inline_event").colorbox({inline:true, width:"40%"});
+    });
+    $(document).ready(function(){
+        $(".inline_attachment").colorbox({inline:true, width:"40%"});
+    });
+</script>
+
 
 <div id="box-styled-grey">
-  <%= semantic_form_for(@user, :url => account_path(@user), :html => { :multipart => true }) do |f| %>
-        <%= image_tag @user.avatar.url, :width => 200, :height => 200 %>
-        <%= f.inputs do %>
-            <%= f.file_field :avatar, :accept => "image/*" %>
-            <%= f.input :email, :as => :string, :input_html => { :readonly => true }, :label => "E-mail" %>
-            <%= f.input :first_name, :as => :string, :label => "Имя" %>
-            <%= f.input :last_name, :as => :string, :label => "Фамилия" %>
-            <%= f.input :telephone, :as => :string, :label => "Телефон" %>
-            <%= f.input :address, :as => :string, :label => "Адрес" %>
-        <% end %>
+  <%= semantic_form_for(@user, :remote => true, :url => account_path(@user), :html => { :multipart => true }) do |f| %>
+     <%= image_tag @user.avatar.url, :width => 200, :height => 200 %>
+     <%= f.inputs do %>
+        <%= f.file_field :avatar, :accept => "image/*" %>
+        <br/>
+        <%= label_tag :set_chat, "Показать чат" %>
+        <%= check_box_tag :set_chat, params[:set_chat], current_user.set_chat %>
+        <%= f.input :email, :as => :string, :input_html => { :readonly => true }, :label => "E-mail" %>
+        <%= f.input :first_name, :as => :string, :label => "Имя" %>
+        <%= f.input :last_name, :as => :string, :label => "Фамилия" %>
+        <%= f.input :telephone, :as => :string, :label => "Телефон" %>
+        <%= f.input :address, :as => :string, :label => "Адрес" %>
+     <% end %>
 
-        <%= f.inputs do %>
-            <%= if current_user.email!="test@test.com"
-                label_tag :change_password, "Изменить пароль"
-            end %>
-            <%= if current_user.email!="test@test.com"
-                check_box_tag :change_password, 1, params[:change_password]
-            end %>
-
-            <%= if current_user.email!="test@test.com"
-                f.input :new_password, :as => :password, :label => "Пароль"
-            end %>
-            <%= if current_user.email!="test@test.com"
-                f.input :new_password_confirmation, :as => :password, :label => "Подтверждение"
-            end %>
+     <%= f.inputs do %>
+        <% if current_user.email!="test@test.com" %>
+           <%= label_tag :change_password, "Новый пароль" %>
+           <%= check_box_tag :change_password, 1, params[:change_password] %>
+           <%= f.input :new_password, :as => :password, :label => "Пароль" %>
+           <%= f.input :new_password_confirmation, :as => :password, :label => "Подтверждение" %>
         <% end %>
-        <%= f.buttons do %>
-           <%= f.commit_button "Сохранить", :button_html => { :class => 'button-styled grey'}%>
-           <br/>
-        <% end %>
-        <%= raw(Helper.get_chat_script(current_user)) %>
+     <% end %>
+     <%= f.buttons do %>
+        <%= f.commit_button "Сохранить", :button_html => { :class => 'button-styled grey'}%>
+     <% end %>
   <% end %>
 </div>
 
 <div id="box-styled-grey" style="width:70%">
+  <div id="box-styled-grey-attachment-large">
+     <a class='inline_task' href="#task_content"><%= image_tag("/system/icons/NewTask.png")%></a><br/>
+     <a class='inline_task' href="#task_content">Новая задача</a>
+  </div>
+
+  <div style='display:none'>
+    <div id='task_content' style='padding:10px'>
+       <%= render :partial => new_task_path %>
+    </div>
+  </div>
+
+  <div id="box-styled-grey-attachment-large">
+     <%= link_to image_tag("/system/icons/Tasks.png"), projects_path %><br/>
+     <%= link_to 'Задачи', projects_path %>
+  </div>
+
+  <div id="box-styled-grey-attachment-large">
+     <a class='inline_discussion' href="#discussion_content"><%= image_tag("/system/icons/NewDiscussion.png")%></a><br/>
+     <a class='inline_discussion' href="#discussion_content">Новое обсуждение</a>
+  </div>
+
+  <div style='display:none'>
+     <div id='discussion_content' style='padding:10px'>
+        <%= render :partial => new_discussion_path %>
+     </div>
+  </div>
+
+  <div id="box-styled-grey-attachment-large">
+     <%= link_to image_tag("/system/icons/Themes.png"), themes_path %><br/>
+     <%= link_to 'Обсуждения', themes_path %>
+  </div>
+
+  <div id="box-styled-grey-attachment-large">
+     <%= link_to image_tag("/system/icons/news.png"), company_workers_path %><br/>
+     <%= link_to 'Сотрудники', company_workers_path %>
+  </div>
+
+  <div id="box-styled-grey-attachment-large">
+     <a class='inline_event' href="#event_content"><%= image_tag("/system/icons/NewEvent.png")%></a><br/>
+     <a class='inline_event' href="#event_content">Новое событие</a>
+  </div>
+
+  <div style='display:none'>
+     <div id='event_content' style='padding:10px'>
+        <%= render :partial => new_event_path %>
+     </div>
+  </div>
+
+  <div id="box-styled-grey-attachment-large">
+     <%= link_to image_tag("/system/icons/Calendars.png"), calendars_path %><br/>
+     <%= link_to 'Календари', calendars_path %>
+  </div>
+
+  <div id="box-styled-grey-attachment-large">
+    <a class='inline_attachment' href="#attachment_content"><%= image_tag("/system/icons/NewAttachment.png")%></a><br/>
+    <a class='inline_attachment' href="#attachment_content">Новый файл</a>
+  </div>
+
+  <div id="box-styled-grey-attachment-large">
+     <%= link_to image_tag("/system/icons/Attachments.png"), folders_path %><br/>
+     <%= link_to 'Файлы', folders_path %>
+  </div>
+
+  <div style='display:none'>
+      <div id='attachment_content' style='padding:10px'>
+         <%= render :partial => new_attachment_path %>
+      </div>
+  </div>
+
+
+  <div id="box-styled-grey-attachment-large">
+     <%= link_to image_tag("/system/icons/Chat.png"), rooms_path %><br/>
+     <%= link_to 'Конференции', rooms_path %>
+  </div>
+
 </div>
+
+<% if current_user.set_chat == true %>
+  <%= raw(Helper.get_chat_script(current_user)) %>
+<% end %>
 
 

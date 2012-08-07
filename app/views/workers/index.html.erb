@@ -1,79 +1,203 @@
+# coding: utf-8
+<script>
+    $(document).ready(function(){
+        $(".inline_group").colorbox({inline:true, width:"40%"});
+    });
+
+    $(document).ready(function(){
+        $(".inline_worker").colorbox({inline:true, width:"40%"});
+    });
+</script>
+
 <div id="box-styled-grey">
-    <div id="box-styled-lightgrey" style="width:95%">
-      <p><%= link_to "Новый сотрудник", new_company_worker_path %></p>
-      <p><%= link_to "Новая группа", new_group_path %></p>
-    </div>
-      <div id="box-styled-lightgrey" style="width:95%">
-        <h1>Сотрудники</h1>
-        <div>
-        <% if !@groups.nil? %>
+   <div id="box-styled-lightgrey" style="width:95%">
+      <p><a class='inline_worker' href="#worker_content">Новый сотрудник</a></p>
+      <p><a class='inline_group' href="#group_content">Новая группа</a></p>
+
+      <div style='display:none'>
+         <div id='group_content' style='padding:10px'>
+            <%= render :partial => new_group_path %>
+         </div>
+      </div>
+
+      <div style='display:none'>
+         <div id='worker_content' style='padding:10px'>
+            <%= render :partial => 'new' %>
+         </div>
+      </div>
+   </div>
+
+   <div id="box-styled-lightgrey" style="width:95%">
+     <div id="inputs">
+       <ol>
+         <li>
+            <h3>
+              <%= link_to image_tag("/system/icons/ArrowLeft.png", :width=>"16px", :height=>"16px"), company_workers_path(:current_date=>@current_date-1.day)%>
+              &nbsp;<%= @current_date %>
+              <%= link_to image_tag("/system/icons/ArrowRight.png", :width=>"16px", :height=>"16px"), company_workers_path(:current_date=>@current_date+1.day)%>
+            </h3>
+         </li>
+       </ol>
+     </div>
+   </div>
+
+   <div id="box-styled-lightgrey" style="width:95%">
+      <h1>Сотрудники</h1>
+      <div id="workers">
+         <% if !@groups.nil? %>
            <% @groups.each do |group| %>
-                 <p><%= link_to group.group_name, group_path(group) %></p>
+              <p><%= link_to image_tag("/system/icons/Group.png", :width=>"16px", :height=>"16px"), group_path(group, :current_date=>@current_date) %>
+                 <%= link_to group.group_name, group_path(group, :current_date=>@current_date), :remote => true %>
+              </p>
 
-                  <% if !group.users.empty? %>
-                     <% group.users.each do |user| %>
-                            <div style="padding-left:10px">
-                              <p><%= link_to user.email, company_worker_path(user) %></p>
-                            </div>
-                     <% end %>
-                  <% end %>
+              <% if !group.users.empty? %>
+                 <% group.users.each do |user| %>
+                    <div style="padding-left:10px">
+                       <p><%= link_to image_tag(user.avatar.url, :width=>"16px", :height=>"16px"), company_worker_path(user, :current_date=>@current_date) %>
+                          <%= link_to user.name, company_worker_path(user, :current_date=>@current_date), :remote => true %></p>
+                    </div>
+                 <% end %>
+              <% end %>
 
-                <% if !Group.where(:parent_id => group.id).empty? %>
-                   <% Group.where(:parent_id => group.id).each do |child_group_first| %>
-                          <div style="padding-left:10px">
-                            <p><%= link_to child_group_first.group_name, group_path(child_group_first) %></p>
-                          </div>
+              <% if !Group.where(:parent_id => group.id).empty? %>
+                 <% Group.where(:parent_id => group.id).each do |child_group_first| %>
+                    <div style="padding-left:10px">
+                       <p>
+                          <%= link_to image_tag("/system/icons/Group.png", :width=>"16px", :height=>"16px"), group_path(child_group_first, :current_date=>@current_date) %>
+                          <%= link_to child_group_first.group_name, group_path(child_group_first, :current_date=>@current_date), :remote => true  %>
+                       </p>
+                    </div>
 
-                          <% if !child_group_first.users.empty? %>
-                              <% child_group_first.users.each do |user| %>
-                                 <div style="padding-left:20px">
-                                     <p><%= link_to user.email, company_worker_path(user) %></p>
-                              </div>
-                          <% end %>
-                  <% end %>
+                    <% if !child_group_first.users.empty? %>
+                      <% child_group_first.users.each do |user| %>
+                        <div style="padding-left:20px">
+                           <p>
+                              <%= link_to image_tag(user.avatar.url, :width=>"16px", :height=>"16px"), company_worker_path(user, :current_date=>@current_date) %>
+                              <%= link_to user.email, company_worker_path(user, :current_date=>@current_date), :remote => true  %>
+                           </p>
+                        </div>
+                      <% end %>
+                    <% end %>
 
-                        <% if !Group.where(:parent_id => child_group_first.id).empty? %>
-                           <% Group.where(:parent_id => child_group_first.id).each do |child_group_second| %>
-                                <div style="padding-left:20px">
-                                  <p><%= link_to child_group_second.group_name, group_path(child_group_second) %></p>
-                                </div>
+                    <% if !Group.where(:parent_id => child_group_first.id).empty? %>
+                      <% Group.where(:parent_id => child_group_first.id).each do |child_group_second| %>
+                        <div style="padding-left:20px">
+                           <p><%= link_to image_tag("/system/icons/Group.png", :width=>"16px", :height=>"16px"), group_path(child_group_second, :current_date=>@current_date) %>
+                              <%= link_to child_group_second.group_name, group_path(child_group_second, :current_date=>@current_date), :remote => true  %></p>
+                        </div>
 
-                                <% if !child_group_second.users.empty? %>
-                                      <% child_group_second.users.each do |user| %>
-                                         <div style="padding-left:30px">
-                                             <p><%= link_to user.email, company_worker_path(user) %></p>
-                                      </div>
-                                <% end %>
-
-                                <div>
-                                <% if !Group.where(:parent_id => child_group_second.id).empty? %>
-                                   <% Group.where(:parent_id => child_group_second.id).each do |child_group_third| %>
-                                        <div style="padding-left:30px">
-                                          <p><%= link_to child_group_third.group_name, group_path(child_group_third) %></p>
-                                        </div>
-
-                                        <% if !child_group_second.users.empty? %>
-                                          <% child_group_second.users.each do |user| %>
-                                            <div style="padding-left:40px">
-                                              <p><%= link_to user.email, company_worker_path(user) %></p>
-                                            </div>
-                                          <% end %>
-                                        <% end %>
-                                <% end %>
-                                   <% end %>
-                                <% end %>
-                                </div>
+                        <% if !child_group_second.users.empty? %>
+                           <% child_group_second.users.each do |user| %>
+                             <div style="padding-left:30px">
+                                <p>
+                                   <%= link_to image_tag(user.avatar.url, :width=>"16px", :height=>"16px"), company_worker_path(user, :current_date=>@current_date) %>
+                                   <%= link_to user.email, company_worker_path(user, :current_date=>@current_date), :remote => true  %></p>
+                                </p>
+                             </div>
                            <% end %>
                         <% end %>
-                   <% end %>
-                <% end %>
+                      <% end %>
+                    <% end %>
+                 <% end %>
+              <% end %>
            <% end %>
-
-        <% end %>
-        </div>
+         <% end %>
+         </div>
       </div>
-</div>
 
+        <div id="user_info">
 
+        </div>
+   </div>
 
-<%= raw(Helper.get_chat_script(current_user)) %>
+   <div id="box-styled-grey" style="width:70%">
+     <div id="post_form">
+       <div id="box-styled-lightgrey" style="width:95%" >
+          <h1>Задачи</h1>
+          <% if !@tasks.empty? %>
+             <h3>Созданные</h3>
+             <% @tasks.each do |task| %>
+                <div id="box-styled-grey" style="width:95%">
+                   <h3>Название: <%= task.title %> (<%= link_to 'link', task_path(task) %>)</h3>
+                   <p><%= image_tag User.find(task.user_id).avatar.url, :width => "20px", :height => "20px", :align=>'bottom' %>
+                      <%= task.user.name %> <i><%= Helper.distance_of_time_in_words(task.created_at,DateTime.now.utc) %></i></p>
+                 </div>
+             <% end %>
+             <% if !params[:task_number].nil? %>
+                <%= link_to 'Свернуть', group_path(@default_group, :task_number => 2), :remote => true %>
+             <% else %>
+                <%= link_to 'Подробнее', group_path(@default_group, :task_number => 0), :remote => true %>
+             <% end %>
+          <% end %>
+
+         <% if !@closed_tasks.empty? %>
+            <h3>Закрытые</h3>
+            <% @closed_tasks.each do |task| %>
+               <div id="box-styled-grey" style="width:95%">
+                  <h3>Название: <%= task.title %> (<%= link_to 'link', task_path(task) %>)</h3>
+                  <p><%= image_tag User.find(task.user_id).avatar.url, :width => "20px", :height => "20px", :align=>'bottom' %>
+                     <%= task.user.name %> <i><%= Helper.distance_of_time_in_words(task.created_at,DateTime.now.utc) %></i></p>
+                </div>
+            <% end %>
+            <% if !params[:task_number].nil? %>
+               <%= link_to 'Свернуть', group_path(@default_group, :task_number => 2), :remote => true %>
+            <% else %>
+               <%= link_to 'Подробнее', group_path(@default_group, :task_number => 0), :remote => true %>
+            <% end %>
+         <% end %>
+       </div>
+
+       <div id="box-styled-lightgrey" style="width:95%" >
+          <h1>События</h1>
+          <% if !@events.empty? %>
+            <% @events.each do |event| %>
+                 <div id="box-styled-grey" style="width:95%">
+                   <h3>Название: <%= event.name %> (<%= link_to 'link', calendar_path(event.calendar_id) %>)</h3>
+                   <p><%= image_tag User.find(event.user_id).avatar.url, :width => "20px", :height => "20px", :align=>'bottom' %>
+                   <%= event.user.name %> <i><%= Helper.distance_of_time_in_words(event.created_at,DateTime.now.utc) %></i></p>
+                 </div>
+            <% end %>
+            <% if !params[:event_number].nil? %>
+               <%= link_to 'Свернуть', group_path(@default_group, :event_number => 2), :remote => true %>
+            <% else %>
+               <%= link_to 'Подробнее', group_path(@default_group, :event_number => 0), :remote => true %>
+            <% end %>
+          <% end %>
+       </div>
+
+       <div id="box-styled-lightgrey" style="width:95%" >
+       <h1>Файлы</h1>
+         <% @attachments.each do |attachment| %>
+             <div id="box-styled-grey-attachment">
+               <%= image_tag AttachmentHelper.get_icon_path(attachment.attach) %> <br/>
+               <%= link_to attachment.attach_file_name, attachment.attach.url(:original, false) %>
+               <p id="time_field"><%= Helper.distance_of_time_in_words(DateTime.now.utc,attachment.created_at) %></p>
+             </div>
+         <% end %>
+       </div>
+
+       <div id="box-styled-lightgrey" style="width:95%" >
+          <h1>Дискуссии</h1>
+          <% if !@discussions.empty? %>
+            <% @discussions.each do |discussion| %>
+                 <div id="box-styled-grey" style="width:95%">
+                   <h3>Название: <%= discussion.discussion %> (<%= link_to 'link', discussion_path(discussion) %>)</h3>
+                   <p><%= image_tag User.find(discussion.user_id).avatar.url, :width => "20px", :height => "20px", :align=>'bottom' %>
+                   <%= discussion.user.name %> <i><%= Helper.distance_of_time_in_words(discussion.created_at,DateTime.now.utc) %></i></p>
+                 </div>
+            <% end %>
+            <% if !params[:discussion_number].nil? %>
+               <%= link_to 'Свернуть', group_path(@default_group, :discussion_number => 2), :remote => true %>
+            <% else %>
+               <%= link_to 'Подробнее', group_path(@default_group, :discussion_number => 0), :remote => true %>
+            <% end %>
+          <% end %>
+       </div>
+
+     </div>
+     </div>
+   </div>
+
+<% if current_user.set_chat == true %>
+  <%= raw(Helper.get_chat_script(current_user)) %>
+<% end %>

@@ -1,0 +1,70 @@
+<% if !@groups.nil? %>
+   <% @groups.each do |group| %>
+        <p>
+           <%= link_to image_tag("/system/icons/Group.png", :width=>"16px", :height=>"16px"), new_room_path(:group_id => group.id) %>
+           <%= link_to group.group_name, new_room_path(:group_id => group.id), :remote => true %>
+           <%= link_to image_tag("/system/icons/Plus.png", :height => 16, :width => 16), new_room_path(:group_id => group.id) %>
+        </p>
+
+
+        <% if !group.users.empty? %>
+           <% group.users.each do |user| %>
+              <div style="padding-left:10px">
+                 <p>
+                    <%= link_to image_tag(user.avatar.url, :width=>"16px", :height=>"16px"), new_room_path(:user_id => user) %>
+                    <%= link_to user.email, new_room_path(:user_id => user) %>
+                    <%= link_to image_tag("/system/icons/Plus.png", :height => 16, :width => 16), new_room_path(:user_id => user.id) %>
+                </p>
+              </div>
+           <% end %>
+        <% end %>
+
+        <% if !Group.where(:parent_id => group.id).empty? %>
+           <% Group.where(:parent_id => group.id).each do |child_group_first| %>
+              <div style="padding-left:10px">
+                 <p>
+                    <%= link_to image_tag("/system/icons/Group.png", :width=>"16px", :height=>"16px"), new_room_path(:group_id => child_group_first) %>
+                    <%= link_to child_group_first.group_name, new_room_path(:group_id => child_group_first) %>
+                    <%= link_to image_tag("/system/icons/Plus.png", :height => 16, :width => 16), new_room_path(:group_id => child_group_first) %>
+                 </p>
+              </div>
+
+              <% if !child_group_first.users.empty? %>
+                 <% child_group_first.users.each do |user| %>
+                   <div style="padding-left:20px">
+                      <p>
+                         <%= link_to image_tag(user.avatar.url, :width=>"16px", :height=>"16px"), new_room_path(:user_id => user) %>
+                         <%= link_to user.email, new_room_path(:user_id => user) %>
+                         <%= link_to image_tag("/system/icons/Plus.png", :height => 16, :width => 16), new_room_path(:user_id => user) %>
+                      </p>
+                   </div>
+                 <% end %>
+              <% end %>
+
+                <% if !Group.where(:parent_id => child_group_first.id).empty? %>
+                   <% Group.where(:parent_id => child_group_first.id).each do |child_group_second| %>
+                     <div style="padding-left:20px">
+                        <p>
+                           <%= link_to image_tag("/system/icons/Group.png", :width=>"16px", :height=>"16px"), new_room_path(:group_id => child_group_second) %>
+                           <%= link_to child_group_second.group_name, new_room_path(:group_id => child_group_second) %>
+                           <%= link_to image_tag("/system/icons/Plus.png", :height => 16, :width => 16), new_room_path(:group_id => child_group_second) %>
+                        </p>
+                     </div>
+
+                     <% if !child_group_second.users.empty? %>
+                        <% child_group_second.users.each do |user| %>
+                          <div style="padding-left:30px">
+                             <p>
+                                <%= link_to image_tag(user.avatar.url, :width=>"16px", :height=>"16px"), new_room_path(:user_id => user) %>
+                                <%= link_to user.email, new_room_path(:user_id => user) %>
+                                <%= link_to image_tag("/system/icons/Plus.png", :height => 16, :width => 16), new_room_path(:user_id => user) %>
+                             </p>
+                          </div>
+                        <% end %>
+                     <% end %>
+                   <% end %>
+                <% end %>
+           <% end %>
+        <% end %>
+   <% end %>
+<% end %>

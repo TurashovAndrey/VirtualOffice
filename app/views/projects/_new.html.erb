@@ -1,0 +1,30 @@
+<%= semantic_form_for(@project, :remote=>false, :html => { :multipart => true}) do |f| %>
+  <div id="box-styled-grey" style="width:95%;">
+  <h1> Новый проект </h1>
+
+  <%= f.inputs do %>
+     <%= f.input :project_name, :as => :text, :label => "Описание", :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 50  }%>
+  <% end %>
+
+  <div id="box-styled-lightgrey" style="width:95%;">
+    <h1>Группы</h1>
+      <br/>
+      <div style="padding-left:7px">
+         <%= check_box_tag 'group_ids[]', 0, false %>
+         <%= label_tag "Все" %>
+      </div>
+      <br/>
+      <% current_user.company.groups.each do |group| %>
+        <div style="padding-left:7px">
+           <%= check_box_tag 'group_ids[]', group.id, false %>
+           <%= label_tag group.group_name %>
+        </div>
+        <br/>
+      <% end %>
+  </div>
+
+  <div style="width:100%; text-align:center">
+     <%= button_to 'Сохранить', @project, :method => :update, :class => 'button-styled grey' %>
+  </div>
+<% end %>
+</div>

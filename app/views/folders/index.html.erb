@@ -1,50 +1,37 @@
+<script>
+    $(document).ready(function(){
+        $(".inline_folder").colorbox({inline:true, width:"40%"});
+    });
+    $(document).ready(function(){
+        $(".inline_attachment").colorbox({inline:true, width:"40%"});
+    });
+</script>
+
 <div id="box-styled-grey">
     <div id="box-styled-lightgrey" style="width:95%">
-      <p><%= link_to "Новая папка", new_folder_path %></p>
+      <p><a class='inline_folder' href="#folder_content">Новая папка</a></p>
+      <p><a class='inline_attachment' href="#attachment_content">Новый файл</a></p>
     </div>
 
-    <div id="box-styled-lightgrey" style="width:95%">
-      <h1><%= link_to "Папки компании", folders_path %></h1>
-      <% if !@folders.nil? %>
-         <% @folders.each do |folder| %>
-            <p><%= link_to folder.folder_name, folder_path(folder) %>
-               <%= link_to image_tag("/system/icons/Edit.gif"), edit_folder_path(folder) %>
-               <%= link_to image_tag("/system/icons/Delete.gif"), folder_path(folder), :confirm => 'Вы уверены?', :method => :delete %>
-            </p>
-         <% end %>
-      <% end %>
+    <div style='display:none'>
+      <div id='folder_content' style='padding:10px'>
+         <%= render :partial => 'new' %>
+      </div>
     </div>
 
-    <div id="box-styled-lightgrey" style="width:95%">
-      <h1><%= link_to "Мои папки", folders_path %></h1>
-      <% if !@my_folders.nil? %>
-         <% @my_folders.each do |folder| %>
-            <p><%= link_to folder.folder_name, folder_path(folder) %>
-               <%= link_to image_tag("/system/icons/Edit.gif"), edit_folder_path(folder) %>
-               <%= link_to image_tag("/system/icons/Delete.gif"), folder_path(folder), :confirm => 'Вы уверены?', :method => :delete %>
-            </p>
-         <% end %>
-      <% end %>
+    <div style='display:none'>
+       <div id='attachment_content' style='padding:10px'>
+         <%= render :partial => 'new_attachment' %>
+       </div>
     </div>
 
-    <div id="box-styled-lightgrey" style="width:95%">
-        <%= semantic_form_for(@attachment) do |f| %>
-
-          <h1>Прикрепить файл</h1><br/>
-          <%= f.inputs do %>
-             <%= f.file_field :attach %>
-          <% end %>
-
-          <br/>
-          <div style="position:relative; text-align:center">
-            <%= button_to 'Сохранить', @attachment, :method => :create, :class => 'button-styled grey' %>
-          </div>
-        <% end %>
-        <br/>
+    <div id="folder_list">
+      <%= render :partial => "folder_list" %>
     </div>
 </div>
 
 <div id="box-styled-grey" style="width: 70%">
+  <div id="show_attachments">
   <% if !@folders.nil? %>
      <% @folders.each do |folder| %>
           <div id="box-styled-lightgrey" style="width:98%">
@@ -81,5 +68,9 @@
      <% end %>
      </div>
   <% end %>
+  </div>
 </div>
-    <%= raw(Helper.get_chat_script(current_user)) %>
+
+<% if current_user.set_chat == true %>
+  <%= raw(Helper.get_chat_script(current_user)) %>
+<% end %>

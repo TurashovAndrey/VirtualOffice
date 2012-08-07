@@ -10,9 +10,13 @@
         <% @project.stages.each do |stage| %>
           <div id="stage-link">
             <% if stage == @stage %>
-               <p><b><%= link_to stage.stage_name, stage_path(stage) %></b></p>
+               <p><b><%= link_to stage.stage_name, stage_path(stage) %></b>
+                     <%= link_to image_tag("/system/icons/Edit.png", :height => 16, :width => 16), edit_stage_path(stage) %>
+                     <%= link_to image_tag("/system/icons/Delete.png", :height => 16, :width => 16), stage_path(stage), :confirm => 'Вы уверены?', :method => :delete %></p>
             <% else %>
-               <p><%= link_to stage.stage_name, stage_path(stage) %></p>
+               <p><%= link_to stage.stage_name, stage_path(stage) %>
+                  <%= link_to image_tag("/system/icons/Edit.png", :height => 16, :width => 16), edit_stage_path(stage) %>
+                  <%= link_to image_tag("/system/icons/Delete.png", :height => 16, :width => 16), stage_path(stage), :confirm => 'Вы уверены?', :method => :delete %></p>
             <% end %>
           </div>
         <% end %>
@@ -40,8 +44,8 @@
           <div id="box-styled-lightgrey" style="width:98%">
             <div id="box-styled-lightgrey" style="width:98%">
               <p><b><%=link_to task.title, task_path(task) %>
-              <%= link_to image_tag("/system/icons/Edit.gif"), edit_task_path(task) %>
-              <%= link_to image_tag("/system/icons/Delete.gif"), task_path(task), :confirm => 'Вы уверены?', :method => :delete %></b></p>
+              <%= link_to image_tag("/system/icons/Edit.png", :height => 16, :width => 16), edit_task_path(task) %>
+              <%= link_to image_tag("/system/icons/Delete.png", :height => 16, :width => 16), task_path(task), :confirm => 'Вы уверены?', :method => :delete %></b></p>
               <div id="box-styled-lightgrey-comment">
                 <p><%= task.notes %></p>
                 <br/>
@@ -55,5 +59,6 @@
      <% end %>
 </div>
 
-
-<%= raw(Helper.get_chat_script(current_user)) %>
+<% if current_user.set_chat == true %>
+  <%= raw(Helper.get_chat_script(current_user)) %>
+<% end %>

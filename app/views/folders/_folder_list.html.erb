@@ -1,0 +1,35 @@
+<script>
+    $(document).ready(function() {
+       $('.best_in_place').best_in_place();
+    });
+</script>
+
+<div id="box-styled-lightgrey" style="width:95%">
+  <h1><%= link_to "Папки компании", folders_path, :remote => true %></h1>
+  <% if !@folders.nil? %>
+     <% @folders.each do |folder| %>
+        <p>
+           <%= link_to image_tag("/system/icons/Folder.png", :height=>16, :width=>16), folder_path(folder) %>
+           <%= link_to best_in_place(folder, :folder_name, :activator => "#activator_#{folder.id}"), folder_path(folder), :remote => true %>
+           <a href="#" id="activator_<%= folder.id %>">...</a>
+           <%= link_to image_tag("/system/icons/Edit.png", :height => 16, :width => 16), edit_folder_path(folder) %>
+           <%= link_to image_tag("/system/icons/Delete.png", :height => 16, :width => 16), folder_path(folder), :confirm => 'Вы уверены?', :method => :delete %>
+        </p>
+     <% end %>
+  <% end %>
+</div>
+
+<div id="box-styled-lightgrey" style="width:95%">
+  <h1><%= link_to "Мои папки", folders_path %></h1>
+  <% if !@my_folders.nil? %>
+     <% @my_folders.each do |folder| %>
+        <p>
+          <%= link_to image_tag("/system/icons/Folder.png", :height=>16, :width=>16), folder_path(folder) %>
+          <%= link_to best_in_place(folder, :folder_name, :activator => "#activator_#{folder.id}"), folder_path(folder), :remote => true %>
+          <a href="#" id="activator_<%= folder.id %>">...</a>
+          <%= link_to image_tag("/system/icons/Edit.png", :height => 16, :width => 16), edit_folder_path(folder) %>
+          <%= link_to image_tag("/system/icons/Delete.png", :height => 16, :width => 16), folder_path(folder), :confirm => 'Вы уверены?', :method => :delete %>
+        </p>
+     <% end %>
+  <% end %>
+</div>

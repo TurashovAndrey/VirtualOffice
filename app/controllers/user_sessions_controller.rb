@@ -55,10 +55,23 @@ class UserSessionsController < ApplicationController
   def activate
     @user = User.find_using_perishable_token(params[:activation_code], 1.week)
     if (@user)
+      @user_session = UserSession.new
+      @user_session.email = @user.email
+      @user_session.password = @user.password
       @user.active = true
       @user.save
+
+      if @user_session.save
+        new_user = @user_session.record
+        Authorization.current_user = new_user
+        redirect_to application_root_path(current_user.company.url_base)
+      else
+        flash[:notice] = t('user_session.flashes.login_failed')
+        render :action => :new, :layout => "main"
+      end
+    else
+      redirect_to application_root_path
     end
-    redirect_to application_root_path
   end
 
   protected

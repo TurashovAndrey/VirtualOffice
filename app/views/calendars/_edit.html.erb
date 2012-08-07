@@ -1,0 +1,38 @@
+
+<%= semantic_form_for(@calendar) do |f| %>
+   <h1> <%= @calendar.calendar_name %> </h1>
+   <%= f.inputs do %>
+      <%= f.input :calendar_name, :label=>"Название", :as => :text, :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 100  }, :required => true %>
+   <% end %>
+
+    <div id="box-styled-grey" style="border:0; width:95%" >
+      <div id="box-styled-grey" style="width:35%;margin-left:30px;">
+        <h1>Группы</h1>
+        <br/>
+          <div style="padding-left:7px">
+             <% if (@permissions.first.group_id.nil?) && (@permissions.first.user_id.nil?) %>
+               <%= check_box_tag 'group_ids[]', 0, true %>
+             <% else %>
+               <%= check_box_tag 'group_ids[]', 0, false %>
+             <% end %>
+             <%= label_tag "Все" %>
+          </div>
+          <br/>
+          <% current_user.company.groups.each do |group| %>
+             <div style="padding-left:7px">
+                <% if @permissions.where(:group_id => group.id).empty? %>
+                  <%= check_box_tag 'group_ids[]', group.id, false %>
+                <% else %>
+                  <%= check_box_tag 'group_ids[]', group.id, true %>
+                <% end %>
+                <%= label_tag group.group_name %>
+             </div>
+             <br/>
+          <% end %>
+      </div>
+    </div>
+   <%= f.buttons do %>
+     <%= button_to 'Сохранить', @calendar, :method => :create, :class => 'button-styled grey' %>
+     <br/>
+   <% end %>
+<% end %>

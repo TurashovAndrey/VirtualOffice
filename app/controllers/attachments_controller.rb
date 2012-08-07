@@ -12,19 +12,26 @@ class AttachmentsController < ApplicationController
   end
 
   def create
-    @attachment = Attachment.new(params[:attachment])
-    @attachment.company = current_user.company
-    @attachment.user = current_user
+    if (!params[:attachment].nil?)
+      @attachment = Attachment.new(params[:attachment])
+      @attachment.company = current_user.company
+      @attachment.user = current_user
 
+      #if @params[:attachment][:folder]==0
+      #  @attachment.folder = nil
+      #end
 
-    if @attachment.save
-      flash[:notice] = t('attachment.flashes.created')
-    else
-      flash[:error] = t('attachment.flashes.create_error')
-    end
+      if @attachment.save
+        flash[:notice] = t('attachment.flashes.created')
+      else
+        flash[:error] = t('attachment.flashes.create_error')
+      end
 
-    if !(@attachment.folder.nil?)
-      redirect_to folder_path(@attachment.folder)
+      if !(@attachment.folder.nil?)
+        redirect_to folder_path(@attachment.folder)
+      else
+        redirect_to folders_path
+      end
     else
       redirect_to folders_path
     end

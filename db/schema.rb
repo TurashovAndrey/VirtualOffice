@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120706090401) do
+ActiveRecord::Schema.define(:version => 20120727145920) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "company_id"
@@ -55,6 +55,17 @@ ActiveRecord::Schema.define(:version => 20120706090401) do
     t.datetime "logo_updated_at"
     t.date     "expire_date",       :default => '2099-01-01'
     t.integer  "default_group"
+    t.integer  "calendar_id"
+  end
+
+  create_table "conferences", :force => true do |t|
+    t.integer  "room_id"
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "company_id"
+    t.integer  "owner_id"
   end
 
   create_table "discussions", :force => true do |t|
@@ -101,10 +112,12 @@ ActiveRecord::Schema.define(:version => 20120706090401) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "description"
-    t.integer  "task_id"
     t.integer  "company_id"
     t.integer  "folder_id"
     t.integer  "calendar_id"
+    t.integer  "theme_id"
+    t.integer  "stage_id"
+    t.integer  "project_id"
   end
 
   create_table "projects", :force => true do |t|
@@ -122,6 +135,7 @@ ActiveRecord::Schema.define(:version => 20120706090401) do
     t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "owner_id"
   end
 
   create_table "stages", :force => true do |t|
@@ -201,6 +215,7 @@ ActiveRecord::Schema.define(:version => 20120706090401) do
     t.string   "telephone"
     t.string   "address"
     t.integer  "group_id"
+    t.boolean  "set_chat",            :default => false
   end
 
 end

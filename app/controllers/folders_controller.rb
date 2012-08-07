@@ -1,16 +1,21 @@
 class FoldersController < ApplicationController
   def index
     @attachment = Attachment.new
-    @attachments = Attachment.where(:company_id => current_user.company).where(:folder_id => nil)
+    @attachments = Attachment.where(:company_id => current_user.company).where(:folder_id => nil )
 
-    @folders = get_folders
-    @my_folders = get_private_folders
+    @folders = FoldersHelper.get_folders(current_user)
+    @my_folders = FoldersHelper.get_private_folders(current_user)
+
+    @all_folders = FoldersHelper.get_folders(current_user)
+    @all_folders += FoldersHelper.get_private_folders(current_user)
+
+    @folder = Folder.new
   end
 
   def new
     @folder = Folder.new
-    @folders = get_folders
-    @my_folders = get_private_folders
+    @folders = FoldersHelper.get_folders(current_user)
+    @my_folders = FoldersHelper.get_private_folders(current_user)
   end
 
   def create
@@ -34,8 +39,8 @@ class FoldersController < ApplicationController
     else
       @attachment = Attachment.new
       @attachments = Attachment.where(:company_id => current_user.company).where(:folder_id => nil)
-      @folders = get_folders
-      @my_folders = get_private_folders
+      @folders = FoldersHelper.get_folders(current_user)
+      @my_folders = FoldersHelper.get_private_folders(current_user)
     end
   end
 
@@ -46,8 +51,13 @@ class FoldersController < ApplicationController
     else
       @folder = Folder.find(params[:id])
       @folder.update_attributes(params[:folder])
-      save_groups(params[:group_ids],@folder)
-      redirect_to folder_path(@folder)
+      if (!params[:group_ids].nil?)
+        save_groups(params[:group_ids],@folder)
+      end
+      respond_to do |format|
+        format.html  {redirect_to folder_path(@folder)}
+        format.json { render :json => @folder, :status => :ok }
+      end
     end
   end
 
@@ -56,8 +66,11 @@ class FoldersController < ApplicationController
     if @folder.nil?
       redirect_to folders_path
     else
-      @folders = get_folders
-      @my_folders = get_private_folders
+      @all_folders = FoldersHelper.get_folders(current_user)
+      @all_folders += FoldersHelper.get_private_folders(current_user)
+
+      @folders = FoldersHelper.get_folders(current_user)
+      @my_folders = FoldersHelper.get_private_folders(current_user)
       @attachments = Attachment.where(:folder_id => @folder)
       @attachment = Attachment.new
       @attachment.folder = @folder
@@ -75,31 +88,7 @@ class FoldersController < ApplicationController
     end
   end
 
-
-
   protected
-    def get_folders ()
-      @users_folders =[]
-      @company_perms = Permission.where(:company_id => current_user.company).where('folder_id != ""').order(:group_id)
-      @company_perms.each do |company_perm|
-        if (((company_perm.group == current_user.group) && (company_perm.company == current_user.company)) ||
-           ((company_perm.group.nil?) && (company_perm.user.nil?)  && (company_perm.company == current_user.company)))
-          @users_folders << Folder.find(company_perm.folder_id)
-        end
-      end
-      @users_folders
-    end
-
-    def get_private_folders ()
-      @private_folders = []
-      @private_perms = Permission.where(:user_id => current_user).where(!:folder_id.nil?)
-      @private_perms.each do |private_perm|
-        @private_folders << Folder.find(private_perm.folder_id)
-      end
-      @private_folders
-    end
-
-
     def get_folder_permissions(folder_id)
       @folder = nil
       @folder_perms = Permission.where(:company_id => current_user.company).where(:folder_id => folder_id).order(:group_id)
@@ -107,7 +96,7 @@ class FoldersController < ApplicationController
         if ((folder_perm.user == current_user) ||
            ((folder_perm.group == current_user.group) && (folder_perm.company == current_user.company)) ||
            ((folder_perm.group.nil?) && (folder_perm.user.nil?) && (folder_perm.company == current_user.company)))
-          @folder = Folder.find(params[:id])
+          @folder = Folder.find(folder_id)
           @permissions = Permission.where(:folder_id => @folder)
         end
       end

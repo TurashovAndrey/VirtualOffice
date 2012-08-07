@@ -1,6 +1,8 @@
 //= require jquery
 //= require jquery_ujs
+//= require jquery.purr
 //= require_tree .
+//= require best_in_place
 
  jQuery(function() {
     jQuery("#new_ev").dialog({
@@ -24,15 +26,6 @@ jQuery(function() {
         title: "Вход"
     });
 });
-
-/* jQuery(function() {
-    jQuery("#div_worker").dialog({
-        autoOpen: false,
-        show: "slide",
-        hide: "slide",
-        title: "Сотрудник"
-    });
-}); */
 
 jQuery(function() {
     jQuery("table#users_table td").click(function() {

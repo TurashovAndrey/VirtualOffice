@@ -1,88 +1,88 @@
-<div id="box-styled-grey">
+ <div id="box-styled-grey">
+
     <div id="box-styled-lightgrey" style="width:95%">
       <p><%= link_to "Новый сотрудник", new_company_worker_path(:parent_id => @group.id) %></p>
       <p><%= link_to "Новая группа", new_group_path(:parent_id => @group.id) %></p>
     </div>
+
     <div id="box-styled-lightgrey" style="width:95%">
       <h1>Сотрудники</h1>
-      <div>
       <% if !@groups.nil? %>
          <% @groups.each do |group| %>
-               <p><%= link_to group.group_name, group_path(group) %></p>
+              <p><%= link_to group.group_name, group_path(group) %></p>
 
-                <% if !group.users.empty? %>
-                   <% group.users.each do |user| %>
-                          <div style="padding-left:10px">
-                            <p><%= link_to user.email, company_worker_path(user) %></p>
-                          </div>
-                   <% end %>
-                <% end %>
+              <% if !group.users.empty? %>
+                 <% group.users.each do |user| %>
+                    <div style="padding-left:10px">
+                       <p><%= link_to user.email, company_worker_path(user) %></p>
+                    </div>
+                 <% end %>
+              <% end %>
 
               <% if !Group.where(:parent_id => group.id).empty? %>
                  <% Group.where(:parent_id => group.id).each do |child_group_first| %>
-                        <div style="padding-left:10px">
-                          <p><%= link_to child_group_first.group_name, group_path(child_group_first) %></p>
-                        </div>
+                    <div style="padding-left:10px">
+                       <p><%= link_to child_group_first.group_name, group_path(child_group_first) %></p>
+                    </div>
 
-                        <% if !child_group_first.users.empty? %>
-                            <% child_group_first.users.each do |user| %>
-                               <div style="padding-left:20px">
-                                   <p><%= link_to user.email, company_worker_path(user) %></p>
-                            </div>
-                        <% end %>
-                <% end %>
+                    <% if !child_group_first.users.empty? %>
+                       <% child_group_first.users.each do |user| %>
+                         <div style="padding-left:20px">
+                            <p><%= link_to user.email, company_worker_path(user) %></p>
+                         </div>
+                       <% end %>
+                    <% end %>
 
                       <% if !Group.where(:parent_id => child_group_first.id).empty? %>
                          <% Group.where(:parent_id => child_group_first.id).each do |child_group_second| %>
-                              <div style="padding-left:20px">
-                                <p><%= link_to child_group_second.group_name, group_path(child_group_second) %></p>
-                              </div>
+                           <div style="padding-left:20px">
+                              <p><%= link_to child_group_second.group_name, group_path(child_group_second) %></p>
+                           </div>
 
-                              <% if !child_group_second.users.empty? %>
-                                    <% child_group_second.users.each do |user| %>
-                                       <div style="padding-left:30px">
-                                           <p><%= link_to user.email, company_worker_path(user) %></p>
-                                    </div>
+                           <% if !child_group_second.users.empty? %>
+                              <% child_group_second.users.each do |user| %>
+                                <div style="padding-left:30px">
+                                   <p><%= link_to user.email, company_worker_path(user) %></p>
+                                </div>
                               <% end %>
-
-                              <div>
-                              <% if !Group.where(:parent_id => child_group_second.id).empty? %>
-                                 <% Group.where(:parent_id => child_group_second.id).each do |child_group_third| %>
-                                      <div style="padding-left:30px">
-                                        <p><%= link_to child_group_third.group_name, group_path(child_group_third) %></p>
-                                      </div>
-
-                                      <% if !child_group_second.users.empty? %>
-                                        <% child_group_second.users.each do |user| %>
-                                          <div style="padding-left:40px">
-                                            <p><%= link_to user.email, company_worker_path(user) %></p>
-                                          </div>
-                                        <% end %>
-                                      <% end %>
-                              <% end %>
-                                 <% end %>
-                              <% end %>
-                              </div>
+                           <% end %>
                          <% end %>
                       <% end %>
+
                  <% end %>
               <% end %>
          <% end %>
-
       <% end %>
       </div>
-    </div>
-</div>
+ </div>
 
 <div id="box-styled-grey" style="width:70%">
   <div id="box-styled-lightgrey" style="width:95%" >
-          <% @tasks.each do |task| %>
-              <br/>
-              <div id="box-styled-lightgrey" style="width:95%">
-                 <%= task.description %><%= link_to 'link', task_path(task.task_id) %>
-                 <%= task.created_at %>
-              </div>
-          <% end %>
+     <h1>Задачи</h1>
+     <% if !@tasks.empty? %>
+       <% @tasks.each do |task| %>
+          <br/>
+          <div id="box-styled-lightgrey" style="width:95%">
+             <%= task.title %><%= link_to 'link', task_path(task.id) %>
+             <%= task.created_at %>
+          </div>
+       <% end %>
+     <% end %>
   </div>
+  <div id="box-styled-lightgrey" style="width:95%" >
+     <h1>События</h1>
+     <% if !@events.empty? %>
+       <% @events.each do |event| %>
+          <br/>
+          <div id="box-styled-lightgrey" style="width:95%">
+             <%= event.name %><%= link_to 'link', event_path(event.id) %>
+             <%= event.created_at %>
+          </div>
+       <% end %>
+     <% end %>
+  </div>
+</div>
 
-    <%= raw(Helper.get_chat_script(current_user)) %>
+<% if current_user.set_chat == true %>
+  <%= raw(Helper.get_chat_script(current_user)) %>
+<% end %>

@@ -1,3 +1,7 @@
 <div class="new_user">
 <%= render :partial => 'workers/form', :user => @user %>
 </div>
+
+<% if current_user.set_chat == true %>
+  <%= raw(Helper.get_chat_script(current_user)) %>
+<% end %>

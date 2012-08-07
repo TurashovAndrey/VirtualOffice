@@ -2,10 +2,6 @@
 <%= stylesheet_link_tag "event_calendar"%>
 <div id="new_ev">
 <%= semantic_form_for(@event) do |f| %>
-    <div class="note_message">
-      Добавляйте новые события фирмы в календарь и они автоматически будут отображены в календаре. Изменяйте/удаляйте событие нажав на событие в календаре.
-    </div>
-    <br/>
     <%= f.inputs do %>
         <%= f.input :name, :as => :string, :label => "Событие", :required => true %>
         <%= f.input :start_at, :as => :string, :type => :datetime,  :label => "Дата начала", :required => true %>
@@ -28,3 +24,7 @@
       <% end %>
 <% end %>
 </div>
+
+<% if current_user.set_chat == true %>
+  <%= raw(Helper.get_chat_script(current_user)) %>
+<% end %>

@@ -1,0 +1,21 @@
+<%= semantic_form_for(@event) do |f| %>
+    <div id="box-styled-lightgrey" style="width:98%" >
+    <h1>Новое событие</h1>
+    <%= f.inputs do %>
+        <%= f.input :name, :as => :string, :label => "Событие", :required => true %>
+        <%= f.input :start_at, :as => :string, :type => :datetime,  :label => "Дата начала", :required => true %>
+        <%= f.input :end_at, :as => :string, :type => :datetime, :label => "Дата конца", :required => true %>
+        <%= f.input :description, :as => :string, :label => "Описание", :input_html => { :rows => 10, :cols => 20, :maxlength => 10 } %>
+
+        <%= f.input :color, :label => "Важность",  :as => :select, :collection => options_for_select([["Очень важно","#FF0000", {:style => "background-color:Red; color: #FFFFFF;"}],
+                      ["Важно","#EBE81D", {:style => "background-color: Yellow; color: #FFFFFF;"}],
+                      ["Не важно","#00FF00", {:style => "background-color: Green; color: #FFFFFF;"}]]) %>
+        <%= f.input :calendar_id, :as => :select, :label => "Календарь", :collection => Hash[@all_calendars.map {|b| [b.calendar_name, b.id]}] %>
+    <% end %>
+
+    <div style="width:100%; text-align:center">
+         <%= button_to 'Сохранить', @event, :method => :update, :class => 'button-styled grey', :align => "center"%>
+    </div>
+    <br/>
+    </div>
+<% end %>

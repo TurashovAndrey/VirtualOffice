@@ -1,0 +1,3 @@
+$("#calendar_info").html("<%= escape_javascript(render(:partial => "show"))%>");
+$("#event_content").html("<%= escape_javascript(render(:partial => new_event_path))%>");
+$("#calendar_list").html("<%= escape_javascript(render(:partial => "calendar_list"))%>");

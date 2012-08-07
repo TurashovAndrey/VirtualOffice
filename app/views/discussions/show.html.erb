@@ -1,38 +1,28 @@
 <%= semantic_form_for(@discussion, :remote=>false, :html => { :multipart => true}) do |f| %>
 
     <div id="box-styled-grey">
-      <div id="box-styled-lightgrey" style="width:95%">
-         <h1>Темы</h1>
-         <p><%= link_to "Все темы", themes_path %></p>
-         <% if !@themes.nil? %>
-            <% @themes.each do |theme| %>
-               <p><%= link_to theme.theme, theme_path(theme) %>
-                  <%= link_to image_tag("/system/icons/Delete.gif"), theme_path(theme), :confirm => 'Вы уверены?', :method => :delete %>
-               </p>
-            <% end %>
-         <% end %>
+      <div id="theme_list">
+        <%= render :partial => "themes/theme_list" %>
       </div>
     </div>
 
   <div id="box-styled-grey" style="width:70%">
 
-    <div id="box-styled-lightgrey" style="width:95%" >
-        <%= f.inputs do %>
-          <%= f.input :discussion, :as => :text, :label => "Название", :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 50  }%>
-          <%= f.input :theme_id, :as => :hidden %>
-        <% end %>
-
-        <%= f.buttons do %>
-           <%= f.commit_button "Сохранить", :button_html => { :class => 'button-styled grey'}, :align=>"right" %>
-           <br/>
-        <% end %>
+    <div id="box-styled-lightgrey" style="width:98%">
+       <p><b><%= link_to @discussion.discussion, discussion_path(@discussion)%>
+       <%= link_to image_tag("/system/icons/Edit.png", :height => 16, :width => 16), edit_discussion_path(@discussion) %>
+       <%= link_to image_tag("/system/icons/Delete.png", :height => 16, :width => 16), discussion_path(@discussion), :confirm => 'Вы уверены?', :method => :delete %></b></p>
+       <div id="box-styled-lightgrey-comment">
+         <br/>
+       </div>
+       <p><%= image_tag @discussion.user.avatar.url, :height => "30px", :width => "30px" %> <%=@discussion.user.email%> <%= Helper.distance_of_time_in_words(DateTime.now.utc,@discussion.created_at) %></p>
     </div>
 
     <% @comments.each do |comment| %>
               <br/>
               <div id="box-styled-lightgrey" style="width:95%">
                 <p><%= image_tag comment.user.avatar.url, :width => 50, :height => 50, :align=>'middle' %>
-                <%= comment.user.email %> <%= comment.comment_date %></p>
+                <%= comment.user.email %> <%= Helper.distance_of_time_in_words(DateTime.now.utc,comment.comment_date) %></p>
                 <p><%= comment.comment %></p>
                 <% comment.task_attachments.each do |attachment| %>
                    <div id="box-styled-grey-attachment">
@@ -45,12 +35,11 @@
 
     <div id="box-styled-lightgrey" style="width:95%" >
         <%= render :partial => new_comment_path(@comment) %>
-
-        <%= f.buttons do %>
-            <%= f.commit_button "Добавить", :button_html => { :class => 'button-styled grey', :id =>"add_comment"}%>
-            <br/>
-        <% end %>
+        <%= f.commit_button "Сохранить", :button_html => {:class => 'button-styled grey', :position => "relative"} %>
     </div>
   </div>
 <% end %>
+
+<% if current_user.set_chat == true %>
   <%= raw(Helper.get_chat_script(current_user)) %>
+<% end %>

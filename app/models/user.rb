@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   end
 
   attr_accessor :company_name
+  attr_reader :name
 
   has_attached_file :avatar
 
@@ -19,6 +20,7 @@ class User < ActiveRecord::Base
   has_many   :projects
   has_many   :folders
   has_many   :permissions
+  has_many   :conferences
 
   belongs_to :group
 
@@ -32,13 +34,13 @@ class User < ActiveRecord::Base
   attr_accessor :new_password, :new_password_confirmation
 
   def name
-    if (self.first_name.nil?) && (self.last_name.nil?)
+    if (self.first_name.empty?) && (self.last_name.empty?)
       self.email
     else
-      if (self.first_name.nil?)
+      if (self.first_name.empty?)
         self.last_name
       else
-        if (self.last_name.nil?)
+        if (self.last_name.empty?)
           self.first_name
         else
           self.first_name+" "+self.last_name
@@ -98,12 +100,15 @@ class User < ActiveRecord::Base
       @calendar.company = self.company
       @calendar.save
 
+      self.company.calendar_id = @calendar
+
       @permission = Permission.new
       @permission.calendar_id = @calendar
       @permission.company = self.company
       @permission.save
 
       self.group = @group
+      self.company.save
       self.save
     end
   end
