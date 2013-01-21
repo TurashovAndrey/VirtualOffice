@@ -25,23 +25,6 @@
           <%= f.input :project_name, :as => :text, :label => "Описание", :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 100  }%>
        <% end %>
 
-      <div id="box-styled-lightgrey" style="border:0; width:95%" >
-         <h1>Группы</h1>
-         <br/>
-           <div style="padding-left:7px">
-              <%= check_box_tag 'group_ids[]', 0, false %>
-              <%= label_tag "Все" %>
-           </div>
-           <br/>
-         <% current_user.company.groups.each do |group| %>
-             <div style="padding-left:7px">
-                <%= check_box_tag 'group_ids[]', group.id, false %>
-                <%= label_tag group.group_name %>
-             </div>
-             <br/>
-         <% end %>
-      </div>
-
        <%= f.buttons do %>
          <%= f.commit_button "Сохранить", :button_html => { :class => 'button-styled grey'}, :align=>"right" %>
        <% end %>

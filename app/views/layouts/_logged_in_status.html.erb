@@ -1,31 +1,29 @@
-<div id="login_button">
-    <%= render :partial => 'accounts/logged_in' if logged_in? %>
-    <div id="main_header">
-      <ul>
-        <a href="#" style="color: #deeeff; text-decoration:none;"><li style="float:left; border: none; padding-left:10px; font-size: 16px;">TimTim.ru</li></a>
-        <% if !logged_in? %>
-            <li>
-              <%= link_to(t('user.buttons.login'), new_user_session_path)  %>
-            </li>
-        <% end %>
-
-        <% if !logged_in? %>
-            <li>
-              <%= link_to(t('user.buttons.demo'), create_demo_user_session_path) %>
-            </li>
+<%= render :partial => 'accounts/logged_in' if logged_in? %>
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="#">TimTim.ru</a>
+      <div class="nav-collapse collapse">
+          <% if !logged_in? %>
+             <ul class="nav">
+                <li><%= link_to(t('user.buttons.login'), new_user_session_path) %></li>
+                <li><%= link_to(t('user.buttons.demo'), create_demo_user_session_path) %></li>
+                <% if @current_path != root_path %>
+                  <li><%= link_to(t('user.buttons.register'), root_path)  %></li>
+                <% end %>
+             </ul>
         <% end %>
 
         <% if logged_in? %>
-            <li>
               <%= link_to(t('user.buttons.logout'), logout_path, :method => :delete) %>
-            </li>
         <% end %>
-
-        <% if !logged_in? && @current_path != root_path %>
-            <li>
-              <%= link_to(t('user.buttons.register'), root_path)  %>
-            </li>
-        <% end %>
-      </ul>
+      </div>
     </div>
+  </div>
 </div>
+

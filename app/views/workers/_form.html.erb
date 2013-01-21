@@ -5,7 +5,6 @@
          <%= f.input :email, :required => true, :label => "E-mail" %>
          <%= f.input :first_name, :label => "Имя" %>
          <%= f.input :last_name, :label => "Фамилия" %>
-         <%= f.input :group, :as => :select, :label =>"Отдел", :collection => Hash[current_user.company.groups.all.map{|b| [b.group_name,b.id]}] %>
          <%= f.input :telephone, :label => "Телефон" %>
          <%= f.input :address, :label => "Адрес" %>
        <% end %>

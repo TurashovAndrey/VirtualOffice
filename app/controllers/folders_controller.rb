@@ -1,157 +1,97 @@
 class FoldersController < ApplicationController
   def index
-    @attachment = Attachment.new
-    @attachments = Attachment.where(:company_id => current_user.company).where(:folder_id => nil )
-
-    @folders = FoldersHelper.get_folders(current_user)
-    @my_folders = FoldersHelper.get_private_folders(current_user)
-
-    @all_folders = FoldersHelper.get_folders(current_user)
-    @all_folders += FoldersHelper.get_private_folders(current_user)
-
-    @folder = Folder.new
+    get_init_folders
+    @new_folder = Folder.new
+    unless current_user.company.folders.first.nil?
+      @folder = current_user.company.folders.first
+      @new_attachment = Attachment.new
+      @new_attachment.folder = @folder
+    end
   end
 
   def new
-    @folder = Folder.new
-    @folders = FoldersHelper.get_folders(current_user)
-    @my_folders = FoldersHelper.get_private_folders(current_user)
+    redirect_to folders_path
   end
 
   def create
-    if (params[:folder][:folder_name].empty?)
-      redirect_to new_folder_path
+    @folder = Folder.new
+    @folder.user = current_user
+    @folder.company = current_user.company
+    if @folder.update_attributes(params[:folder])
+      flash[:notice] = t('folder.save.success')
+      redirect_to folder_path(@folder)
     else
-      @folder = Folder.new
-      @folder.user = current_user
-      @folder.company = current_user.company
-      @folder.update_attributes(params[:folder])
-
-      save_groups(params[:group_ids],@folder)
-      redirect_to folders_path
+      flash[:error] = t('folder.save.error')
     end
   end
 
   def edit
-    @folder = get_folder_permissions(params[:id])
-    if @folder.nil?
-      redirect_to folders_path
+    @folder = Folder.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to folders_url, :error => t('folder.flash.has_no_permission_to_show')
     else
-      @attachment = Attachment.new
-      @attachments = Attachment.where(:company_id => current_user.company).where(:folder_id => nil)
-      @folders = FoldersHelper.get_folders(current_user)
-      @my_folders = FoldersHelper.get_private_folders(current_user)
-    end
+      if has_permission_to_folder? params[:id]
+        get_init_folders
+      else
+        flash[:error] = t('folder.flash.has_no_permission_to_edit')
+      end
   end
 
   def update
-    @folder = get_folder_permissions(params[:id])
-    if @folder.nil?
-      redirect_to folders_path
+    @folder = Folder.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to folders_url, :error => t('folder.flash.has_no_permission_to_show')
     else
-      @folder = Folder.find(params[:id])
-      @folder.update_attributes(params[:folder])
-      if (!params[:group_ids].nil?)
-        save_groups(params[:group_ids],@folder)
+      if has_permission_to_folder? params[:id]
+        if @folder.update_attributes(params[:folder])
+          flash[:notice] = t('folder.save.success')
+          redirect_to folder_path(@folder)
+        else
+          flash[:error] = t('folder.save.error')
+          redirect_to folders_path
+        end
+      else
+        flash[:error] = t('folder.flash.has_no_permission_to_edit')
+        redirect_to folders_path
       end
-      respond_to do |format|
-        format.html  {redirect_to folder_path(@folder)}
-        format.json { render :json => @folder, :status => :ok }
-      end
-    end
   end
 
   def show
-    @folder = get_folder_permissions(params[:id])
-    if @folder.nil?
-      redirect_to folders_path
+    @folder = Folder.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to folders_url, :error => t('folder.flash.has_no_permission_to_show')
     else
-      @all_folders = FoldersHelper.get_folders(current_user)
-      @all_folders += FoldersHelper.get_private_folders(current_user)
-
-      @folders = FoldersHelper.get_folders(current_user)
-      @my_folders = FoldersHelper.get_private_folders(current_user)
-      @attachments = Attachment.where(:folder_id => @folder)
-      @attachment = Attachment.new
-      @attachment.folder = @folder
-    end
+      get_init_folders
+      @new_folder = Folder.new
+      @new_attachment = Attachment.new
+      @new_attachment.folder = @folder
+      unless has_permission_to_folder? params[:id]
+        redirect_to folders_path, :error => t('folder.flash.has_no_permission_to_show')
+      end
   end
 
   def destroy
-    @folder = get_folder_permissions(params[:id])
-    if @folder.nil?
-      redirect_to folders_path
+    @folder = Folder.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to folders_url, :error => t('folder.flash.has_no_permission_to_show')
     else
-      Permission.delete_all(:folder_id => @folder)
-      @folder.destroy
+      if has_permission_to_folder?(params[:id])
+        @folder = Folder.find(params[:id])
+        @folder.destroy
+      else
+        flash[:error] = t('folder.flash.has_no_permission_to_delete')
+      end
       redirect_to folders_path
-    end
   end
 
   protected
-    def get_folder_permissions(folder_id)
-      @folder = nil
-      @folder_perms = Permission.where(:company_id => current_user.company).where(:folder_id => folder_id).order(:group_id)
-      @folder_perms.each do |folder_perm|
-        if ((folder_perm.user == current_user) ||
-           ((folder_perm.group == current_user.group) && (folder_perm.company == current_user.company)) ||
-           ((folder_perm.group.nil?) && (folder_perm.user.nil?) && (folder_perm.company == current_user.company)))
-          @folder = Folder.find(folder_id)
-          @permissions = Permission.where(:folder_id => @folder)
-        end
-      end
-      @folder
+    def has_permission_to_folder?(folder_id)
+      (Folder.find(folder_id).company == current_user.company) or
+      (Folder.find(folder_id).user == current_user)
     end
 
-    def need_saving?(new_group, folder_id)
-      @need_to_save = true
-      if (new_group.nil?)
-        if (!Permission.where(:user_id => current_user).where(:folder_id => folder_id).empty?)
-          @need_to_save = false
-        end
-      else
-        if (new_group.to_i == 0)
-          if (!Permission.where(:company_id => current_user.company).where(:folder_id => folder_id).empty?)
-            @need_to_save = false
-          end
-        else
-          if (!Permission.where(:group_id => new_group).where(:folder_id => folder_id).empty?)
-            @need_to_save = false
-          end
-        end
-      end
-      @need_to_save
-    end
+  def get_init_folders
+    @company_folders = current_user.company.folders
+  end
 
-    def save_groups(groups, folder)
-      Permission.delete_all(:folder_id => folder)
-      if (groups.nil?)
-        if (need_saving?(nil,folder.id))
-          @new_permission = Permission.new
-          @new_permission.folder = folder
-          @new_permission.company = current_user.company
-          @new_permission.user = current_user
-          @new_permission.save
-        end
-      else
-        groups.each do |new_group|
-          while (!new_group.nil?)
-            if need_saving?(new_group,folder.id)
-              @new_permission = Permission.new
-              @new_permission.folder = folder
-              @new_permission.company = current_user.company
-              if (new_group.to_i != 0)
-                @new_permission.group = Group.find(new_group)
-              end
-              @new_permission.save
-            end
-            if (new_group.to_i != 0)
-              new_group = Group.find(new_group).parent_id
-            else
-              new_group = nil
-            end
-          end
-        end
-      end
-    end
 end

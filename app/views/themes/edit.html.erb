@@ -1,52 +1,14 @@
-<div id="box-styled-grey">
-    <div id="box-styled-lightgrey" style="width:95%">
-      <p><%= link_to "Новая тема", new_theme_path %></p>
-      <p><%= link_to "Новое обсуждение", new_discussion_path %></p>
-    </div>
+# coding: utf-8
 
-    <div id="theme_list">
-      <%= render :partial => "theme_list" %>
-    </div>
+<div class="span6 well">
+  <%= render "theme_list", :company_themes => @company_themes %>
 </div>
 
-<div id="box-styled-grey" style="width: 70%">
-  <%= semantic_form_for(@theme, :remote=>false, :html => { :multipart => true}) do |f| %>
-     <%= f.inputs do %>
-        <%= f.input :theme, :as => :text, :label => "Название", :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 50  }%>
-        <br/>
-     <% end %>
-
-      <div id="box-styled-lightgrey" style="border:0; width:95%" >
-         <h1>Группы</h1>
-         <br/>
-           <div style="padding-left:7px">
-              <% if (@permissions.first.group_id.nil?) && (@permissions.first.user_id.nil?) %>
-                <%= check_box_tag 'group_ids[]', 0, true %>
-              <% else %>
-                <%= check_box_tag 'group_ids[]', 0, false %>
-              <% end %>
-                  <%= label_tag "Все" %>
-               </div>
-           <br/>
-         <% current_user.company.groups.each do |group| %>
-             <div style="padding-left:7px">
-                <% if @permissions.where(:group_id => group.id).empty? %>
-                  <%= check_box_tag 'group_ids[]', group.id, false %>
-                <% else %>
-                  <%= check_box_tag 'group_ids[]', group.id, true %>
-                <% end %>
-                <%= label_tag group.group_name %>
-             </div>
-             <br/>
-         <% end %>
-      </div>
-      <%= f.buttons do %>
-         <%= button_to 'Сохранить', @theme, :method => :create, :class => 'button-styled grey' %>
-         <br/>
+<div class="span12 well">
+  <%= semantic_form_for(@theme) do |f| %>
+      <%= f.inputs do %>
+          <%= f.input :theme_name, :label=>"Название", :as => :text, :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 100 }%>
       <% end %>
+      <%= button_to 'Сохранить', folders_path(@folder), :class => 'btn btn-primary' %>
   <% end %>
 </div>
-
-<% if current_user.set_chat == true %>
-  <%= raw(Helper.get_chat_script(current_user)) %>
-<% end %>

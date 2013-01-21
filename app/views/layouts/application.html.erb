@@ -2,37 +2,19 @@
 <html>
 <head>
   <%= render :partial => 'layouts/html_head' %>
-  <%= javascript_include_tag 'jquery-1.4.2.min.js', 'application' %>
-  <%= javascript_include_tag 'jquery-1.4.2.min.js', 'jquery-ui-1.8.2.custom.min.js' %>
-  <%= javascript_include_tag :application %>
-  <%= stylesheet_link_tag "scaffold", "jquerycss", 'jquery-ui-1.8.2-custom.css' %>
-  <%= stylesheet_link_tag "scaffold", "colorboxcss", 'colorbox.css' %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tag %>
+
 
 </head>
 <body>
-<div id="all">
-  <div id="nonFooter">
-     <div id="content">
 
-  <div id="header">
-    <%= render :partial => 'layouts/header' %>
-    <%= render :partial => "layouts/navigation" %>
-    <%= render :partial => 'layouts/sub_navigation' %>
-  </div>
+  <%= render :partial => 'layouts/header' %>
+  <%= render :partial => "layouts/navigation" %>
 
-  <div id="content">
-    <%= render :partial => 'layouts/flash' %>
-    <h1><%= display_headline %></h1>
-    <%= yield %>
-  </div>
-  </div>
- </div>
-
-  <!--<div id="footer">
-    <%= render :partial => 'layouts/footer' %>
-  </div> -->
-
-</div>
+  <%= render :partial => 'layouts/flash' %>
+  <h1><%= display_headline %></h1>
+  <%= yield %>
 </body>
 </html>

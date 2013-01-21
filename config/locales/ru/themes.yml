@@ -2,3 +2,11 @@ ru:
   theme:
     titles:
       themes: 'Обсуждения'
+    flash:
+      has_no_permission_to_show: У вас нет прав для просмотра данной темы
+      has_no_permission_to_edit: У вас нет прав для редактирования данной темы
+      has_no_permission_to_update: У вас нет прав для изменения данной темы
+      has_no_permission_to_delete: У вас нет прав для удаления данной темы
+    save:
+      error: Произошла ошибка при сохранении темы
+      success: Тема успешно сохранена

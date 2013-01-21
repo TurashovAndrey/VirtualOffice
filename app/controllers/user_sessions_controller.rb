@@ -55,11 +55,9 @@ class UserSessionsController < ApplicationController
   def activate
     @user = User.find_using_perishable_token(params[:activation_code], 1.week)
     if (@user)
-      @user_session = UserSession.new
-      @user_session.email = @user.email
-      @user_session.password = @user.password
       @user.active = true
       @user.save
+      @user_session = UserSession.new(@user)
 
       if @user_session.save
         new_user = @user_session.record

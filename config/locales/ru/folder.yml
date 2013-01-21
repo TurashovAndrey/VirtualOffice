@@ -2,3 +2,11 @@ ru:
   folder:
     titles:
       folders: Файлы
+    flash:
+      has_no_permission_to_show: У вас нет прав для просмотра данной папки
+      has_no_permission_to_edit: У вас нет прав для редактирования данной папки
+      has_no_permission_to_update: У вас нет прав для изменения данной папки
+      has_no_permission_to_delete: У вас нет прав для удаления данной папки
+    save:
+      error: Произошла ошибка при сохранении папки
+      success: Папка успешно сохранена

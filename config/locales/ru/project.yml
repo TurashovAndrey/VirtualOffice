@@ -6,3 +6,11 @@ ru:
       delegate_projects: 'Делегированные задачи'
       all_projects: 'Все задачи'
       done_projects: 'Выполненные задачи'
+    flash:
+      has_no_permission_to_show: У вас нет прав для просмотра данного проекта
+      has_no_permission_to_edit: У вас нет прав для редактирования данного проекта
+      has_no_permission_to_update: У вас нет прав для изменения данного проекта
+      has_no_permission_to_delete: У вас нет прав для удаления данного проекта
+    save:
+      error: Произошла ошибка при сохранении проекта
+      success: Проект успешно сохранен

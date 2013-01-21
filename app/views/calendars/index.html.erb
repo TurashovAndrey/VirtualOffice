@@ -1,56 +1,20 @@
 # coding: utf-8
-<script>
-    $(document).ready(function(){
-        $(".inline_calendar").colorbox({inline:true, width:"40%"});
-    });
+<div class="span6 well">
+   <%= link_to 'Новый календарь', '#NewCalendarModal', :data=>{:toggle => "modal"} %>
+   <%= render "calendar_list", :company_calendars => @company_calendars %>
+</div>
 
-    $(document).ready(function(){
-        $(".inline_event").colorbox({inline:true, width:"40%"});
-    });
-    $(document).ready(function(){
-        $('.tTip').betterTooltip({speed: 150, delay: 300});
-    });
-</script>
-
-<!-- Probably move the stylesheet to you layout. Also make sure you include the javascript. -->
-<%= stylesheet_link_tag "event_calendar"%>
- <div id="box-styled-grey" style="width:25%">
-    <div id="box-styled-lightgrey" style="width:95%">
-       <p><a class='inline_calendar' href="#calendar_content">Новый календарь</a></p>
-       <p><a class='inline_event' href="#event_content">Новое событие</a></p>
-
-       <div style='display:none'>
-          <div id='calendar_content' style='padding:10px'>
-             <%= render :partial => 'new' %>
-          </div>
-       </div>
-
-       <div style='display:none'>
-          <div id='event_content' style='padding:10px'>
-             <%= render :partial => "show_event" %></div>
-       </div>
-    </div>
-
-    <div id="calendar_list">
-      <%= render :partial => "calendar_list" %>
-    </div>
-
-   <!-- <div id="box-styled-lightgrey" style="width:95%">
-    <div id="event_content">
-        <%= render :partial => "show_event" %>
-    </div>
-  </div> -->
- </div>
-
-<div id="box-styled-grey" style="width:72%">
-  <div id = "calendar_info">
-    <h1><%= link_to @calendar.calendar_name, calendar_path(@calendar) %></h1>
+<div class="span12 well">
+  <div id="calendar">
+  <% unless @default_calendar.nil? %>
+    <%= link_to 'Новое событие', '#NewEventModal', :data=>{:toggle => "modal"} %>
+    <%= render new_event_path, :event => @event %>
+    <h2><%= link_to @default_calendar.calendar_name, calendar_path(@default_calendar) %></h2>
     <%= raw(event_calendar) %>
+  <% end %>
   </div>
 </div>
 
-<% if current_user.set_chat == true %>
-  <%= raw(Helper.get_chat_script(current_user)) %>
-<% end %>
+<%= render new_calendar_path, :new_calendar => @new_calendar %>
 
 

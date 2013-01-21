@@ -4,7 +4,4 @@ class TaskAttachment < ActiveRecord::Base
   belongs_to :company
   belongs_to :task
   belongs_to :comment
-  belongs_to :stage
-  belongs_to :project
-  belongs_to :discussion
 end

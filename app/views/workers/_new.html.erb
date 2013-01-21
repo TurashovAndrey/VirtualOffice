@@ -6,14 +6,10 @@
          <%= f.input :email, :required => true, :label => "E-mail" %>
          <%= f.input :first_name, :label => "Имя" %>
          <%= f.input :last_name, :label => "Фамилия" %>
-         <%= f.input :group, :as => :select, :label =>"Группа", :collection => Hash[current_user.company.groups.all.map{|b| [b.group_name,b.id]}] %>
          <%= f.input :telephone, :label => "Телефон" %>
          <%= f.input :address, :label => "Адрес" %>
        <% end %>
 
-       <%= f.buttons do %>
-          <%= f.commit_button :label => t('company.buttons.update'), :button_html => { :class => 'button-styled grey'} %>
-          <br/>
-       <% end %>
+       <%= f.commit_button :label => t('company.buttons.update'), :button_html => { :class => 'button-styled grey'} %>
    <% end %>
 </div>

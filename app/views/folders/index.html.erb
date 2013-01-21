@@ -1,76 +1,15 @@
-<script>
-    $(document).ready(function(){
-        $(".inline_folder").colorbox({inline:true, width:"40%"});
-    });
-    $(document).ready(function(){
-        $(".inline_attachment").colorbox({inline:true, width:"40%"});
-    });
-</script>
-
-<div id="box-styled-grey">
-    <div id="box-styled-lightgrey" style="width:95%">
-      <p><a class='inline_folder' href="#folder_content">Новая папка</a></p>
-      <p><a class='inline_attachment' href="#attachment_content">Новый файл</a></p>
-    </div>
-
-    <div style='display:none'>
-      <div id='folder_content' style='padding:10px'>
-         <%= render :partial => 'new' %>
-      </div>
-    </div>
-
-    <div style='display:none'>
-       <div id='attachment_content' style='padding:10px'>
-         <%= render :partial => 'new_attachment' %>
-       </div>
-    </div>
-
-    <div id="folder_list">
-      <%= render :partial => "folder_list" %>
-    </div>
+# coding: utf-8
+<div class="span6 well">
+  <%= link_to 'Новая папка', '#NewFolderModal', :data=>{:toggle => "modal"} %>
+  <%= render "folder_list", :company_folders => @company_folders %>
 </div>
 
-<div id="box-styled-grey" style="width: 70%">
-  <div id="show_attachments">
-  <% if !@folders.nil? %>
-     <% @folders.each do |folder| %>
-          <div id="box-styled-lightgrey" style="width:98%">
-          <h1><%= link_to folder.folder_name, folder_path(folder) %></h1>
-          <% if !folder.attachments.empty? %>
-             <% folder.attachments.each do |attachment| %>
-                <div id="box-styled-grey-attachment">
-                   <%= image_tag AttachmentHelper.get_icon_path(attachment.attach) %> <br/>
-                   <%= link_to attachment.attach_file_name, attachment.attach.url(:original, false) %>
-                   <%= unless attachment.id.nil?
-                      link_to 'Удалить', attachment_path(attachment), :confirm => 'Вы уверены?', :method => :delete
-                   end%><br/>
-                   <p id="time_field"><%= Helper.distance_of_time_in_words(DateTime.now.utc,attachment.created_at) %></p>
-                </div>
-             <% end %>
-          <% end %>
-          </div>
-     <% end %>
+<div class="span12 well">
+  <% unless @folder.nil? %>
+     <%= link_to 'Новый аттачмент', '#NewAttachmentModal', :data=>{:toggle => "modal"} %>
+     <%= render "show_folder_attachments", :folder => @folder %>
+     <%= render new_attachment_path, :new_attachment => @new_attachment %>
   <% end %>
-
-
-  <% if !@attachments.empty? %>
-     <div id="box-styled-lightgrey" style="width:98%">
-     <h1><%= link_to "Файлы", folders_path %></h1>
-     <% @attachments.each do |attachment| %>
-        <div id="box-styled-grey-attachment">
-           <%= image_tag AttachmentHelper.get_icon_path(attachment.attach)%> <br/>
-           <%= link_to attachment.attach_file_name, attachment.attach.url(:original, false) %>
-           <%= unless attachment.id.nil?
-               link_to 'Удалить', attachment_path(attachment), :confirm => 'Вы уверены?', :method => :delete
-           end%><br/>
-           <p id="time_field"><%= Helper.distance_of_time_in_words(DateTime.now.utc,attachment.created_at) %></p>
-        </div>
-     <% end %>
-     </div>
-  <% end %>
-  </div>
 </div>
 
-<% if current_user.set_chat == true %>
-  <%= raw(Helper.get_chat_script(current_user)) %>
-<% end %>
+<%= render new_folder_path, :new_folder => @new_folder %>

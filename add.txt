@@ -1,0 +1,21 @@
+
+          <!-- <div class="span2">
+       <ul class="nav nav-pills nav-stacked">
+          <li><a class='inline_calendar' href="#calendar_content">Новый календарь</a></li>
+          <li><a class='inline_event' href="#event_content">Новое событие</a></li>
+       </ul>
+
+       <!-- <div style='display:none'>
+          <div id='calendar_content' style='padding:10px'>
+             <%= render :partial => 'new' %>
+          </div>
+       </div> -->
+
+          <!-- <div style='display:none'>
+          <div id='event_content' style='padding:10px'>
+             <%= render :partial => "show_event" %>
+          </div>
+       </div> -->
+
+          <!-- <%= render :partial => "show_event" %> -->
+      </div> -->

@@ -1,38 +1,20 @@
 # coding: utf-8
-<script>
-    $(document).ready(function() {
-       $('.best_in_place').best_in_place();
-    });
-</script>
 
-<div id="box-styled-lightgrey" style="width:95%">
-  <h1><%= link_to "Календари компании", calendars_path %></h1>
-  <% if !@company_calendars.nil? %>
-     <% @company_calendars.each do |calendar| %>
-         <div>
-           <p>
-              <%= link_to image_tag("/system/icons/Calendar.png", :height=>16, :width=>16), calendar_path(calendar) %>
-              <%= link_to best_in_place(calendar, :calendar_name, :activator => "#activator_#{calendar.id}"), calendar_path(calendar), :remote => true %>
-              <a href="#" id="activator_<%= calendar.id %>">...</a>
-              <%= link_to image_tag("/system/icons/Edit.png", :height=>16, :width=>16), edit_calendar_path(calendar) %>
-              <%= link_to image_tag("/system/icons/Delete.png", :height=>16, :width=>16), calendar_path(calendar), :confirm => 'Вы уверены?', :method => :delete %></p>
-         </div>
-     <% end %>
-  <% end %>
-</div>
-
-  <div id="box-styled-lightgrey" style="width:95%">
-<h1><%= link_to "Мои календари",calendars_path %></h1>
-<% if !@my_calendars.nil? %>
-   <% @my_calendars.each do |calendar| %>
-       <div>
-         <p>
-            <%= link_to image_tag("/system/icons/Calendar.png", :height=>16, :width=>16), calendar_path(calendar) %>
-            <%= link_to best_in_place(calendar, :calendar_name, :activator => "#activator_#{calendar.id}"), calendar_path(calendar), :remote => true %>
-            <a href="#" id="activator_<%= calendar.id %>">...</a>
-            <%= link_to image_tag("/system/icons/Edit.png", :height=>16, :width=>16), edit_calendar_path(calendar) %>
-            <%= link_to image_tag("/system/icons/Delete.png", :height=>16, :width=>16), calendar_path(calendar), :confirm => 'Вы уверены?', :method => :delete, :remote => true %></p>
-       </div>
+<h3><%= link_to "Календари", calendars_path %></h3>
+<% unless company_calendars.nil? %>
+   <% company_calendars.each do |calendar| %>
+      <p>
+         <%= link_to calendar_path(calendar) do %>
+            <i class="icon-th"></i>
+         <% end %>
+         <%= link_to calendar.calendar_name, calendar_path(calendar), :remote => true %>
+         <%= link_to edit_calendar_path(calendar) do %>
+            <i class="icon-edit"></i>
+         <% end %>
+         <%= link_to calendar_path(calendar), :confirm => 'Вы уверены?', :method => :delete do %>
+            <i class="icon-remove"></i>
+         <% end %>
+      </p>
    <% end %>
 <% end %>
-  </div>
+

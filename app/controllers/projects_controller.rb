@@ -1,161 +1,97 @@
 class ProjectsController < ApplicationController
 
   def new
-    @project = Project.new
-    @projects = ProjectsHelper.get_projects(current_user)
-    @change_project_name = true
+    redirect_to projects_path
   end
 
   def create
-    @projects = ProjectsHelper.get_projects(current_user)
-    if (params[:project][:project_name].empty?)
-      redirect_to new_project_path
+    @project = Project.new
+    @project.user = current_user
+    @project.company = current_user.company
+    if @project.update_attributes(params[:project])
+      flash[:notice] = t('project.save.success')
+      redirect_to project_path(@project)
     else
-      @project = Project.new
-      @project.company = current_user.company
-      @project.user = current_user
-      @project.update_attributes(params[:project])
-
-      save_groups(params[:group_ids],@project)
-      redirect_to projects_path
+      flash[:error] = t('project.save.error')
     end
   end
 
   def index
-    @tasks = Task.where(:user_id => current_user).where(:project_id => nil).where(:done => 0)
-    @projects = ProjectsHelper.get_projects(current_user)
-    @change_project_name = true
-    @project = Project.new
-    @task = Task.new
-    @task_attachments = TaskAttachment.where(:company_id => current_user.company).where(:project_id => nil)
+    get_init_projects
+    @new_project = Project.new
+    unless current_user.company.projects.first.nil?
+      @project = current_user.company.projects.first
+    end
   end
 
   def show
-    @project = get_project_permissions(params[:id])
-    @change_project_name = true
-    @stage = Stage.new
-    @task = Task.new
-    if @project.nil?
-      redirect_to projects_path
-    else
-      @projects = ProjectsHelper.get_projects(current_user)
-      @stages = ProjectsHelper.get_stages(@project.id,current_user)
-      @tasks = Task.where(:second_user_id => current_user).where(:project_id => params[:id]).where(:done => 0)
-      @task_attachments = []
-      #@task_attachments = TaskAttachment.where(:company_id => current_user.company).where(:project_id => @project)
+    @project = Project.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to projects_url, :error => t('project.flash.has_no_permission_to_show')
+  else
+    get_init_projects
+    @new_project = Project.new
+    @new_task = Task.new
+    @new_task.project = @project
+    unless has_permission_to_project? params[:id]
+      redirect_to projects_path, :error => t('project.flash.has_no_permission_to_show')
     end
   end
 
   def edit
-    @project = get_project_permissions(params[:id])
-    @change_project_name = true
-    if @project.nil?
-      redirect_to projects_path
+    @project = Project.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to projects_url, :error => t('project.flash.has_no_permission_to_show')
     else
-      @projects = ProjectsHelper.get_projects(current_user)
-    end
+      if has_permission_to_project? params[:id]
+        get_init_projects
+      else
+        flash[:error] = t('project.flash.has_no_permission_to_edit')
+      end
   end
 
   def update
-    @project = get_project_permissions(params[:id])
-    if @project.nil?
-      redirect_to projects_path
+    @project = Project.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to projects_url, :error => t('project.flash.has_no_permission_to_show')
     else
-      @project.update_attributes(params[:project])
-      if (!params[:group_ids].nil?)
-        save_groups(params[:group_ids],@project)
+      if has_permission_to_project? params[:id]
+        if @project.update_attributes(params[:project])
+          flash[:notice] = t('project.save.success')
+          redirect_to project_path(@project)
+        else
+          flash[:error] = t('project.save.error')
+          redirect_to projects_path
+        end
+      else
+        flash[:error] = t('project.flash.has_no_permission_to_edit')
+        redirect_to projects_path
       end
-      respond_to do |format|
-        format.html  {redirect_to project_path(@project)}
-        #format.html { redirect_to(@calendar, :notice => 'User was successfully updated.') }
-        #format.json do
-        #  render :nothing => true, :status => :ok
-        #  return true
-        #end
-        format.json { render :json => @project, :status => :ok }
-      end
-
-      #redirect_to project_path(@project)
-    end
   end
 
   def destroy
-    @project = get_project_permissions(params[:id])
-    if @project.nil?
-      redirect_to projects_path
+    @project = Project.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to projects_url, :error => t('project.flash.has_no_permission_to_show')
     else
-      Permission.delete_all(:project_id => @project)
-      @project.destroy
+      if has_permission_to_project?(params[:id])
+        @project = Project.find(params[:id])
+        @project.destroy
+      else
+        flash[:error] = t('project.flash.has_no_permission_to_delete')
+      end
       redirect_to projects_path
-    end
   end
 
   protected
 
-  def get_project_permissions(project_id)
-    @project = nil
-    @project_perms = Permission.where(:company_id => current_user.company).where(:project_id => project_id).order(:group_id)
-    @project_perms.each do |project_perm|
-      if ((project_perm.user == current_user) ||
-         ((project_perm.group == current_user.group) && (project_perm.company == current_user.company)) ||
-         ((project_perm.group.nil?) && (project_perm.user.nil?) && (project_perm.company == current_user.company)))
-        @project = Project.find(project_id)
-        @permissions = Permission.where(:project_id => @project)
-      end
-    end
-    @project
+  def has_permission_to_project?(project_id)
+    (Project.find(project_id).company == current_user.company) or
+        (Project.find(project_id).user == current_user)
   end
 
-  def need_saving?(new_group, project_id)
-    @need_to_save = true
-    if (new_group.nil?)
-      if (!Permission.where(:user_id => current_user).where(:project_id => project_id).empty?)
-        @need_to_save = false
-      end
-    else
-      if (new_group.to_i == 0)
-        if (!Permission.where(:company_id => current_user.company).where(:project_id => project_id).empty?)
-          @need_to_save = false
-        end
-      else
-        if (!Permission.where(:group_id => new_group).where(:project_id => project_id).empty?)
-          @need_to_save = false
-        end
-      end
-    end
-    @need_to_save
+  def get_init_projects
+    @company_projects = current_user.company.projects
   end
 
-  def save_groups(groups, project)
-    @need_save = true
-    Permission.delete_all(:project_id => project)
-    if (groups.nil?)
-      if (need_saving?(nil,project.id))
-        @new_permission = Permission.new
-        @new_permission.project = project
-        @new_permission.company = current_user.company
-        @new_permission.user = current_user
-        @new_permission.save
-      end
-    else
-      groups.each do |new_group|
-        while (!new_group.nil?) && (@need_save)
-          if need_saving?(new_group,project.id)
-            @new_permission = Permission.new
-            @new_permission.project = project
-            @new_permission.company = current_user.company
-            if (new_group.to_i != 0)
-              @new_permission.group = Group.find(new_group)
-            end
-            @new_permission.save
-          end
-          if (new_group.to_i != 0)
-            new_group = Group.find(new_group).parent_id
-          else
-            @need_save = false
-          end
-        end
-      end
-    end
-  end
 end

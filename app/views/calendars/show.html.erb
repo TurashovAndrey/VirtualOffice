@@ -1,39 +1,19 @@
 # coding: utf-8
-
-<script>
-    $(document).ready(function(){
-        $(".inline_calendar").colorbox({inline:true, width:"40%"});
-    });
-
-    $(document).ready(function(){
-        $(".inline_event").colorbox({inline:true, width:"40%"});
-    });
-    $(document).ready(function(){
-        $('.tTip').betterTooltip({speed: 150, delay: 300});
-    });
-
-    $(document).ready(function() {
-        $('.best_in_place').best_in_place();
-    });
-</script>
-
-<!-- Probably move the stylesheet to you layout. Also make sure you include the javascript. -->
-<%= stylesheet_link_tag "event_calendar"%>
- <div id="box-styled-grey" style="width:30%">
-    <div id="box-styled-lightgrey" style="width:95%">
-      <p><%= link_to "Новый календарь", new_calendar_path %></p>
-    </div>
-
-    <div id="calendar_list">
-      <%= render :partial => "calendar_list" %>
-    </div>
- </div>
-
-<div id="box-styled-grey" style="width:65%">
-  <h1><%= link_to @calendar.calendar_name, calendar_path(@calendar) %></h1>
-  <%= raw(event_calendar) %>
+<div class="span6 well">
+  <%= link_to 'Новый календарь', '#NewCalendarModal', :data=>{:toggle => "modal"} %>
+  <div id="calendar_list">
+    <%= render "calendar_list", :company_calendars => @company_calendars %>
+  </div>
 </div>
 
-<% if current_user.set_chat == true %>
-  <%= raw(Helper.get_chat_script(current_user)) %>
-<% end %>
+<div class="span12 well">
+  <% unless @calendar.nil? %>
+    <%= link_to 'Новое событие', '#NewEventModal', :data=>{:toggle => "modal"} %>
+    <h2><%= link_to @calendar.calendar_name, calendar_path(@calendar) %></h2>
+    <%= raw(event_calendar) %>
+  <% end %>
+</div>
+
+<%= render new_calendar_path, :new_calendar => @new_calendar %>
+<%= render new_event_path, :event => @event %>
+

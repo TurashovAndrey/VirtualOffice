@@ -1,4 +1,3 @@
-
 class WorkersController < ApplicationController
 
   filter_resource_access :nested_in => :companies, :context => :users,
@@ -16,9 +15,6 @@ class WorkersController < ApplicationController
     end
 
     @workers = @company.users.find(:all, :conditions => ['email != ""'])
-    @groups = Group.where(:company_id => @company.id).where(:parent_id => nil)
-    @default_group = current_user.group
-    @group = Group.new
     @user = User.new
 
     if !params[:task_number].nil?
@@ -50,14 +46,6 @@ class WorkersController < ApplicationController
     end
     @attachments = get_group_attachments(current_user.group, @current_date, @attachment_number)
 
-    if !params[:discussion_number].nil?
-      @discussion_number = params[:discussion_number].to_i
-    else
-      @discussion_number = 10
-    end
-    @discussions = get_group_discussions(current_user.group, @current_date, @discussion_number)
-
-
   end
 
   def show
@@ -68,7 +56,6 @@ class WorkersController < ApplicationController
     end
 
     @user = User.find(params[:id])
-    @groups = Group.where(:company_id => @company.id).where(:parent_id => nil)
 
     if get_rights?(current_user, @user.group_id)
       if !params[:task_number].nil?
@@ -117,16 +104,19 @@ class WorkersController < ApplicationController
   def create
     @user.role = Role::WORKER
     k = ActiveSupport::SecureRandom.hex(6)
-    @user.password = k.to_s
+    # @user.password = k.to_s
+    @user.password = "turashov"
+    @user.active= true
 
     if @user.save
       flash[:notice] = t('company.flashes.worker_created')
       sendmail
-      redirect_to company_workers_path
+      # redirect_to company_workers_path
     else
       flash[:error] = t('company.flashes.worker_create_error')
-      render :new
+      # render :new
     end
+    redirect_to company_workers_path
   end
 
   def destroy

@@ -1,7 +1,4 @@
-<%= semantic_form_for(@comment, :url => new_comment_path(@comment), :multipart => true) do |f| %>
-  <h1> Добавить комментарий </h1>
-  <%= f.inputs do %>
-     <%= f.input :comment, :as => :text, :label => "Комментарий", :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 50 } %>
-  <% end %>
-  <%= render :partial => new_task_attachment_path(@task_attachment) %>
-<% end %>
+﻿  <div class="well">
+     <h1>Добавить комментарий</h1>
+     <textarea id="comment-textarea" style="width:700px; height:200px"></textarea>
+  </div>

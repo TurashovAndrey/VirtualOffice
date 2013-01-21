@@ -9,9 +9,6 @@
           <%= f.input :company_name, :required => false, :label => '.timtim.ru' %>
       <% end %>
     </div>
-
-    <%= f.buttons do %>
-        <%= button_to t('user.buttons.register'), new_company_worker_path(@user), :method => :create, :class => 'button-styled blue', :style=>"margin-top:-4px" %>
-    <% end %>
+    <%= button_to t('user.buttons.register'), new_company_worker_path(@user), :method => :create, :class => 'btn btn-primary' %> 
 <% end %>
 </div>

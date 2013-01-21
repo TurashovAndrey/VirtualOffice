@@ -1,2 +1,6 @@
-  <h1><%= link_to @calendar.calendar_name, calendar_path(@calendar) %></h1>
-  <%= raw(event_calendar) %>
+  <% unless calendar.nil? %>
+    <%= link_to 'Новое событие', '#NewEventModal', :data=>{:toggle => "modal"} %>
+    <%= render new_event_path, :event => event %>
+    <h2><%= link_to calendar.calendar_name, calendar_path(calendar) %></h2>
+    <%= raw(event_calendar) %>
+  <% end %>

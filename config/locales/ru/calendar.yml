@@ -2,3 +2,11 @@ ru:
   calendar:
     titles:
       calendars: Календари
+    flash:
+      has_no_permission_to_show: У вас нет прав для просмотра данного календаря
+      has_no_permission_to_edit: У вас нет прав для редактирования данного календаря
+      has_no_permission_to_update: У вас нет прав для изменения данного календаря
+      has_no_permission_to_delete: У вас нет прав для удаления данного календаря
+    save:
+      error: Произошла ошибка при сохранении календаря
+      success: Календарь успешно сохранен

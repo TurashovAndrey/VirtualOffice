@@ -1,3 +1,19 @@
-<div id="main_menu">
-    <%= render_navigation :level => 1 %>
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <div class="nav-collapse collapse">
+        <a class="brand" href="#">TimTim.ru</a>
+        <ul class="nav">
+           <li><a href=<%= account_path %>><%=t('user.titles.account')%></a></li>
+           <li><a href=<%= company_workers_path %>><%=t('company.titles.my_company')%></a></li>
+           <li class="dropdown">
+           <li><%= link_to t('calendar.titles.calendars'), calendars_path %></li>
+           <li><a href=<%= projects_path %>><%=t('project.titles.projects')%></a></li>
+           <li><a href=<%= folders_path %>><%=t('folder.titles.folders')%></a></li>
+           <li><a href=<%= themes_path %>><%=t('theme.titles.themes')%></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
+

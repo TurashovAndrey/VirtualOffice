@@ -14,23 +14,17 @@ VirtualOffice::Application.routes.draw do
     resources :workers
   end
 
-  resources :events
-  resources :attachments
+  resources :events, :only => [:create, :update, :destroy, :new]
+  resources :attachments, :only => [:create, :destroy, :new]
   resources :task_attachments
-  resources :comments
   resources :folders
-  resources :groups
   resources :calendars
-  resources :permission
+
+  resources  :comments
 
   resources :tasks
-  resources :rooms
   resources :projects
-
-  resources :discussions
   resources :themes
-
-  resources :stages
 
   match 'logout' => 'user_sessions#destroy'
 
@@ -42,13 +36,6 @@ VirtualOffice::Application.routes.draw do
 
   root :to => 'pages#main'
 
-  # match "chat" => "chat#chat", :as => :chat
-  # match 'socky/auth' => 'sockies#auth'
-
-  match "delegate_tasks" => "delegate_tasks#index"
-  match "all_tasks" => "all_tasks#index"
-  match "done_tasks" => "done_tasks#index"
-  
   # root :to => "chat#login"
 
 

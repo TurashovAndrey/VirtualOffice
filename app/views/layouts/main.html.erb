@@ -6,97 +6,37 @@
 
   <!-- Yandex.Metrika counter -->
   <script type="text/javascript">
-  (function (d, w, c) {
-      (w[c] = w[c] || []).push(function() {
+     (function (d, w, c) {
+       (w[c] = w[c] || []).push(function() {
           try {
               w.yaCounter13444135 = new Ya.Metrika({id:13444135, enableAll: true, webvisor:true});
           } catch(e) {}
-      });
-    
-    var n = d.getElementsByTagName("script")[0],
-        s = d.createElement("script"),
-        f = function () { n.parentNode.insertBefore(s, n); };
-    s.type = "text/javascript";
-    s.async = true;
-    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+     });
+     var n = d.getElementsByTagName("script")[0],
+         s = d.createElement("script"),
+         f = function () { n.parentNode.insertBefore(s, n); };
+         s.type = "text/javascript";
+         s.async = true;
+         s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
 
-    if (w.opera == "[object Opera]") {
-        d.addEventListener("DOMContentLoaded", f);
-    } else { f(); }
-  })(document, window, "yandex_metrika_callbacks");
-
-		$(function(){
-			$('#slides').slides({
-				preload: true,
-				preloadImage: 'loading.gif',
-				play: 5000,
-				pause: 2000,
-				hoverPause: true
-			});
-		});
-
+         if (w.opera == "[object Opera]") {
+           d.addEventListener("DOMContentLoaded", f);
+         } else { f(); }
+     })(document, window, "yandex_metrika_callbacks");
   </script>
 
+  <style type="text/css">
+      body {
+          padding-top: 60px;
+          padding-bottom: 40px;
+      }
+  </style>
 </head>
+
 <body>
+    <%= render 'layouts/logged_in_status' %>
 
-    <div id="nonFooter">
-       <div id="content">
-
-    <div id="main">
-        <%= render :partial => 'layouts/main_header' %>
-         <!--<div id="header">
-            <div class="shell">
-            <%= image_tag "Logo.jpg" %> <h4>Ваша удаленная реальность</h4>
-           </div>
-       </div>  -->
+    <%= render :partial => 'layouts/main_header' %>
     <%= yield %>
-
-
-     <div id="main_body">
-     <ul>
-       <h1 style="align:justify">Управляйте Компанией. Создавайте Задачи. Используйте Календарь. Сохраняйте Файлы. Общайтесь в Чате или в Видеоконференции</h1>
-       <!-- <h3><b>Видеоконференция:</b><br/>Организовуйте видеоконференцию внутри Вашей компании легко путем нажатия на вкладку "Конференция"</h3>
-       <h3><b>Чат:</b><br/>Предоставляет возможность в пределах одной компании учавствовать в диалогах в режиме реального времени, обмениваясь при этом текстовой ифнормацией</h3>
-       <h3><b>Таск-менеджер:</b><br/>Позволяет аккумулировать целевые потоки задач в пределах одной компании.</h3>
-       <h3><b>Календарь событий:</b><br/>Служит для обозначения ключевых событий компании.</h3>
-       <h3><b>Файловое хранилище:</b><br/>Сетевая система хранения данных, которая обеспечивает надежность хранения данных и легкость доступа к файлам компании, и предоставляет неограниченное пространство для хранения ифнормации.</h3> -->
-
-       <div id="container">
-           <div id="example">
-               <div id="slides">
-                   <div class="slides_container">
-                       <a href="http://www.flickr.com/photos/jliba/4665625073/" title="145.365 - Happy Bokeh Thursday! | Flickr - Photo Sharing!" target="_blank"><img src="http://slidesjs.com/examples/standard/img/slide-1.jpg" width="570" height="270" alt="Slide 1"></a>
-                       <a href="http://www.flickr.com/photos/stephangeyer/3020487807/" title="Taxi | Flickr - Photo Sharing!" target="_blank"><img src="http://slidesjs.com/examples/standard/img/slide-2.jpg" width="570" height="270" alt="Slide 2"></a>
-                       <a href="http://www.flickr.com/photos/childofwar/2984345060/" title="Happy Bokeh raining Day | Flickr - Photo Sharing!" target="_blank"><img src="http://slidesjs.com/examples/standard/img/slide-3.jpg" width="570" height="270" alt="Slide 3"></a>
-                       <a href="http://www.flickr.com/photos/b-tal/117037943/" title="We Eat Light | Flickr - Photo Sharing!" target="_blank"><img src="http://slidesjs.com/examples/standard/img/slide-4.jpg" width="570" height="270" alt="Slide 4"></a>
-                       <a href="http://www.flickr.com/photos/bu7amd/3447416780/" title="вЂњI must go down to the sea again, to the lonely sea and the sky; and all I ask is a tall ship and a star to steer her by.вЂќ | Flickr - Photo Sharing!" target="_blank"><img src="http://slidesjs.com/examples/standard/img/slide-5.jpg" width="570" height="270" alt="Slide 5"></a>
-                       <a href="http://www.flickr.com/photos/streetpreacher/2078765853/" title="twelve.inch | Flickr - Photo Sharing!" target="_blank"><img src="http://slidesjs.com/examples/standard/img/slide-6.jpg" width="570" height="270" alt="Slide 6"></a>
-                       <a href="http://www.flickr.com/photos/aftab/3152515428/" title="Save my love for loneliness | Flickr - Photo Sharing!" target="_blank"><img src="http://slidesjs.com/examples/standard/img/slide-7.jpg" width="570" height="270" alt="Slide 7"></a>
-                   </div>
-                   <a href="#" class="prev"><%= image_tag "arrow-prev.png", :width=>"24", :height=>"43", :alt=>"Arrow Prev" %></a>
-                   <a href="#" class="next"><%= image_tag "arrow-next.png", :width=>"24", :height=>"43", :alt=>"Arrow Next" %></a>
-               </div>
-               <%= image_tag "example-frame.png",:width=>"739", :height=>"341", :alt=>"Example Frame", :id=>"frame" %>
-           </div>
-       </div>
-
-       <h1> Почему TimTim.ru?</h1>
-       <p>Больше нет необходимости снимать дорогостоящий офис, оплачивать коммунальные услуги и тратить огромное количество времени в пробках по пути на работу. <b>TimTim.ru - Ваша удаленная реальность</b>, которая позволяет дистанционно осуществлять
-         полноценную деятельность компании за счет емкого функционала, охватывающего все необходимые направления деятельности компании.  </p>
-     </ul>
-   </div>
-  </div>
- </div>
-
- <!-- <div id="footer_box">
-        <h2> Что такое TimTim.ru </h2>
-        <p align="justify" size="14 px">Больше нет необходимости снимать дорогостоящий офис, оплачивать коммунальные услуги и тратить огромное количество времени в пробках по пути на работу. <b>TimTim.ru - Ваша удаленная реальность</b>, которая позволяет дистанционно осуществлять
-          полноценную деятельность компании за счет емкого функционала, охватывающего все необходимые направления деятельности компании.  </p>
-      </div> -->
-       <div id="footer">
-         <%= render :partial => 'layouts/footer' %>
-       </div>
-    </div>
 </body>
 </html>

@@ -1,75 +1,21 @@
-<script>
-    $(document).ready(function(){
-        $(".inline_discussion").colorbox({inline:true, width:"40%"});
-    });
-    $(document).ready(function(){
-        $(".inline_theme").colorbox({inline:true, width:"40%"});
-    });
-    $(document).ready(function() {
-       $('.best_in_place').best_in_place();
-    });
-</script>
-
-<div id="box-styled-grey">
-    <div id="box-styled-lightgrey" style="width:95%">
-      <p><a class='inline_theme' href="#theme_content">Новая тема</a></p>
-      <p><a class='inline_discussion' href="#discussion_content">Новое обсуждение</a></p>
-    </div>
-
-      <div style='display:none'>
-         <div id='discussion_content' style='padding:10px'>
-            <%= render :partial => new_discussion_path %>
-         </div>
-      </div>
-
-      <div style='display:none'>
-         <div id='theme_content' style='padding:10px'>
-            <%= render :partial => 'new' %>
-         </div>
-      </div>
-
-      <div id="theme_list">
-        <%= render :partial => "theme_list" %>
-      </div>
+# coding: utf-8
+<div class="span6 well">
+   <%= link_to 'Новая тема', '#NewThemeModal', :data=>{:toggle => "modal"} %>
+   <%= render "theme_list", :company_themes => @company_themes %>
 </div>
 
-<div id="box-styled-grey" style="width: 70%">
- <div id="show_themes">
-  <% if !@themes.nil? %>
-     <% @themes.each do |theme| %>
-            <h1><%= link_to theme.theme, theme_path(theme) %></h1>
-            <% if !theme.discussions.empty? %>
-               <% theme.discussions.each do |discussion| %>
-                    <a href= <%= discussion_path(discussion) %> >
-                    <div id="box-styled-lightgrey-task" style="width:98%">
-                      <h1 style="text-align:center"><b><%= link_to best_in_place(discussion, :discussion, :activator => "#activator_discussion#{discussion.id}"), discussion_path(discussion), :remote => true %>
-                      <a href="#" id="activator_discussion<%= discussion.id %>">...</a>
-                      <%= link_to image_tag("/system/icons/Delete.png", :height => 16, :width => 16), discussion_path(discussion), :confirm => 'Вы уверены?', :method => :delete %></b>(<%= discussion.comments.all.count %> комментариев)</h1>
-                      <p><%= image_tag discussion.user.avatar.url, :height => "30px", :width => "30px" %> <%= discussion.user.name %> <i><%= Helper.distance_of_time_in_words(DateTime.now.utc,discussion.created_at) %></i></p>
-                    </div>
-                    </a>
-               <% end %>
-            <% end %>
-     <% end %>
+<div class="span12 well">
+  <div id="theme">
+  <% unless @default_theme.nil? %>
+    <h2><%= link_to @default_theme.theme_name, theme_path(@default_theme) %></h2>
   <% end %>
+  </div>
 
+  <%= render new_comment_path %>
 
-  <% if !@discussions.empty? %>
-       <h1><%= link_to "Дискуссии", themes_path %></h1>
-       <% @discussions.each do |discussion| %>
-            <a href= <%= discussion_path(discussion) %> >
-            <div id="box-styled-lightgrey-task" style="width:98%">
-              <h1 style="text-align:center"><b><%= link_to best_in_place(discussion, :discussion, :activator => "#activator_discussion#{discussion.id}"), discussion_path(discussion), :remote => true %>
-              <a href="#" id="activator_discussion<%= discussion.id %>">...</a>
-              <%= link_to image_tag("/system/icons/Delete.png", :height => 16, :width => 16), discussion_path(discussion), :confirm => 'Вы уверены?', :method => :delete %></b>(<%= discussion.comments.all.count %> комментариев)</h1>
-              <p><%= image_tag discussion.user.avatar.url, :height => "30px", :width => "30px" %> <%= discussion.user.name %> <i><%= Helper.distance_of_time_in_words(DateTime.now.utc,discussion.created_at) %></i></p>
-            </div>
-            </a>
-       <% end %>
-  <% end %>
- </div>
 </div>
 
-<% if current_user.set_chat == true %>
-  <%= raw(Helper.get_chat_script(current_user)) %>
-<% end %>
+<%= render new_theme_path, :new_theme => @new_theme %>
+
+
+

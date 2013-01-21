@@ -1,70 +1,15 @@
 # coding: utf-8
 
-<script>
-    $(document).ready(function(){
-        $(".inline_calendar").colorbox({inline:true, width:"40%"});
-    });
-    $(document).ready(function() {
-       $('.best_in_place').best_in_place();
-    });
-</script>
+<div class="span6 well">
+  <%= render "calendar_list", :company_calendars => @company_calendars %>
+</div>
 
-<!-- Probably move the stylesheet to you layout. Also make sure you include the javascript. -->
-<%= stylesheet_link_tag "event_calendar"%>
- <div id="box-styled-grey" style="width:30%">
-    <div id="box-styled-lightgrey" style="width:95%">
-      <p><a class='inline_calendar' href="#calendar_content">Новый календарь</a></p>
-
-      <div style='display:none'>
-         <div id='calendar_content' style='padding:10px'>
-            <%= render :partial => 'new' %>
-         </div>
-      </div>
-    </div>
-
-    <div id="calendar_list">
-      <%= render :partial => "calendar_list" %>
-    </div>
- </div>
-
-<div id="box-styled-grey" style="width:65%">
+<div class="span12 well">
   <%= semantic_form_for(@calendar) do |f| %>
      <%= f.inputs do %>
-        <%= f.input :calendar_name, :label=>"Название", :as => :text, :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 100  }, :required => true %>
+        <%= f.input :calendar_name, :label=>"Название", :as => :text, :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 100 } %>
      <% end %>
-
-      <div id="box-styled-lightgrey" style="border:0; width:95%" >
-         <h1>Группы</h1>
-         <br/>
-           <div style="padding-left:7px">
-              <% if (@permissions.first.group_id.nil?) && (@permissions.first.user_id.nil?) %>
-                <%= check_box_tag 'group_ids[]', 0, true %>
-              <% else %>
-                <%= check_box_tag 'group_ids[]', 0, false %>
-              <% end %>
-                  <%= label_tag "Все" %>
-               </div>
-           <br/>
-         <% current_user.company.groups.each do |group| %>
-             <div style="padding-left:7px">
-                <% if @permissions.where(:group_id => group.id).empty? %>
-                  <%= check_box_tag 'group_ids[]', group.id, false %>
-                <% else %>
-                  <%= check_box_tag 'group_ids[]', group.id, true %>
-                <% end %>
-                <%= label_tag group.group_name %>
-             </div>
-             <br/>
-         <% end %>
-      </div>
-   <%= f.buttons do %>
-     <br/>
-     <%= button_to 'Сохранить', @calendar, :method => :create, :class => 'button-styled grey' %>
-     <br/>
-   <% end %>
+     <%= button_to 'Сохранить', calendars_path(@calendar), :class => 'btn btn-primary' %>
   <% end %>
 </div>
 
-<% if current_user.set_chat == true %>
-  <%= raw(Helper.get_chat_script(current_user)) %>
-<% end %>

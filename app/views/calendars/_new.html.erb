@@ -1,28 +1,15 @@
-<div id="box-styled-grey" style="border:0; width:95%" >
- <h1 align="center">Новый календарь</h1>
- <%= semantic_form_for(@new_calendar) do |f| %>
-     <%= f.inputs do %>
-        <%= f.input :calendar_name, :label=>"Название", :as => :text, :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 100 }, :required => true %>
-     <% end %>
+<div id="NewCalendarModal" class="modal hide fade form-horizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>Новый календарь</h3>
+  </div>
 
-     <div id="box-styled-lightgrey" style="width:95%">
-         <h1>Группы</h1>
-           <div style="padding-left:7px">
-              <%= check_box_tag 'group_ids[]', 0, false %>
-              <%= label_tag "Все" %>
-           </div>
-           <br/>
-
-         <% current_user.company.groups.each do |group| %>
-             <div style="padding-left:7px">
-                <%= check_box_tag 'group_ids[]', group.id, false %>
-                <%= label_tag group.group_name %>
-             </div>
-             <br/>
-         <% end %>
-     </div>
-
-     <div style="width:100%; text-align:center"><%= button_to 'Сохранить', @calendar, :method => :create, :class => 'button-styled grey' %></div>
-     <br/>
-  <% end %>
+  <div class="modal-body well">
+    <%= semantic_form_for(new_calendar) do |f| %>
+       <%= f.inputs do %>
+         <%= f.input :calendar_name, :label=>"Название", :as => :text, :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 100 } %>
+       <% end %>
+       <%= button_to 'Сохранить', calendars_path(new_calendar), :class => 'btn btn-primary', :remote => true %>
+    <% end %>
+  </div>
 </div>

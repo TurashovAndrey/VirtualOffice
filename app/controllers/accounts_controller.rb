@@ -14,7 +14,7 @@ class AccountsController < ApplicationController
     @user.active = true
     if @user.save
       flash[:notice] = t('user.flashes.created')
-      redirect_to company_path
+      redirect_to account_path
     else
       flash[:error] = t('user.flashes.create_error')
       render 'pages/main', :layout => 'main'
@@ -22,17 +22,16 @@ class AccountsController < ApplicationController
   end
 
   def show
+    @new_calendar = Calendar.new
+
     @task = Task.new
     @projects = ProjectsHelper.get_projects(current_user)
     @themes = ThemesHelper.get_themes(current_user)
 
-    @all_calendars = CalendarsHelper.get_calendars(current_user)
-    @all_calendars += CalendarsHelper.get_private_calendars(current_user)
+    @all_calendars = Calendar.where(:company => current_user.company)
 
     @all_folders = FoldersHelper.get_folders(current_user)
-    @all_folders += FoldersHelper.get_private_folders(current_user)
-
-    @discussion = Discussion.new
+    #@all_folders += FoldersHelper.get_private_folders(current_user)
 
     @event = Event.new
     @event.calendar = Calendar.find(current_user.company.calendar_id)
@@ -46,7 +45,7 @@ class AccountsController < ApplicationController
                              :telephone => params[:user][:telephone],
                              :address => params[:user][:address])
 
-     if (!params[:set_chat].nil?)
+     if (params[:user][:set_chat] == "true")
        @user.update_attribute(:set_chat,true)
      else
        @user.update_attribute(:set_chat,false)

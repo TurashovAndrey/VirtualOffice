@@ -1,13 +1,23 @@
-<%= semantic_form_for(@user_session, :url => user_session_path) do |f| %>
-    <%= f.semantic_errors :email, :password %>
+# coding: utf-8
+<div class="row-fluid">
+  <div class="span12"></div>
+  <div class="span12"></div>
+  <div class="span12"></div>
+  <div class="span12"></div>
+  <div class="span4"></div>
+  <div class="span3">
+     <h1><small><%= t('user.titles.login') %></small></h1>
+     <div class="hero-unit">
+       <%= semantic_form_for(@user_session, :url => user_session_path) do |f| %>
+           <%= f.semantic_errors :email, :password %>
 
-    <%= f.inputs do %>
-        <%= f.input :email, :required => false, :label => false %>
-        <%= f.input :password, :required => false, :label => false %>
-    <% end %>
+           <%= f.input :email, :required => false, :label => "Email" %>
+           <%= f.input :password, :required => false, :label => "Пароль" %>
 
-    <%= f.buttons do %>
-        <%= f.commit_button :label => t('user.buttons.login'), :button_html => { :class => 'button-styled blue'} %>
-    <% end %>
+           <%= f.submit :class => "btn btn-primary" %>
 
-<% end %>
+       <% end %>
+     </div>
+  </div>
+  <div class="span4"></div>
+</div>

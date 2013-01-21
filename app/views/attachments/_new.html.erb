@@ -1,18 +1,18 @@
-<div id="box-styled-lightgrey" style="width:98%" >
-<%= semantic_form_for(@attachment) do |f| %>
-  <div id="box-styled-lightgrey" style="width:98%" >
-    <h1>Прикрепить файл</h1>
-    <br/>
+<%= semantic_form_for(new_attachment) do |f| %>
+    <div id="NewAttachmentModal" class="modal hide fade form-horizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>Прикрепить файл</h3>
+      </div>
 
-    <%= f.inputs do %>
-       <%= f.file_field :attach %>
-       <%= f.input :folder_id, :as => :select, :label=>"Папка", :collection => Hash[@all_folders.map {|b| [b.folder_name, b.id]}].merge({"" => nil}) %>
-    <% end %>
+      <div class="modal-body well">
+        <%= f.inputs do %>
+           <%= f.file_field :attach %>
+           <%= f.input :folder_id, :as => :hidden %>
+        <% end %>
 
-    <br/>
-    <div style="position:relative; text-align:center">
-      <%= button_to 'Сохранить', @attachment, :method => :create, :class => 'button-styled grey' %>
+        <%= button_to 'Сохранить', new_attachment, :method => :create, :class => 'btn btn-primary' %>
+      </div>
     </div>
-  </div>
 <% end %>
 </div>

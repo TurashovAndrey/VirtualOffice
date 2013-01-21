@@ -3,8 +3,8 @@ class PagesController < ApplicationController
   layout 'main'
 
   def main
-    @slide_companies = Company.find(:all, :conditions => ['logo_file_name != "missing.png"'], :limit => 4, :order => "RAND()")
     @user = User.new
+    @user_session = UserSession.new
   end
 
   def id

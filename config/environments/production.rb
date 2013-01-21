@@ -8,6 +8,14 @@ VirtualOffice::Application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
+  #config.assets.precompile += ['application.js', 'event_calendar.js', 'form-field-tooltip.js', 
+  #                             'jquery-1.7.2.js', 'jquery-1.7.2.min.js', 'jquery-ui-1.8.20.custom.min.js',
+  #                             'jquery-ui-timepicker-addon.js', 'jquery.betterTooltip.js', 'jquery.colorbox.js',
+  #                             'jquery.colorbox-min.js','jquery.purr.js', 'jquery.tools.min.js',
+  #                             'jquery.ui.datepicker-ru.js', 'rounded-corners.js', 'slides.min.jquery.js',
+  #                             'application.css', 'colorbox.css', 'event_calendar.css', 'form-field-tooltip.css',
+  #                             'jquery-ui-1.8.20.custom.css', 'pagination.css', 'reset.css', 'slides.css', 'style.css']
+
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
 

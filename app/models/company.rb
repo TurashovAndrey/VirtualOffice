@@ -5,15 +5,15 @@ class Company < ActiveRecord::Base
   has_many :attachments
   has_many :projects
   has_many :folders
-
-  has_many :comments
-  has_many :groups
-  has_many :conferences
+  has_many :calendars
+  has_many :themes
 
   has_many :permissions
 
   has_attached_file :logo
 
+  validates_format_of :name, :with => /^[a-zA-Z1-9]+$/
+  validates_format_of :url_base, :with => /^[a-zA-Z1-9]+$/
   validates_presence_of :url_base
   validates_uniqueness_of :name, :url_base
 

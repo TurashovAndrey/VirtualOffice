@@ -1,29 +1,15 @@
-<div id="box-styled-grey" style="width:95%" >
-<h1>Новая тема</h1>
-<%= semantic_form_for(@theme, :remote=>false, :html => { :multipart => true}) do |f| %>
-   <%= f.inputs do %>
-      <%= f.input :theme, :as => :text, :label => "Название", :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 50  }%>
-      <br/>
-   <% end %>
+<div id="NewThemeModal" class="modal hide fade form-horizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>Новая тема</h3>
+  </div>
 
-    <div id="box-styled-lightgrey" style="border:0; width:95%" >
-       <h1>Группы</h1>
-       <br/>
-         <div style="padding-left:7px">
-            <%= check_box_tag 'group_ids[]', 0, false %>
-            <%= label_tag "Все" %>
-         </div>
-       <% current_user.company.groups.each do |group| %>
-           <div style="padding-left:7px">
-              <%= check_box_tag 'group_ids[]', group.id, false %>
-              <%= label_tag group.group_name %>
-           </div>
-       <% end %>
-    </div>
-
-      <div style="width:100%; text-align:center">
-         <%= button_to 'Сохранить', @theme, :method => :create, :class => 'button-styled grey' %>
-         <br/>
-      </div>
-<% end %>
+  <div class="modal-body well">
+    <%= semantic_form_for(new_theme) do |f| %>
+        <%= f.inputs do %>
+            <%= f.input :theme_name, :label=>"Название", :as => :text, :input_html => { :class => 'autogrow', :rows => 4, :maxlength => 100 }, :required => true %>
+        <% end %>
+        <%= button_to 'Сохранить', new_theme, :method => :create, :class => 'btn btn-primary' %>
+    <% end %>
+  </div>
 </div>

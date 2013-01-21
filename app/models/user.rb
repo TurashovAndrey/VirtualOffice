@@ -9,7 +9,6 @@ class User < ActiveRecord::Base
 
   has_attached_file :avatar
 
-  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :role
 
   belongs_to :company
@@ -49,10 +48,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def role_symbols
-    [self.role.name.to_sym]
-  end
-
   def active?
     active
   end
@@ -62,60 +57,14 @@ class User < ActiveRecord::Base
     save
   end
 
-  def deactivate!
-    self.active = false
-    save
-  end
-
-  def send_activation_instructions!
-    reset_perishable_token!
-    UserMailer.activation_instructions(self).deliver
-  end
-
-  def deliver_activation_instructions!
-    reset_perishable_token!
-    Notifier.deliver_activation_instructions(self)
-  end
-
-  def deliver_activation_confirmation!
-    reset_perishable_token!
-    Notifier.deliver_activation_confirmation(self)
-  end
-
   protected
 
   def create_company_for_manager
     if self.role == Role::MANAGER
       self.company = Company.new(:url_base => self.company_name)
 
-      @group = Group.new
-      @group.group_name = "Company"
-      @group.company = self.company
-      @group.save
-
-      self.company.default_group = @group.id
-
-      @calendar = Calendar.new
-      @calendar.calendar_name = "Company"
-      @calendar.company = self.company
-      @calendar.save
-
-      self.company.calendar_id = @calendar
-
-      @permission = Permission.new
-      @permission.calendar_id = @calendar
-      @permission.company = self.company
-      @permission.save
-
-      self.group = @group
       self.company.save
       self.save
     end
   end
-
-  private
-    def save_password
-      self.password = @new_password
-    end
-
 end

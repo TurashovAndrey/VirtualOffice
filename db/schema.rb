@@ -11,10 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120727145920) do
+ActiveRecord::Schema.define(:version => 20130101204522) do
 
   create_table "attachments", :force => true do |t|
-    t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "attach_file_name"
@@ -34,17 +33,18 @@ ActiveRecord::Schema.define(:version => 20120727145920) do
   end
 
   create_table "comments", :force => true do |t|
-    t.integer  "task_id"
+    t.string   "title",            :limit => 50, :default => ""
+    t.text     "comment"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
     t.integer  "user_id"
-    t.integer  "company_id"
-    t.string   "comment"
-    t.datetime "comment_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "stage_id"
-    t.integer  "project_id"
-    t.integer  "discussion_id"
   end
+
+  add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
+  add_index "comments", ["commentable_type"], :name => "index_comments_on_commentable_type"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "companies", :force => true do |t|
     t.string   "name",              :default => "",           :null => false
@@ -54,27 +54,6 @@ ActiveRecord::Schema.define(:version => 20120727145920) do
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
     t.date     "expire_date",       :default => '2099-01-01'
-    t.integer  "default_group"
-    t.integer  "calendar_id"
-  end
-
-  create_table "conferences", :force => true do |t|
-    t.integer  "room_id"
-    t.integer  "user_id"
-    t.integer  "group_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "company_id"
-    t.integer  "owner_id"
-  end
-
-  create_table "discussions", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "company_id"
-    t.integer  "theme_id"
-    t.string   "discussion"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "events", :force => true do |t|
@@ -98,53 +77,12 @@ ActiveRecord::Schema.define(:version => 20120727145920) do
     t.datetime "updated_at"
   end
 
-  create_table "groups", :force => true do |t|
-    t.string   "group_name"
-    t.integer  "parent_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "company_id"
-  end
-
-  create_table "permissions", :force => true do |t|
-    t.integer  "group_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "description"
-    t.integer  "company_id"
-    t.integer  "folder_id"
-    t.integer  "calendar_id"
-    t.integer  "theme_id"
-    t.integer  "stage_id"
-    t.integer  "project_id"
-  end
-
   create_table "projects", :force => true do |t|
     t.string   "project_name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "company_id"
-  end
-
-  create_table "rooms", :force => true do |t|
-    t.string   "name"
-    t.string   "session_id"
-    t.boolean  "public"
-    t.integer  "company_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "owner_id"
-  end
-
-  create_table "stages", :force => true do |t|
-    t.string   "stage_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "comment_id"
-    t.integer  "task_attachment_id"
-    t.integer  "project_id"
   end
 
   create_table "task_attachments", :force => true do |t|
@@ -157,10 +95,7 @@ ActiveRecord::Schema.define(:version => 20120727145920) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
-    t.integer  "comment_id"
     t.integer  "project_id"
-    t.integer  "stage_id"
-    t.integer  "discussion_id"
   end
 
   create_table "tasks", :force => true do |t|
@@ -175,14 +110,12 @@ ActiveRecord::Schema.define(:version => 20120727145920) do
     t.integer  "second_user_id"
     t.integer  "company_id"
     t.datetime "task_date"
-    t.integer  "project_id"
-    t.integer  "stage_id"
   end
 
   create_table "themes", :force => true do |t|
     t.integer  "user_id"
     t.integer  "company_id"
-    t.string   "theme"
+    t.string   "theme_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -214,7 +147,6 @@ ActiveRecord::Schema.define(:version => 20120727145920) do
     t.boolean  "active",              :default => false, :null => false
     t.string   "telephone"
     t.string   "address"
-    t.integer  "group_id"
     t.boolean  "set_chat",            :default => false
   end
 

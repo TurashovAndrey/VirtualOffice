@@ -61,21 +61,3 @@
         </div>
     <% end %>
   </div>
-
-  <div id="box-styled-lightgrey" style="width:95%" >
-     <h1>Дискуссии</h1>
-     <% if !@discussions.empty? %>
-       <% @discussions.each do |discussion| %>
-            <div id="box-styled-grey" style="width:95%">
-              <h3>Название: <%= discussion.discussion %> (<%= link_to 'link', discussion_path(discussion) %>)</h3>
-              <p><%= image_tag User.find(discussion.user_id).avatar.url, :width => "20px", :height => "20px", :align=>'bottom' %>
-              <%= discussion.user.name %> <i><%= Helper.distance_of_time_in_words(discussion.created_at,DateTime.now.utc) %></i></p>
-            </div>
-       <% end %>
-       <% if !params[:discussion_number].nil? %>
-          <%= link_to 'Свернуть', company_worker_path(@user, :discussion_number => 2), :remote => true %>
-       <% else %>
-          <%= link_to 'Подробнее', company_worker_path(@user, :discussion_number => 0), :remote => true %>
-       <% end %>
-     <% end %>
-  </div>

@@ -58,14 +58,6 @@ module EventsHelper
               "Окончание:"+@end_date.to_s+"<br/>"+
               "Время:"+@end_time
       html = %(<div class="tTip" id=#{h(event.name)} title=#{h(title)}><a href="#{calendars_path(:event_id => event.id)}" style="padding:0; color:white">#{h(event.name)}</a></div> )
-      #html = %(<a href="#" title="#{h(event.name)}" style="padding:0; color:white" onclick ="showToolTip(event,'This is a simple, simple test');return false">#{h(event.name)}</a>)
-      #html = %(<a href="#{calendars_path(:event_id => event.id)}" title="#{h(event.name)}" style="padding:0; color:white" tooltipText="Type in your firstname in this box <br/><br/><br/> tyutu">#{h(event.name)}</a>)
-      #html = %(<a href="#{calendars_path(:event_id => event.id)}" title="#{h(event.name)}" style="padding:0; color:white" tooltipText="Type in your firstname in this box <br/><br/><br/> tyutu">#{h(event.name)}</a>)
-      #html << %(<a href="#{event_path(event.id)}" data-confirm="Вы уверены?" data-method="delete" rel="nofollow" style="padding:0; color:white">Удалить</a></a>)
-      #html = %(<a href="" title="#{h(event.name)}">#{h(event.name)}"</a>)
-      #html = %(<a href="#{edit_event_path(event.id)}" title="#{h(event.name)}">#{h(event.name)})
-      #html<<%(<span class="ec-event-time">#{h(event.user.email)}</span>)
-      #html = %(#{h(event.name)})
       html
     end
   end
