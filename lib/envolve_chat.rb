@@ -130,6 +130,8 @@ module EnvolveChat
       #        Default value: None.
       # is_admin -- optional boolean for the user's admin status.
       #             Default value: False.
+      # string - option customize the strings used in the interface.
+      #             Default value: None.
     
       api_key = EnvolveChat::EnvolveAPIKey.new(envolve_api_key)
       raise EnvolveChat::EnvolveAPIError.new "You must provide at least a first name. If you are providing a username, use it for the first name." unless first_name
@@ -205,8 +207,6 @@ module EnvolveChat
           case opt[0].to_s
             when "people_here_text"
               o << "peopleHereText : '#{opt[1]}'"
-            when "divID"
-              o << "divID : '#{opt[1]}'"
             when "people_list_header_text"
               o << "peopleListHeaderText : '#{opt[1]}'"
             when "enable_socialgo"
